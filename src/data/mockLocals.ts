@@ -78,6 +78,23 @@ export const mockChefs: Local[] = [
 
 // Security
 export const mockSecurity: Local[] = [
+    {
+    id: 'security-4',
+    name: 'Andrea',
+    category: 'Security',
+    description: 'Professional personal security specialist.',
+    fullDescription: 'Professional personal security specialist.',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_2.jpg',
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_2.jpg' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Andrea%20%281%29.mp4' },
+    ],
+    specialties: ['Personal Protection'],
+    availability: 'Available upon request',
+    languages: ['English'],
+    cropX: 20,
+    cropY: 11,
+  },
   {
     id: 'security-1',
     name: 'Elion',
@@ -128,23 +145,6 @@ export const mockSecurity: Local[] = [
     languages: ['English', 'French'],
     cropX: 20,
     cropY: 17,
-  },
-  {
-    id: 'security-4',
-    name: 'Andrea',
-    category: 'Security',
-    description: 'Professional personal security specialist.',
-    fullDescription: 'Professional personal security specialist.',
-    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_2.jpg',
-    media: [
-      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_2.jpg' },
-      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Andrea%20%281%29.mp4' },
-    ],
-    specialties: ['Personal Protection'],
-    availability: 'Available upon request',
-    languages: ['English'],
-    cropX: 20,
-    cropY: 15,
   },
   {
     id: 'security-5',
@@ -278,8 +278,8 @@ export const mockDrivers: Local[] = [
     specialties: ['Driver'],
     availability: 'Available upon request',
     languages: ['English'],
-    cropX: defaultCropX,
-    cropY: defaultCropY,
+    cropX: 20,
+    cropY: 15,
   },
   {
     id: 'driver-3',
@@ -313,7 +313,7 @@ export const mockDrivers: Local[] = [
     availability: 'Available upon request',
     languages: ['English', 'French', 'Spanish'],
     cropX: 20,
-    cropY: 18,
+    cropY: 24,
   },
   {
     id: 'driver-5',
@@ -363,8 +363,8 @@ export const mockDrivers: Local[] = [
     specialties: ['Driver'],
     availability: 'Available upon request',
     languages: ['English', 'French'],
-    cropX: defaultCropX,
-    cropY: defaultCropY,
+    cropX: 20,
+    cropY: 12,
   },
   {
     id: 'driver-8',
@@ -401,8 +401,8 @@ export const mockConcierges: Local[] = [
     specialties: ['Tourism', 'Problem Solving'],
     availability: 'Available upon request',
     languages: ['English', 'French', 'Spanish'],
-    cropX: defaultCropX,
-    cropY: defaultCropY,
+    cropX: 20,
+    cropY: 15,
   },
   {
     id: 'concierge-2',
@@ -418,8 +418,8 @@ export const mockConcierges: Local[] = [
     specialties: ['Wine Safari Tour'],
     availability: 'Available upon request',
     languages: ['English', 'Spanish'],
-    cropX: defaultCropX,
-    cropY: defaultCropY,
+    cropX: 20,
+    cropY: 13,
   },
   {
     id: 'concierge-3',
@@ -435,8 +435,8 @@ export const mockConcierges: Local[] = [
     specialties: ['Tourism Agency'],
     availability: 'Available upon request',
     languages: ['English', 'French', 'Spanish'],
-    cropX: defaultCropX,
-    cropY: defaultCropY,
+    cropX: 20,
+    cropY: 9,
   },
 ];
 
@@ -476,28 +476,28 @@ export const mockMassageTherapists: Local[] = [
     cropX: defaultCropX,
     cropY: defaultCropY,
   },
-];
-
-// Physiotherapists
-export const mockPhysiotherapists: Local[] = [
   {
     id: 'physio-1',
     name: 'Francesco',
-    category: 'Physiotherapist',
-    description: 'Professional physiotherapist.',
-    fullDescription: 'Professional physiotherapist.',
+    category: 'Massage Therapist',
+    description: 'A leading physiotherapist known for refined, personalized treatments.',
+    fullDescription:
+      'A leading physiotherapist known for refined, personalized treatments designed to restore balance, mobility, and optimal body performance.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/fisioterapista.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/fisioterapista.jpg' },
       { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Fisioterapista%20Francesco.MP4' },
     ],
-    specialties: [],
+    specialties: ['Physiotherapy', 'Rehab', 'Mobility'],
     availability: 'Available upon request',
     languages: ['English'],
     cropX: defaultCropX,
     cropY: defaultCropY,
   },
 ];
+
+// Physiotherapists
+export const mockPhysiotherapists: Local[] = [];
 
 export const mockLocalCare: Local[] = [
   {

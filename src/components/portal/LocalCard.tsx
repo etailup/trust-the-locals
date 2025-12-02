@@ -35,7 +35,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   // Clamp heights so images scale gracefully on mobile without zooming
-  const cardImageHeight = local.imageHeight ?? 'clamp(12rem, 45vw, 18rem)';
+  const cardImageHeight = local.imageHeight ?? 'clamp(18rem, 58vw, 24rem)';
   const detailImageHeight = local.detailImageHeight ?? 'clamp(22rem, 60vh, 32rem)';
   const objectPosCard =
     local.cropX !== undefined || local.cropY !== undefined
@@ -121,11 +121,11 @@ const LocalCard = ({ local }: LocalCardProps) => {
       </div>
 
       {/* Content */}
-      <div className="p-4 md:p-6 bg-[#FAF7F2]">
-        <h3 className="font-luxury text-2xl md:text-3xl text-portal-navy mb-3 transition-colors">
+      <div className="p-3 md:p-4 bg-[#FAF7F2]">
+        <h3 className="font-luxury text-2xl md:text-3xl text-portal-navy mb-2 transition-colors">
           {local.name}
         </h3>
-        <p className="text-base md:text-lg text-portal-navy/80 line-clamp-2 mb-5">
+        <p className="text-base md:text-lg text-portal-navy/80 line-clamp-1 mb-3">
           {local.description}
         </p>
 
@@ -142,7 +142,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
         </div>
 
         {/* Languages */}
-        <div className="flex flex-wrap gap-2 mt-3">
+        <div className="flex flex-wrap gap-2 mt-2">
           {local.languages.map((language) => (
             <span
               key={language}
@@ -154,7 +154,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
         </div>
 
         {/* Details */}
-        <div className="mt-4 pt-4 border-t border-portal-navy/20 text-sm md:text-lg text-portal-navy/70 flex items-center justify-between gap-3">
+        <div className="mt-3 pt-3 border-t border-portal-navy/20 text-sm md:text-lg text-portal-navy/70 flex items-center justify-between gap-3">
           <span>{local.availability}</span>
         </div>
       </div>

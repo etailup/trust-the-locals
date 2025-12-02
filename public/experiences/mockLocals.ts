@@ -78,6 +78,23 @@ export const mockChefs: Local[] = [
 
 // Security
 export const mockSecurity: Local[] = [
+    {
+    id: 'security-4',
+    name: 'Andrea',
+    category: 'Security',
+    description: 'Professional personal security specialist.',
+    fullDescription: 'Professional personal security specialist.',
+    image: '/locals/bodyguard_2.jpg',
+    media: [
+      { type: 'image', src: '/locals/bodyguard_2.jpg' },
+      { type: 'video', src: '/locals/Bodyguard_Andrea.mp4' },
+    ],
+    specialties: ['Personal Protection'],
+    availability: 'Available upon request',
+    languages: ['English'],
+    cropX: 20,
+    cropY: 15,
+  },
   {
     id: 'security-1',
     name: 'Elion',
@@ -128,23 +145,6 @@ export const mockSecurity: Local[] = [
     languages: ['English', 'French'],
     cropX: 20,
     cropY: 17,
-  },
-  {
-    id: 'security-4',
-    name: 'Andrea',
-    category: 'Security',
-    description: 'Professional personal security specialist.',
-    fullDescription: 'Professional personal security specialist.',
-    image: '/locals/bodyguard_2.jpg',
-    media: [
-      { type: 'image', src: '/locals/bodyguard_2.jpg' },
-      { type: 'video', src: '/locals/Bodyguard_Andrea.mp4' },
-    ],
-    specialties: ['Personal Protection'],
-    availability: 'Available upon request',
-    languages: ['English'],
-    cropX: 20,
-    cropY: 15,
   },
   {
     id: 'security-5',

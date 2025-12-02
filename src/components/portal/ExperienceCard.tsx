@@ -23,6 +23,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
     'Private Wellness Experience': '€210 / person',
     'Cooking Class': '€155 / person',
     'Wine Tour': '€700',
+    'Wine Experience': '€700',
     'Supercar Grand Tour - Tuscany Landscape': '€900',
     'Wine Tasting and Custom Label Crafting': '€195',
   };
