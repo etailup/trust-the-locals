@@ -1,0 +1,205 @@
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import PortalSidebar from '@/components/portal/PortalSidebar';
+import ConciergeButton from '@/components/portal/ConciergeButton';
+import { mockExperiences } from '@/data/mockExperiences';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { ArrowLeft } from 'lucide-react';
+import { toast } from 'sonner';
+
+const Booking = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const experience = mockExperiences.find((exp) => exp.id === id);
+  
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    guests: '2',
+    date: '',
+    notes: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success('Your request has been sent! Our concierge team will contact you shortly.');
+    navigate('/portal/dashboard');
+  };
+
+  if (!experience) {
+    return (
+      <div className="flex min-h-screen bg-portal-cream">
+        <PortalSidebar />
+        <main className="md:ml-10 flex-1 p-8">
+          <p>Experience not found</p>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex min-h-screen bg-portal-cream">
+      <PortalSidebar />
+      
+      <main className="md:ml-10 flex-1 p-8">
+        <Button
+          onClick={() => navigate(-1)}
+          variant="outline"
+          className="mb-6"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back
+        </Button>
+
+        <div className="max-w-4xl mx-auto">
+          <h1 className="font-luxury text-6xl text-portal-navy mb-4">
+            Request Experience
+          </h1>
+          <p className="text-foreground/70 text-2xl mb-10">
+            {experience.title} - {experience.subtitle}
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Form */}
+            <div className="lg:col-span-2 bg-[#FAF7F2] border border-border rounded-lg p-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="firstName" className="text-lg text-portal-navy">First Name</Label>
+                    <Input
+                      id="firstName"
+                      required
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="lastName" className="text-lg text-portal-navy">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      required
+                      value={formData.lastName}
+                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="email" className="text-lg text-portal-navy">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="text-lg"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="phone" className="text-lg text-portal-navy">Phone</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="text-lg"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="guests" className="text-lg text-portal-navy">Number of Guests</Label>
+                    <Input
+                      id="guests"
+                      type="number"
+                      min="1"
+                      required
+                      value={formData.guests}
+                      onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="date" className="text-lg text-portal-navy">Preferred Date</Label>
+                    <Input
+                      id="date"
+                      type="date"
+                      required
+                      value={formData.date}
+                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="notes" className="text-lg text-portal-navy">Additional Notes or Preferences</Label>
+                  <Textarea
+                    id="notes"
+                    rows={4}
+                    value={formData.notes}
+                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                    placeholder="Any special requests, dietary restrictions, or preferences..."
+                    className="text-lg"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full bg-portal-gold text-portal-navy hover:bg-portal-gold/90 font-medium h-12 text-xl"
+                >
+                  Submit Request
+                </Button>
+              </form>
+            </div>
+
+            {/* Summary */}
+            <div className="bg-[#FAF7F2] border border-border rounded-lg p-6 h-fit sticky top-8">
+              <h3 className="font-luxury text-3xl text-portal-navy mb-4">Summary</h3>
+              
+              <img
+                src={experience.image}
+                alt={experience.title}
+                className="w-full h-32 object-cover rounded-md mb-4"
+              />
+
+              <div className="space-y-3 text-lg">
+                <p className="text-foreground/70">
+                  <strong className="text-portal-navy">Experience:</strong><br />
+                  {experience.title}
+                </p>
+                <p className="text-foreground/70">
+                  <strong className="text-portal-navy">Duration:</strong><br />
+                  {experience.duration}
+                </p>
+                <p className="text-foreground/70">
+                  <strong className="text-portal-navy">Location:</strong><br />
+                  {experience.location}
+                </p>
+              </div>
+
+              <div className="mt-6 p-4 bg-portal-light rounded-md">
+                <p className="text-base text-foreground/70">
+                  <strong className="text-portal-navy">Note:</strong> This is a request form. Our concierge team will contact you within 24 hours to confirm availability and provide pricing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <ConciergeButton />
+    </div>
+  );
+};
+
+export default Booking;
