@@ -36,7 +36,7 @@ const LocalCareDetail = () => {
           <img
             src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg"
             alt="Local Care"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain bg-white"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 

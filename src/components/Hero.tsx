@@ -72,11 +72,11 @@ const Hero = () => {
         animationFillMode: "backwards"
       }}>
         <div className="container mx-auto px-6 sm:px-10 py-4 sm:py-6">
-          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center text-center gap-4 sm:gap-10 text-white font-nav text-sm sm:text-lg tracking-[0.3em]">
+          <div className="max-w-3xl mx-auto flex flex-row flex-wrap items-center justify-center text-center gap-3 sm:gap-10 text-white font-nav text-sm sm:text-lg tracking-[0.3em]">
             <a href="mailto:info@trusthelocals.com" className="hover:opacity-70 transition-opacity text-center min-h-[44px] flex items-center justify-center">
               info@trusthelocals.com
             </a>
-            <span className="hidden sm:inline text-white/40">|</span>
+            <span className="inline text-white/40">|</span>
             <a href="tel:+1234567890" className="hover:opacity-70 transition-opacity text-center min-h-[44px] flex items-center justify-center">
               +39 351 3628747
             </a>

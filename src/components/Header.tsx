@@ -44,15 +44,15 @@ const Header = ({ transparent = false }: HeaderProps) => {
       <header className="fixed top-0 left-0 right-0 z-50">
         {/* Main Header - Cream Background */}
         <div className="bg-portal-cream border-b border-portal-navy/10">
-          <div className="container mx-auto px-4 sm:px-8 py-8">
+          <div className="container mx-auto px-3 sm:px-8 py-6 sm:py-8">
             <div className="flex items-center justify-between">
               {/* Left: Menu Icon */}
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="w-14 h-14 min-h-[56px] min-w-[56px] rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-foreground/50 transition-colors md:hidden"
+                className="w-12 h-12 min-h-[48px] min-w-[48px] sm:w-14 sm:h-14 sm:min-h-[56px] sm:min-w-[56px] rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-foreground/50 transition-colors md:hidden"
                 aria-label="Menu"
               >
-                <Menu className="w-6 h-6 text-foreground" />
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
               </button>
 
               {/* Center: Logo */}
@@ -63,7 +63,7 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 <img
                   src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg"
                   alt="Trust the Locals logo"
-                  className="h-34 sm:h-36 w-auto object-contain"
+                  className="h-20 sm:h-36 w-auto object-contain"
                 />
               </Link>
 
@@ -81,10 +81,10 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 {/* Mobile: User Icon */}
                 <Link 
                   to="/portal/login"
-                  className="sm:hidden w-16 h-16 min-h-[56px] min-w-[56px] rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-foreground/50 transition-colors"
+                  className="sm:hidden w-12 h-12 min-h-[48px] min-w-[48px] rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-foreground/50 transition-colors"
                   aria-label="Login"
                 >
-                  <User className="w-6 h-6 text-foreground" />
+                  <User className="w-5 h-5 text-foreground" />
                 </Link>
               </div>
             </div>
