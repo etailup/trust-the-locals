@@ -1,12 +1,40 @@
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 const Hero = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.defaultMuted = true;
+
+    const tryPlay = () => {
+      const playPromise = vid.play();
+      if (playPromise?.catch) {
+        playPromise.catch(() => {});
+      }
+    };
+
+    tryPlay();
+
+    const onVisibility = () => {
+      if (!document.hidden) tryPlay();
+    };
+
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
   return <section className="relative h-screen w-full overflow-hidden">
       {/* Video Background */}
       <video
+        ref={videoRef}
         src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/HEADER%20FINALE.mp4"
         autoPlay
         muted
+        defaultMuted
         playsInline
         loop
         preload="auto"
