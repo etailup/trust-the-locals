@@ -24,8 +24,8 @@ export const mockExperiences: Experience[] = [
     title: 'Florence Panoramic Escape',
     subtitle: 'Private Gallery Experience',
     category: 'Food & Wine',
-    description: 'Experience the Uffizi Gallery after hours with a private art historian.',
-    longDescription: `An exclusive journey through the hills of Settignano and Fiesole, where breathtaking views and authentic traditions come together. The experience begins with a stop amid ancient olive groves for a guided tasting of local extra-virgin olive oil, presented directly by the producer. The route continues along the most scenic roads, with stops at the best viewpoints overlooking Florence, surrounded by quiet landscapes, historic villas, and natural terraces. The tour concludes in Fiesole with an aperitivo overlooking the Renaissance city—an intimate and refined moment that captures the true essence of the Florentine hills.`,
+    description: 'Exclusive journey through Settignano and Fiesole with olive oil tasting, panoramic stops, and an aperitivo overlooking Florence.',
+    longDescription: `An exclusive journey through the hills of Settignano and Fiesole, where breathtaking views and authentic traditions come together.The experience begins with a stop among ancient olive groves for a guided tasting of local extra-virgin olive oil, presented directly by the producer. The route continues along the most scenic roads, with stops at the best viewpoints overlooking Florence, surrounded by quiet landscapes, historic villas, and natural terraces.The tour concludes in Fiesole with an aperitivo overlooking the Renaissance city—an intimate and refined moment that captures the true essence of the Florentine hills.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg",
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg',
@@ -47,8 +47,8 @@ export const mockExperiences: Experience[] = [
     title: 'Artisan Tour',
     subtitle: 'Florentine Craftsmanship',
     category: 'History',
-    description: 'Florence as the cradle of luxury craftsmanship: leather, gold, mosaics, marbled paper.',
-    longDescription: 'Florence as the cradle of luxury craftsmanship: leather, gold, mosaics, marbled paper. Visit authentic ateliers and meet master artisans who preserve centuries-old techniques. A deep dive into the artisan soul of Florence.',
+    description: 'Exclusive walk through hidden workshops to meet artisans crafting leather, gold, paper, and more.',
+    longDescription: 'Step into the heart of Florence with our Artisan Tour: an exclusive walk through hidden workshops where tradition meets creativity. Watch skilled artisans craft leather, gold, paper, and more, sharing the secrets behind their timeless creations. A unique experience that reveals the soul of the city through its finest handmade treasures.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
     gallery: [ 
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
@@ -68,8 +68,12 @@ export const mockExperiences: Experience[] = [
     title: 'Cooking Class',
     subtitle: 'In Leonardo\'s Chapel',
     category: 'Food & Wine',
-    description: 'A gastronomic journey inside a deconsecrated Renaissance chapel.',
-    longDescription: 'A gastronomic journey inside a deconsecrated Renaissance chapel where Leonardo da Vinci once walked. Start at Mercato Centrale to select ingredients with the chef, then cook traditional Florentine dishes inside the chapel. End with a private tasting of the prepared menu.',
+    description: 'Hands-on Tuscan cooking in a deconsecrated Renaissance chapel after selecting ingredients at Mercato Centrale.',
+    longDescription: `A gastronomic journey in the heart of Florence, set inside a deconsecrated Renaissance chapel—now transformed into an atmospheric bookshop, a unique place once crossed by Leonardo da Vinci himself.
+The experience begins at the Mercato Centrale, where, together with your chef, you’ll select the finest local ingredients from the city’s historic stalls.
+You then move to the chapel for an immersive hands-on cooking class, learning how to prepare the signature dishes of Florentine tradition in an authentic, intimate, and refined setting.
+The experience concludes with a convivial tasting of the dishes you’ve created.
+Available for small groups or as a private, tailor-made experience.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg',
     gallery: [        
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg",
@@ -89,9 +93,16 @@ export const mockExperiences: Experience[] = [
     id: 'prem-4',
     title: 'Tuscany Walk',
     subtitle: 'Florence, Siena, San Gimignano, Lucca, Forte dei Marmi, Pisa, Livorno, Arezzo, and Cortona',
-    description: 'Tuscany on Foot: Tailor-Made Stories Among the Wonders of the Region.',
+    description: 'Tailor-made walking itineraries with Local guides across Florence, Siena, San Gimignano, Lucca, Pisa, Livorno, Arezzo, and more.',
     category: 'History',
-    longDescription: 'Escape to secret natural thermal springs hidden in the Tuscan countryside, known only to locals for centuries. Your private wellness guide will lead you to pristine pools of naturally heated mineral waters with therapeutic properties. Following your thermal bath, enjoy customized spa treatments in a secluded stone cottage, followed by a healthy gourmet lunch prepared with organic local ingredients.',
+    longDescription: `Discovering Tuscany on foot, accompanied by a Local guide, is the most authentic way to step into the heart of this land.
+Every itinerary is crafted on demand, allowing you to experience the history, curiosities, and beauty of its most iconic cities.
+Florence: Cradle of the Renaissance and an open-air museum, where every step reveals art, architecture, and timeless masterpieces.
+Siena & San Gimignano: Between medieval squares and ancient towers: uncover the secrets of the Palio of Siena and be mesmerized by the untouched charm of San Gimignano.
+Lucca & Forte dei Marmi: From Lucca’s Renaissance walls and its oval piazza to a seaside lunch in the elegant beach clubs of Forte dei Marmi.
+Pisa & Livorno: Two opposite yet complementary souls: the world-famous Leaning Tower and the historic canals of Livorno’s Venezia district.
+Arezzo & Cortona: Where art meets breathtaking views: the masterpieces of Piero della Francesca and the stone alleyways overlooking the Val di Chiana.
+A tailor-made journey on foot to discover the most authentic heart of Tuscany.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/siena.jpg',
     gallery: ['https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/siena.jpg',
               'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/sanGIMI.jpg',
@@ -109,8 +120,9 @@ export const mockExperiences: Experience[] = [
     title: 'Wine Tour',
     subtitle: 'Among Vines, Dust, and Wine',
     category: 'Food & Wine',
-    description: 'A raw, authentic Defender adventure across real Tuscan countryside.',
-    longDescription: 'A raw, authentic Defender adventure across real Tuscan countryside. Travel through vineyards, dirt roads, and ridgelines with a local expert. Stop at selected wineries for tastings, stories, and local food pairings. A non-touristic, immersive, land-to-glass experience.\n\nSuggested routes:\n• Poggio Torselli\n• Casa Ruffino (Tenuta Poggio Casciano)\n• Villa Calcinaia / Tenuta degli Dei',
+    description: 'Vintage Defender tour through Tuscan hills with off-the-beaten-path winery tastings and local pairings.',
+    longDescription: `Leave the paved roads behind and climb aboard an iconic vintage Defender: this is how our Wine Safari begins—an authentic journey through the Tuscan hills, where wine is still born and breathed between earth and sky. Guided by someone who knows these fields as home, you’ll cross vineyards, country roads, and endless rows of vines, stopping at local wineries far from the usual tourist routes.
+Each stop is a meeting with real stories, honest wines, and local tastings created to elevate the moment. No staged settings—just the raw beauty of the Tuscan countryside, the silence of the vines, the scent of the land, and the taste of wine right where it comes to life.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/winetour.jpg",
     gallery: ["https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/winetour.jpg",
                           "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wintoor.jpg",
@@ -129,8 +141,10 @@ export const mockExperiences: Experience[] = [
     title: 'Florence Food Tour',
     subtitle: 'Fiorentine Flavors',
     category: 'Food & Wine',
-    description: 'A curated tasting journey across Florence\'s historic shops, bakeries, and markets.',
-    longDescription: 'A curated tasting journey across Florence\'s historic shops, bakeries, and markets. Taste schiacciata, artisanal gelato, pastries, local wine, and the original Negroni. Perfect for discovering the real Florentine lifestyle away from tourist paths.',
+    description: 'Authentic culinary walk through Florence’s historic shops, markets, and artisan workshops with a local expert.',
+    longDescription: `Florentine Flavors – A Culinary Journey Through History and Tradition.
+An authentic path to discover Florence through its cuisine. Guided by a local expert, you’ll explore historic shops, markets, and artisan workshops frequented by real Florentines. Each stop reveals a different facet of everyday Tuscan life: from the city’s most beloved schiacciata to traditional pastries, from artisanal gelato to the iconic Negroni, born right here in Florence.
+A genuine, tailor-made experience designed for those who want to understand the city through its truest flavors, far from the usual tourist routes.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/bicchiere.jpg",
     gallery: ["https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/bicchiere.jpg",
                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/affogato.jpg",
@@ -148,8 +162,10 @@ export const mockExperiences: Experience[] = [
     title: 'Private Dinner on Ponte Vecchio',
     subtitle: 'Exclusive Candlelit Experience',
     category: 'Food & Wine',
-    description: 'Exclusive candlelit dinner on a historic balcony overlooking Ponte Vecchio.',
-    longDescription: 'Exclusive candlelit dinner on a historic balcony overlooking Ponte Vecchio. A private chef prepares a Tuscan menu, while guests learn the hidden stories of Florence\'s oldest goldsmith district — including the secret door of the apartment.',
+    description: 'Private chef dinner on a historic Ponte Vecchio balcony with stories and curiosities about the location.',
+    longDescription: `Private Experience with a View of Ponte Vecchio – Where Taste Meets History.
+In an apartment overlooking the Ponte Vecchio—once home to the city’s butcher shops and today the heart of Florentine goldsmithing—you can enjoy a private dinner on a unique little balcony, perfect for a candlelit evening. Our private chef will guide guests through the magic of Florence using its most authentic flavors.
+Fully customizable, the experience allows you to discover Tuscan cuisine in an exclusive setting filled with history and charm. During the evening, stories and curiosities about the location are revealed, including a hidden door that guards one of Florence’s most fascinating mysteries.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
@@ -168,8 +184,9 @@ export const mockExperiences: Experience[] = [
     title: 'Supercar Grand Tour - Tuscany Landscape',
     subtitle: 'Tuscan Coast & Gourmet Dinner',
     category: 'Premium',
-    description: 'Sail the Tuscan coast on a luxury yacht with a private chef.',
-    longDescription: 'Set sail from Porto Ercole aboard a luxury yacht for an unforgettable evening on the Tuscan coast. Your private captain will navigate to secluded coves and pristine beaches inaccessible by land. As the sun sets over the Mediterranean, your personal chef prepares a multi-course dinner using the freshest local seafood and seasonal ingredients, served on deck under the stars.',
+    description: 'Bespoke Ferrari/Lamborghini tour across iconic Tuscan landscapes with curated scenic stops and hidden villages.',
+    longDescription: `An exclusive supercar (Ferrari, Lamborghini..) tour through Tuscany’s most iconic landscapes.
+Whether you choose the Chianti hills or the coastal route, you will experience a journey crafted entirely around you: legendary roads, scenic stops, hidden villages, and a dedicated Local who opens doors and places usually inaccessible to visitors. An experience that blends luxury, speed, and authenticity in true Trust The Locals style`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari_7.jpeg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari_7.jpeg',
@@ -191,8 +208,9 @@ export const mockExperiences: Experience[] = [
     title: 'Private Wellness Experience',
     subtitle: 'Nature, Art & Wellbeing',
     category: 'Premium',
-    description: 'A private workout experience in iconic Florentine locations: pilates, yoga and total body',
-    longDescription: 'A private yoga experience in iconic Florentine locations: Boboli Gardens, panoramic villas, or countryside estates. Followed by a healthy brunch or aperitivo. Connect mind, body, and the timeless beauty of Tuscany.',
+    description: 'Private yoga session with dedicated instructor in evocative Florentine locations, followed by brunch or aperitivo.',
+    longDescription: `Exclusive Yoga in Florence: nature, art, and well-being.
+Enjoy a private yoga experience guided by a dedicated instructor in some of the most evocative locations in Florence, such as the Boboli Gardens or panoramic villas overlooking the hills. After the session, unwind with a healthy brunch or aperitivo prepared with top-quality ingredients—a perfect moment to restore body and mind while socializing in a refined and intimate atmosphere.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
@@ -211,7 +229,7 @@ export const mockExperiences: Experience[] = [
     title: 'Vertical Wine Tasting',
     subtitle: 'Dal Leo',
     category: 'Food & Wine',
-    description: 'A private experience in Fiesole overlooking Florence at sunset.',
+    description: 'Private ascending tasting in Fiesole with chauffeured transfer and panoramic dinner at Reggia degli Etruschi.',
     longDescription: 'A private experience in Fiesole overlooking Florence. Guests are chauffeured to the Reggia degli Etruschi, a former convent now a panoramic restaurant. A local sommelier guides guests through a curated, ascending vertical tasting of iconic wines paired with freshly prepared dishes. Best enjoyed at sunset, with Florence at your feet.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
     gallery: [
@@ -235,8 +253,11 @@ export const mockExperiences: Experience[] = [
     title: 'Restoration Workshop',
     subtitle: 'Palazzo Ridolfi Zanchini',
     category: 'History',
-    description: 'Learn the art of Florentine restoration in an authentic atelier.',
-    longDescription: 'Learn the art of Florentine restoration in an authentic atelier with an expert restorer. Hands-on workshop with real techniques used after the 1966 flood. Experience the same methods used to restore Florence\'s masterpieces.',
+    description: 'Inside Palazzo Ridolfi Zanchini, learn real Florentine restoration techniques in an authentic atelier.',
+    longDescription: `The Art of Florentine Restoration
+An exclusive and truly unique experience in Florence, hosted inside Palazzo Ridolfi Zanchini, home to an authentic restoration workshop. Here, participants discover the techniques and secrets behind the recovery of artworks—from traditional artisan practices to methods developed after the 1966 flood.
+Around a shared worktable, an expert restorer will guide you step by step through the restoration process on a model painting, explaining what can be done, from cleaning to pictorial reconstruction.
+A rare opportunity to step into the heart of Florentine artistic craftsmanship and witness up close the meticulous, quiet care that brings masterpieces of the past back to life.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro2.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro2.jpg',
@@ -257,8 +278,8 @@ export const mockExperiences: Experience[] = [
     title: 'The Private Goldsmith',
     subtitle: 'Private In-Villa Service',
     category: 'Premium',
-    description: 'A designer or goldsmith comes directly to the villa to create custom pieces.',
-    longDescription: 'Founded in Florence in 1961, the Vannini goldsmith’s atelier embodies a family legacy devoted to crafting precious objects inspired by the elegance of the Italian Renaissance. Today, under the guidance of Gianmaria—who inherited the artistry and secrets of the craft from his parents, Umberto and Graziella—the tradition continues with refined mastery. With The Private Goldsmith: In-Villa Service, this expertise is brought directly to you. Each bespoke creation arises from an intimate, immersive process, where meticulous attention to detail, exceptional goldsmithing skill, and the finest materials come together to shape a jewel that is uniquely yours.',
+    description: 'A master Florentine goldsmith meets you anywhere to design and craft a bespoke jewel by your side.',
+    longDescription: 'A master Florentine goldsmith meets you wherever you are—at home, in your villa, or in a private venue—to design and craft a bespoke piece of jewelry by your side. Together, you’ll choose materials, shapes, and details, watching your idea take form through traditional techniques and expert hands. A truly personal and immersive experience that transforms a moment into a unique, handcrafted creation made exclusively for you.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/private_goldsmith1.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/private_goldsmith1.jpg',
@@ -278,8 +299,10 @@ export const mockExperiences: Experience[] = [
     title: 'Wine Tasting and Custom Label Crafting',
     subtitle: 'Tuscan Wine Experience',
     category: 'Food & Wine',
-    description: 'An authentic journey into the vineyards of Pievasciata, in the heart of Chianti Classico.',
-    longDescription: 'An authentic journey into the vineyards of Pievasciata, in the heart of Chianti Classico. Guided cellar visit, followed by a tasting of the estate\'s signature wines. Guests can also create a personalized wine label and bring home a custom bottle. Optional: private lunch in the winery with dedicated sommelier.',
+    description: 'Guided cellar visit in Chianti Classico with tasting and the option to craft your own personalized wine label.',
+    longDescription: `An authentic journey through the vineyards of Pievasciata, in the heart of Chianti Classico. The experience begins with a guided tour of the winery, offering a close look at the production and aging process.
+It continues with a tasting of the estate’s signature labels, with the option to create your own personalized label and take home a bottle as a unique keepsake.
+Upon request, the experience can conclude with an optional lunch at the winery, accompanied by a dedicated sommelier.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/valle_picciola_2.jpg",
     gallery: [ 
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/valle_picciola_2.jpg",
@@ -299,8 +322,8 @@ export const mockExperiences: Experience[] = [
     title: 'Mugello Grand Tour',
     subtitle: 'Luxury Supercar Experience',
     category: 'Premium',
-    description: 'The Mugello Circuit is closed exclusively for guests.',
-    longDescription: 'The Mugello Circuit is closed exclusively for guests. Drive iconic Italian supercars — Lamborghini, Ferrari — with professional coaches. A once-in-a-lifetime immersion in Italian speed, exclusivity, and adrenaline. Experience the track where Formula 1 legends have raced.',
+    description: 'Exclusive access to the Mugello Circuit to drive iconic supercars with pro coaches.',
+    longDescription: 'Mugello Grand Tour: adrenaline and luxury at the wheel of the finest supercars. An experience designed for those who seek the highest level of prestige and excitement. The legendary Mugello Circuit will be closed exclusively for you, turning into a private arena where you can take the wheel of the most iconic supercars, including Ferrari and Lamborghini. Feel the adrenaline as you tackle the curves of one of the world’s most celebrated tracks, guided step by step by expert professionals. A full immersion into the world of high speed and Italian luxury, created for those who accept no compromises.',
     image:      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari2.jpg",
     gallery: [ "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari2.jpg",
     ],
