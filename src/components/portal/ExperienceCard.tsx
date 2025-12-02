@@ -9,6 +9,20 @@ interface ExperienceCardProps {
 }
 
 const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
+  const priceByTitle: Record<string, string> = {
+    'Vertical Wine Tasting': '€375 / person',
+    'Wine Tour': '€700 (2–8 pax)',
+    'Florence Panoramic Escape': '€450',
+    'Florence Food Tour': '€149 / person',
+    'Private Dinner on Ponte Vecchio': '€600 / 2 people',
+    'Tuscany Walk': '€300',
+    'Restoration Workshop': '€180 / person',
+    'Artisan Tour': '€165 / person',
+    'The Private Goldsmith': '€1400 / person',
+    'Mugello Grand Tour': '€1110 / person',
+    'Private Wellness Experience': '€210 / person',
+  };
+
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
@@ -45,6 +59,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
   }, [experience]);
 
   const href = linkTo || `/portal/experience/${experience.id}`;
+  const priceLabel = priceByTitle[experience.title] || '';
 
   return (
     <Link to={href}>
@@ -69,10 +84,19 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
 
           {/* Category Tag */}
           <div className="absolute bottom-4 left-4">
-            <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-portal-navy text-xs font-medium">
+            <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-portal-navy text-base font-medium rounded-full border border-gray-200 shadow-sm">
               {experience.category}
             </span>
           </div>
+
+          {/* Price Tag */}
+          {priceLabel && (
+            <div className="absolute bottom-4 right-4">
+              <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-gray-800 text-base font-medium rounded-full border border-gray-200 shadow-sm text-right">
+                {priceLabel}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Content */}

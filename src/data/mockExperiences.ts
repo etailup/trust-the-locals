@@ -218,11 +218,10 @@ Whether you choose the Chianti hills or the coastal route, you will experience a
     description: 'Private yoga session with dedicated instructor in evocative Florentine locations, followed by brunch or aperitivo.',
     longDescription: `Exclusive Yoga in Florence: nature, art, and well-being.
 Enjoy a private yoga experience guided by a dedicated instructor in some of the most evocative locations in Florence, such as the Boboli Gardens or panoramic villas overlooking the hills. After the session, unwind with a healthy brunch or aperitivo prepared with top-quality ingredients—a perfect moment to restore body and mind while socializing in a refined and intimate atmosphere.`,
-    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/yoga.jpg",
     gallery: [
-      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/yoga.jpg",
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/Experience%20Gina%27s%20workout.mp4',
-      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia1.jpg'
 
     ],
     duration: '2-3 hours',
@@ -332,7 +331,9 @@ Upon request, the experience can conclude with an optional lunch at the winery, 
     description: 'Exclusive access to the Mugello Circuit to drive iconic supercars with pro coaches.',
     longDescription: 'Mugello Grand Tour: adrenaline and luxury at the wheel of the finest supercars. An experience designed for those who seek the highest level of prestige and excitement. The legendary Mugello Circuit will be closed exclusively for you, turning into a private arena where you can take the wheel of the most iconic supercars, including Ferrari and Lamborghini. Feel the adrenaline as you tackle the curves of one of the world’s most celebrated tracks, guided step by step by expert professionals. A full immersion into the world of high speed and Italian luxury, created for those who accept no compromises.',
     image:      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari2.jpg",
-    gallery: [ "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari2.jpg",
+    gallery: [ 
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ferrari2.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/mugello.jpg"
     ],
     duration: '4-6 hours',
     location: 'Mugello Circuit',

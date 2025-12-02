@@ -1,39 +1,23 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import SeasonalCard from '@/components/portal/SeasonalCard';
-import { winterExperiences, springExperiences, summerExperiences, autumnExperiences } from '@/data/mockSeasonal';
-import { Snowflake, Flower, Sun, Leaf, Menu } from 'lucide-react';
+import { mockSeasonal } from '@/data/mockSeasonal';
+import { Menu } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Seasonal = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedSeason, setSelectedSeason] = useState('All');
 
-  const seasons = [
-    { 
-      name: 'Spring', 
-      experiences: springExperiences, 
-      icon: Flower,
-      description: 'March – June'
-    },
-    { 
-      name: 'Summer', 
-      experiences: summerExperiences, 
-      icon: Sun,
-      description: 'July – August'
-    },
-    { 
-      name: 'Autumn', 
-      experiences: autumnExperiences, 
-      icon: Leaf,
-      description: 'September – November'
-    },
-    { 
-      name: 'Winter', 
-      experiences: winterExperiences, 
-      icon: Snowflake,
-      description: 'November – February'
-    }
-  ];
+  const seasons = ['All', 'Spring', 'Summer', 'Autumn', 'Winter'];
+
+  const filteredSeasonal = useMemo(() => {
+    return mockSeasonal.filter((exp) => {
+      if (selectedSeason === 'All') return true;
+      return exp.season === selectedSeason;
+    });
+  }, [selectedSeason]);
 
   return (
     <div className="flex min-h-screen bg-portal-cream relative">
@@ -68,24 +52,38 @@ const Seasonal = () => {
           <div className="mt-6 md:mt-8 w-20 h-px bg-portal-navy/30"></div>
         </div>
 
-        {/* Seasonal Categories */}
-        {seasons.map((season, index) => (
-          <div key={season.name} className={index !== seasons.length - 1 ? 'mb-16' : ''}>
-            <div className="mb-8 flex items-center justify-center gap-8">
-              <div className="flex-1 h-px bg-portal-navy/20"></div>
-              <h2 className="font-luxury text-3xl md:text-4xl text-portal-navy whitespace-nowrap">
-                {season.name}
-              </h2>
-              <div className="flex-1 h-px bg-portal-navy/20"></div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {season.experiences.map((experience) => (
-                <SeasonalCard key={experience.id} experience={experience} />
-              ))}
-            </div>
+        {/* Filters */}
+        <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4">
+          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1">
+            {seasons.map((season) => (
+              <Button
+                key={season}
+                onClick={() => setSelectedSeason(season)}
+                variant={selectedSeason === season ? 'default' : 'outline'}
+                className={
+                  selectedSeason === season
+                    ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-base font-medium rounded-full'
+                    : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-base font-medium bg-[#FAF7F2] rounded-full'
+                }
+              >
+                {season}
+              </Button>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredSeasonal.map((experience) => (
+            <SeasonalCard key={experience.id} experience={experience} />
+          ))}
+        </div>
+
+        {filteredSeasonal.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-foreground/60">No seasonal experiences found.</p>
+          </div>
+        )}
       </main>
 
       <ConciergeButton />

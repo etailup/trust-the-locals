@@ -55,7 +55,7 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
           
           {/* Season Tag */}
           <div className="absolute bottom-4 left-4">
-            <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-portal-navy text-xs font-medium">
+            <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-portal-navy text-base font-medium rounded-full border border-gray-200 shadow-sm">
               {experience.season}
             </span>
           </div>

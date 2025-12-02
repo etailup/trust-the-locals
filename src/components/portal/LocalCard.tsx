@@ -13,6 +13,23 @@ interface LocalCardProps {
 }
 
 const LocalCard = ({ local }: LocalCardProps) => {
+  const pricingByCategory: Record<string, string> = {
+    Chef: '€80/hr',
+    'Private Chef': '€80/hr',
+    'Personal Assistant': '€750/day',
+    Guide: '€100/hr',
+    Guides: '€100/hr',
+    'Personal Concierge and Guides': '€750/day',
+    Security: '€80/hr',
+    Nanny: '€45/hr',
+    Nannies: '€45/hr',
+    Driver: '€85/hr',
+    Drivers: '€85/hr',
+    'Personal Trainer': '€130/hr',
+    Trainer: '€130/hr',
+    Trainers: '€130/hr',
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -32,6 +49,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
       : [];
   const cardImage = mediaItems[0]?.src ?? local.image;
   const activeMedia = mediaItems[activeIndex] ?? mediaItems[0];
+  const priceLabel = pricingByCategory[local.category] || '';
 
   useEffect(() => {
     if (videoRef.current) {
@@ -59,8 +77,6 @@ const LocalCard = ({ local }: LocalCardProps) => {
       setIsLiked(true);
     }
   };
-
-  const pricing = null;
 
   return (
     <>
@@ -95,10 +111,10 @@ const LocalCard = ({ local }: LocalCardProps) => {
         </div>
 
         {/* Price Tag */}
-        {pricing && (
+        {priceLabel && (
           <div className="absolute bottom-4 right-4">
-            <span className="inline-block px-5 py-2 bg-white/90 backdrop-blur-sm text-portal-navy text-base font-semibold rounded-full text-right">
-              {pricing}
+            <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-gray-800 text-lg font-medium rounded-full border border-gray-200 shadow-sm text-right">
+              {priceLabel}
             </span>
           </div>
         )}

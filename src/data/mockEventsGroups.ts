@@ -18,6 +18,7 @@ export const mockEventsGroups: EventGroup[] = [
     description: "We produce weddings and private celebrations of any size, managing every element from concept to execution.",
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/events_and_groups/wedding.jpg",
     gallery: [
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/seasonal/matrimonio.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/events_and_groups/wedding.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/wedding.jpeg"
     ],
