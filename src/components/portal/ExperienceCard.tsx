@@ -21,6 +21,10 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
     'The Private Goldsmith': '€1400 / person',
     'Mugello Grand Tour': '€1110 / person',
     'Private Wellness Experience': '€210 / person',
+    'Cooking Class': '€155 / person',
+    'Wine Tour': '€700',
+    'Supercar Grand Tour - Tuscany Landscape': '€900',
+    'Wine Tasting and Custom Label Crafting': '€195',
   };
 
   const [isSaved, setIsSaved] = useState(false);

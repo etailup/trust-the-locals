@@ -14,6 +14,8 @@ const Booking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockExperiences.find((exp) => exp.id === id);
+  const transferIncludedExperiences = ['prem-3', 'fw-3', 'fw-10']; // Panoramic Escape, Wine Tour, Supercar Grand Tour
+  const transferIncluded = experience ? transferIncludedExperiences.includes(experience.id) : false;
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -21,6 +23,7 @@ const Booking = () => {
     phone: '',
     guests: '2',
     date: '',
+    transfer: 'No',
     pickUpTime: '',
     dropOffTime: '',
     notes: '',
@@ -130,30 +133,47 @@ const Booking = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                {!transferIncluded && (
                   <div>
-                    <Label htmlFor="pickUpTime" className="text-lg text-portal-navy">Pick Up Time</Label>
-                    <Input
-                      id="pickUpTime"
-                      type="time"
-                      required
-                      value={formData.pickUpTime}
-                      onChange={(e) => setFormData({ ...formData, pickUpTime: e.target.value })}
-                      className="text-lg"
-                    />
+                    <Label htmlFor="transfer" className="text-lg text-portal-navy">Transfer</Label>
+                    <select
+                      id="transfer"
+                      value={formData.transfer}
+                      onChange={(e) => setFormData({ ...formData, transfer: e.target.value })}
+                      className="w-full text-lg mt-1 border border-input rounded-md px-3 py-2 bg-[#FAF7F2] text-portal-navy focus:outline-none focus:ring-2 focus:ring-portal-navy/30"
+                    >
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option>
+                    </select>
                   </div>
-                  <div>
-                    <Label htmlFor="dropOffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
-                    <Input
-                      id="dropOffTime"
-                      type="time"
-                      required
-                      value={formData.dropOffTime}
-                      onChange={(e) => setFormData({ ...formData, dropOffTime: e.target.value })}
-                      className="text-lg"
-                    />
+                )}
+
+                {transferIncluded || formData.transfer === 'Yes' ? (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="pickUpTime" className="text-lg text-portal-navy">Pick Up Time</Label>
+                      <Input
+                        id="pickUpTime"
+                        type="time"
+                        required
+                        value={formData.pickUpTime}
+                        onChange={(e) => setFormData({ ...formData, pickUpTime: e.target.value })}
+                        className="text-lg"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="dropOffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
+                      <Input
+                        id="dropOffTime"
+                        type="time"
+                        required
+                        value={formData.dropOffTime}
+                        onChange={(e) => setFormData({ ...formData, dropOffTime: e.target.value })}
+                        className="text-lg"
+                      />
+                    </div>
                   </div>
-                </div>
+                ) : null}
 
                 <div>
                   <Label htmlFor="notes" className="text-lg text-portal-navy">Additional Notes or Preferences</Label>

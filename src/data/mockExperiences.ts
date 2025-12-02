@@ -321,7 +321,7 @@ Upon request, the experience can conclude with an optional lunch at the winery, 
     included: ['Guided cellar visit', 'Wine tasting', 'Personalized wine label', 'Optional private lunch'],
     availability: 'Year-round, advance booking required',
     featured: true,
-    pricing: 'from €240 per person',
+    pricing: 'from €195 per person',
   },
   {
     id: 'prem-2',
