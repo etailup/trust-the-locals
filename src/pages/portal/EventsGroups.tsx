@@ -19,33 +19,35 @@ const EventsGroups = () => {
         />
       )}
       
-      <main className="md:ml-10 flex-1 p-4 md:p-6 transition-all duration-300">
-        <div className="md:hidden mb-4 flex items-center justify-between">
-          <button
-            aria-label="Open menu"
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-md bg-portal-navy text-portal-cream"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-        </div>
+      <main className="md:ml-10 ml-0 flex-1 p-4 md:p-6 transition-all duration-300">
+        <div className="w-full">
+          <div className="md:hidden mb-4 flex items-center justify-between">
+            <button
+              aria-label="Open menu"
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-md bg-portal-navy text-portal-cream"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
 
-        {/* Hero Header */}
-        <div className="mb-10 md:mb-12 animate-fade-up">
-          <h1 className="font-luxury text-4xl md:text-5xl text-portal-navy mb-3 md:mb-4 font-semibold">
-            Events & Groups
-          </h1>
-          <p className="text-portal-navy/70 text-base md:text-lg max-w-3xl">
-            From intimate celebrations to executive retreats, we produce unforgettable experiences for discerning clients worldwide.
-          </p>
-          <div className="mt-6 w-12 h-px bg-portal-navy/30"></div>
-        </div>
+          {/* Hero Header */}
+          <div className="mb-10 md:mb-12 animate-fade-up">
+            <h1 className="font-luxury text-4xl md:text-5xl text-portal-navy mb-3 md:mb-4 font-semibold">
+              Events & Groups
+            </h1>
+            <p className="text-portal-navy/70 text-base md:text-lg max-w-3xl">
+              From intimate celebrations to executive retreats, we produce unforgettable experiences for discerning clients worldwide.
+            </p>
+            <div className="mt-6 w-12 h-px bg-portal-navy/30"></div>
+          </div>
 
-        {/* Event Group Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockEventsGroups.map((eventGroup) => (
-            <EventGroupCard key={eventGroup.id} eventGroup={eventGroup} />
-          ))}
+          {/* Event Group Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {mockEventsGroups.map((eventGroup) => (
+              <EventGroupCard key={eventGroup.id} eventGroup={eventGroup} />
+            ))}
+          </div>
         </div>
       </main>
 

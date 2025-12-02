@@ -33,10 +33,10 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
   return (
     <Link to={`/portal/seasonal/${experience.id}`} className="block">
       <div 
-        className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg"
+        className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg h-full flex flex-col"
       >
         {/* Image */}
-        <div className="relative h-64 overflow-hidden rounded-t-lg">
+        <div className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
           <img
             src={experience.image}
             alt={experience.title}
@@ -55,14 +55,14 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
           
           {/* Season Tag */}
           <div className="absolute bottom-4 left-4">
-            <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-portal-navy text-base font-medium rounded-full border border-gray-200 shadow-sm">
+            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/90 backdrop-blur-sm text-portal-navy font-medium rounded-full border border-gray-200 shadow-sm">
               {experience.season}
             </span>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-6 flex flex-col flex-1">
           <h3 className="font-luxury text-3xl text-portal-navy mb-3 transition-colors">
             {experience.title}
           </h3>
@@ -71,7 +71,7 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
           </p>
 
           {/* Details */}
-          <div className="mt-4 pt-4 border-t border-portal-navy/20 flex items-center justify-between text-base text-portal-navy/70">
+          <div className="mt-auto pt-4 border-t border-portal-navy/20 flex items-center justify-between text-base text-portal-navy/70">
             <span>{experience.duration}</span>
             <span>{experience.location.split(',')[0]}</span>
           </div>

@@ -176,7 +176,7 @@ Fully customizable, the experience allows you to discover Tuscan cuisine in an e
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
-      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDinner2.jpg',,
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDinner2.jpg',
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ponte_vecchio.mp4"
     ],
     duration: '3 hours',

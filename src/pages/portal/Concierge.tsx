@@ -9,7 +9,7 @@ const Concierge = () => {
       <PortalSidebar />
       
       <main className="md:ml-10 flex-1 p-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-3 md:px-0">
           <h1 className="font-luxury text-4xl text-portal-navy mb-2">
             Concierge Service
           </h1>

@@ -21,7 +21,7 @@ const LocalCareDetail = () => {
       )}
 
       <main className="flex-1 p-0 md:p-0 transition-all duration-300">
-        <div className="md:hidden mb-4 flex items-center justify-between">
+        <div className="md:hidden mb-4 flex items-center justify-between px-3 md:px-0">
           <button
             aria-label="Open menu"
             onClick={() => setSidebarOpen(true)}
@@ -61,7 +61,7 @@ const LocalCareDetail = () => {
         </div>
 
         <div className="p-4 md:p-6 bg-portal-cream">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto px-3 md:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
               <div className="lg:col-span-2 space-y-8">
                 <div>

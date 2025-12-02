@@ -26,6 +26,8 @@ const Booking = () => {
     transfer: 'No',
     pickUpTime: '',
     dropOffTime: '',
+    pickUpSpot: '',
+    dropOffSpot: '',
     notes: '',
   });
 
@@ -50,29 +52,31 @@ const Booking = () => {
     <div className="flex min-h-screen bg-portal-cream">
       <PortalSidebar />
       
-      <main className="md:ml-10 flex-1 p-8">
-        <Button
-          onClick={() => navigate(-1)}
-          variant="outline"
-          className="mb-6 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
-        </Button>
+      <main className="md:ml-10 flex-1 p-4 md:p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 md:px-0">
+          <Button
+            onClick={() => navigate(-1)}
+            variant="outline"
+            className="mb-6 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back
+          </Button>
 
-        <div className="max-w-4xl mx-auto">
-          <h1 className="font-luxury text-6xl text-portal-navy mb-4">
-            Request Experience
-          </h1>
-          <p className="text-foreground/70 text-2xl mb-10">
-            {experience.title} - {experience.subtitle}
-          </p>
+          <div className="max-w-4xl">
+            <h1 className="font-luxury text-4xl sm:text-5xl md:text-6xl text-portal-navy mb-4 leading-tight">
+              Request Experience
+            </h1>
+            <p className="text-foreground/70 text-lg md:text-2xl mb-10 leading-relaxed">
+              {experience.title} - {experience.subtitle}
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Form */}
-            <div className="lg:col-span-2 bg-[#FAF7F2] border border-border rounded-lg p-8">
+            <div className="lg:col-span-2 bg-[#FAF7F2] border border-border rounded-lg p-6 md:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="firstName" className="text-lg text-portal-navy">First Name</Label>
                     <Input
@@ -107,7 +111,7 @@ const Booking = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="guests" className="text-lg text-portal-navy">Number of Guests</Label>
                     <Input
@@ -149,30 +153,59 @@ const Booking = () => {
                 )}
 
                 {transferIncluded || formData.transfer === 'Yes' ? (
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="pickUpTime" className="text-lg text-portal-navy">Pick Up Time</Label>
-                      <Input
-                        id="pickUpTime"
-                        type="time"
-                        required
-                        value={formData.pickUpTime}
-                        onChange={(e) => setFormData({ ...formData, pickUpTime: e.target.value })}
-                        className="text-lg"
-                      />
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="pickUpSpot" className="text-lg text-portal-navy">Pick Up Spot</Label>
+                        <Input
+                          id="pickUpSpot"
+                          type="text"
+                          required
+                          value={formData.pickUpSpot}
+                          onChange={(e) => setFormData({ ...formData, pickUpSpot: e.target.value })}
+                          className="text-lg"
+                          placeholder="e.g., Hotel Savoy, Florence"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="dropOffSpot" className="text-lg text-portal-navy">Drop Off Spot</Label>
+                        <Input
+                          id="dropOffSpot"
+                          type="text"
+                          required
+                          value={formData.dropOffSpot}
+                          onChange={(e) => setFormData({ ...formData, dropOffSpot: e.target.value })}
+                          className="text-lg"
+                          placeholder="e.g., Piazza del Duomo"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <Label htmlFor="dropOffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
-                      <Input
-                        id="dropOffTime"
-                        type="time"
-                        required
-                        value={formData.dropOffTime}
-                        onChange={(e) => setFormData({ ...formData, dropOffTime: e.target.value })}
-                        className="text-lg"
-                      />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="pickUpTime" className="text-lg text-portal-navy">Pick Up Time</Label>
+                        <Input
+                          id="pickUpTime"
+                          type="time"
+                          required
+                          value={formData.pickUpTime}
+                          onChange={(e) => setFormData({ ...formData, pickUpTime: e.target.value })}
+                          className="text-lg"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="dropOffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
+                        <Input
+                          id="dropOffTime"
+                          type="time"
+                          required
+                          value={formData.dropOffTime}
+                          onChange={(e) => setFormData({ ...formData, dropOffTime: e.target.value })}
+                          className="text-lg"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </>
                 ) : null}
 
                 <div>

@@ -12,7 +12,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
   const priceByTitle: Record<string, string> = {
     'Vertical Wine Tasting': '€375 / person',
     'Wine Tour': '€700 (2–8 pax)',
-    'Florence Panoramic Escape': '€450',
+    'Florence Panoramic Escape': 'From €550',
     'Florence Food Tour': '€149 / person',
     'Private Dinner on Ponte Vecchio': '€600 / 2 people',
     'Tuscany Walk': '€300',
@@ -68,9 +68,9 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
 
   return (
     <Link to={href}>
-      <div className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg">
+      <div className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg h-full flex flex-col">
         {/* Image */}
-        <div className="relative h-80 overflow-hidden rounded-t-lg">
+        <div className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
           <img
             src={coverImage}
             alt={experience.title}
@@ -89,7 +89,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
 
           {/* Category Tag */}
           <div className="absolute bottom-4 left-4">
-            <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-portal-navy text-base font-medium rounded-full border border-gray-200 shadow-sm">
+            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/90 backdrop-blur-sm text-portal-navy font-medium rounded-full border border-gray-200 shadow-sm">
               {experience.category}
             </span>
           </div>
@@ -97,7 +97,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
           {/* Price Tag */}
           {priceLabel && (
             <div className="absolute bottom-4 right-4">
-              <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-gray-800 text-base font-medium rounded-full border border-gray-200 shadow-sm text-right">
+              <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/90 backdrop-blur-sm text-gray-800 font-medium rounded-full border border-gray-200 shadow-sm text-right">
                 {priceLabel}
               </span>
             </div>
@@ -105,7 +105,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
         </div>
 
         {/* Content */}
-        <div className="p-4 md:p-5">
+        <div className="p-4 md:p-5 flex flex-col flex-1">
           <h3 className="font-luxury text-2xl md:text-3xl text-portal-navy mb-2 transition-colors">
             {experience.title}
           </h3>
@@ -117,7 +117,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
           </p>
 
           {/* Details */}
-          <div className="mt-3 pt-3 border-t border-portal-navy/20 flex items-center justify-between text-sm md:text-base text-portal-navy/70">
+          <div className="mt-auto pt-3 border-t border-portal-navy/20 flex items-center justify-between text-sm md:text-base text-portal-navy/70">
             <span>{experience.duration}</span>
           </div>
         </div>

@@ -20,8 +20,8 @@ const ExperienceDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockExperiences.find((exp) => exp.id === id);
-  const videoUrl = experience?.gallery?.find((item) =>
-    item.toLowerCase().endsWith('.mp4')
+  const videoUrl = experience?.gallery?.find(
+    (item) => typeof item === 'string' && item.toLowerCase().endsWith('.mp4')
   );
 
   // Build media array like Villas
@@ -35,9 +35,18 @@ const ExperienceDetail = () => {
     return [];
   }, [experience]);
 
-  const images = media.filter(
-    (m) => typeof m === 'string' && m.trim().length > 0
-  );
+  // Only non-video assets for hero/lightbox (prevents video zoom)
+  const imageSlides = useMemo(() => {
+    const imgs = media.filter(
+      (m) =>
+        typeof m === 'string' &&
+        m.trim().length > 0 &&
+        !m.toLowerCase().endsWith('.mp4')
+    );
+    if (imgs.length > 0) return imgs;
+    if (experience?.image) return [experience.image];
+    return [];
+  }, [media, experience]);
 
   const [currentImage, setCurrentImage] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -52,16 +61,16 @@ const ExperienceDetail = () => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsLightboxOpen(false);
       if (e.key === 'ArrowLeft') {
-        setLightboxIndex((prev) => (prev - 1 + images.length) % images.length);
+        setLightboxIndex((prev) => (prev - 1 + imageSlides.length) % imageSlides.length);
       }
       if (e.key === 'ArrowRight') {
-        setLightboxIndex((prev) => (prev + 1) % images.length);
+        setLightboxIndex((prev) => (prev + 1) % imageSlides.length);
       }
     };
 
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [isLightboxOpen, images.length]);
+  }, [isLightboxOpen, imageSlides.length]);
 
   // Pause/reset videos on slide change
   useEffect(() => {
@@ -83,7 +92,7 @@ const ExperienceDetail = () => {
   }
 
   const heroImage =
-    images.length > 0 ? images[currentImage] : experience.image ?? '';
+    imageSlides.length > 0 ? imageSlides[currentImage] : experience.image ?? '';
 
   return (
     <div className="flex min-h-screen bg-portal-cream">
@@ -97,7 +106,7 @@ const ExperienceDetail = () => {
             alt={experience.title}
             className="w-full h-full object-cover cursor-pointer"
             onClick={() => {
-              if (!images.length) return;
+              if (!imageSlides.length) return;
               setLightboxIndex(currentImage);
               setIsLightboxOpen(true);
             }}
@@ -127,7 +136,7 @@ const ExperienceDetail = () => {
 
         {/* Content */}
         <div className="p-4 md:p-6 bg-portal-cream">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
             <div className="flex flex-col gap-8 md:grid md:grid-cols-12 md:gap-16 md:items-start">
               {/* VIDEO COLUMN */}
               {videoUrl && (
@@ -136,6 +145,8 @@ const ExperienceDetail = () => {
                     src={videoUrl}
                     controls
                     playsInline
+                    controlsList="nofullscreen noremoteplayback nodownload"
+                    disablePictureInPicture
                     preload="metadata"
                     className="w-full h-auto max-h-[750px] object-cover rounded-xl shadow-lg border border-[#e6dfd5]"
                   />
@@ -225,7 +236,7 @@ const ExperienceDetail = () => {
       </main>
 
       {/* LIGHTBOX — EXACT VILLAS STYLE */}
-      {isLightboxOpen && images.length > 0 && (
+      {isLightboxOpen && imageSlides.length > 0 && (
         <div
           className="fixed inset-0 bg-black/75 z-50 flex items-center justify-center px-4"
           onClick={() => setIsLightboxOpen(false)}
@@ -246,21 +257,11 @@ const ExperienceDetail = () => {
 
             <div className="relative">
               {/* IMAGE / VIDEO */}
-              {images[lightboxIndex].toLowerCase().endsWith('.mp4') ? (
-                <video
-                  ref={videoRef}
-                  controls
-                  playsInline
-                  className="w-full h-full max-h-[95vh] max-w-[95vw] object-contain rounded-lg mx-auto"
-                  src={images[lightboxIndex]}
-                />
-              ) : (
-                <img
-                  src={images[lightboxIndex]}
-                  alt={experience.title}
-                  className="w-full h-full max-h-[95vh] max-w-[95vw] object-contain rounded-lg mx-auto"
-                />
-              )}
+              <img
+                src={imageSlides[lightboxIndex]}
+                alt={experience.title}
+                className="w-full h-full max-h-[95vh] max-w-[95vw] object-contain rounded-lg mx-auto"
+              />
 
               {/* NAV ARROWS */}
               {images.length > 1 && (

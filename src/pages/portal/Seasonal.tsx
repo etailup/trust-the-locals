@@ -42,7 +42,7 @@ const Seasonal = () => {
         </div>
 
         {/* Page Header */}
-        <div className="mb-10 md:mb-16 animate-fade-up">
+        <div className="mb-10 md:mb-16 animate-fade-up px-3 md:px-0">
           <h1 className="font-luxury text-4xl md:text-5xl text-portal-navy mb-3 md:mb-4 tracking-wide letter-spacing-luxury font-semibold">
             Seasonal Experiences
           </h1>
@@ -53,7 +53,7 @@ const Seasonal = () => {
         </div>
 
         {/* Filters */}
-        <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4">
+        <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4 px-3 md:px-0">
           <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1">
             {seasons.map((season) => (
               <Button
@@ -73,7 +73,7 @@ const Seasonal = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-0">
           {filteredSeasonal.map((experience) => (
             <SeasonalCard key={experience.id} experience={experience} />
           ))}

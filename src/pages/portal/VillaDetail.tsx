@@ -93,7 +93,7 @@ const VillaDetail = () => {
         </div>
 
         <div className="p-8 bg-[#FAF7F2]">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto px-3 md:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-8">

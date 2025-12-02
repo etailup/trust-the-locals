@@ -107,7 +107,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
         
         {/* Category Tag */}
         <div className="absolute bottom-4 left-4">
-          <span className="inline-block px-5 py-2 bg-white/90 backdrop-blur-sm text-portal-navy text-base font-semibold rounded-full">
+          <span className="inline-block px-3 py-1 text-sm md:px-5 md:py-2 md:text-base bg-white/90 backdrop-blur-sm text-portal-navy font-semibold rounded-full">
             {local.category}
           </span>
         </div>
@@ -115,7 +115,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
         {/* Price Tag */}
         {priceLabel && (
           <div className="absolute bottom-4 right-4">
-            <span className="inline-block px-3.5 py-1.5 bg-white/90 backdrop-blur-sm text-gray-800 text-lg font-medium rounded-full border border-gray-200 shadow-sm text-right">
+            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-lg bg-white/90 backdrop-blur-sm text-gray-800 font-medium rounded-full border border-gray-200 shadow-sm text-right">
               {priceLabel}
             </span>
           </div>
@@ -197,6 +197,8 @@ const LocalCard = ({ local }: LocalCardProps) => {
                   controls
                   muted
                   playsInline
+                  controlsList="nofullscreen noremoteplayback nodownload"
+                  disablePictureInPicture
                   className="w-full h-full object-contain rounded-lg bg-black/5"
                   ref={videoRef}
                   style={{ objectPosition: objectPosDetail }}

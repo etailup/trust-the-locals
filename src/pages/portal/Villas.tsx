@@ -9,6 +9,7 @@ const Villas = () => {
       <PortalSidebar />
       
       <main className="md:ml-10 flex-1 p-8">
+        <div className="max-w-6xl mx-auto px-3 md:px-0">
         <div className="mb-12 animate-fade-up">
           <h1 className="font-luxury text-5xl text-portal-navy mb-2 font-semibold">
             Luxury Villas
@@ -23,6 +24,7 @@ const Villas = () => {
           {mockVillas.map((villa) => (
             <VillaCard key={villa.id} villa={villa} />
           ))}
+        </div>
         </div>
       </main>
 

@@ -40,10 +40,10 @@ const Experiences = () => {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="font-luxury text-5xl text-portal-navy mb-2 font-semibold">
+          <h1 className="font-luxury text-4xl sm:text-5xl text-portal-navy mb-2 font-semibold leading-tight">
             All Experiences
           </h1>
-          <p className="text-foreground/60 text-[24px]">
+          <p className="text-foreground/60 text-lg md:text-[24px] leading-relaxed">
             Explore our curated collection of exclusive Tuscan experiences
           </p>
         </div>
