@@ -31,7 +31,7 @@ const OurService = () => {
   }, {
     title: "Local Care",
     description: "Local Care is our dedicated support service for international travel agencies whose clients are visiting Italy. Available 24/7, our team provides instant remote assistance to solve unexpected issues, handle emergencies, manage last-minute reservations, and coordinate reliable local services. Not only a physical presence — but a real Italian team, always online and ready to support your guests throughout their stay.",
-    image: "/our_service/conciergerie.jpg"
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/our_service/conciergerie.jpg"
   }, {
     title: "Exceptional Experiences",
     description: "We curate journeys designed entirely around who you are — your rhythm, your tastes, your way of exploring the world. Each detail is thoughtfully shaped by our specialists to create a personalised journey that feels effortless, intimate, and truly unforgettable.",

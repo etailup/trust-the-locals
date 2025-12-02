@@ -4,25 +4,25 @@ const About = () => {
   const teamMembers = [{
     name: "Duccio",
     role: "Co-Founder & Experience Curator",
-    image: "/about_us/duccio.jpg",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/duccio.jpg",
     imagePosition: "50% 50%",
     description: "Passionate about creating authentic local experiences"
   }, {
     name: "Lorenzo",
     role: "Co-Founder & CEO",
-    image: "/about_us/lorenzo.jpg",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/lorenzo.jpg",
     imagePosition: "50% 50%",
     description: "Oversees every detail of our operations to ensure flawless, high-quality experiences."
   }, {
     name: "Carolina",
     role: "Executive Assistant",
-    image: "/about_us/caro.jpg",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/caro.jpg",
     imagePosition: "15% 10%", 
     description: "Carolina is an outstanding Executive Assistant, the true “right hand” of the founders, managing all operations with impeccable efficiency."
   }, {
     name: "Sofia",
     role: "Guest Relations",
-    image: "/about_us/sofia.jpeg",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/sofia.jpeg",
     imagePosition: "20% 12%",
     description: "The warm, welcoming presence behind our guest experience, ensuring every visitor feels understood, supported, and at home."
   }];
@@ -107,7 +107,7 @@ const About = () => {
       {/* Overlapping Image Section */}
       <section className="relative -mt-20 sm:-mt-28 md:-mt-32 mb-20 sm:mb-28 md:mb-32 container mx-auto px-4 sm:px-6 md:px-12 max-w-7xl z-10">
         <img
-          src="/about_us/our_story1.jpg"
+          src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/our_story1.jpg"
           alt="Team with locals"
           loading="eager"
           decoding="async"

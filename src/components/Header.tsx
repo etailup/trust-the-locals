@@ -61,7 +61,7 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 className="absolute left-1/2 transform -translate-x-1/2 flex items-center"
               >
                 <img
-                  src="/file_final_2.svg"
+                  src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg"
                   alt="Trust the Locals logo"
                   className="h-34 sm:h-36 w-auto object-contain"
                 />

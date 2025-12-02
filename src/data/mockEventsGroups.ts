@@ -16,10 +16,10 @@ export const mockEventsGroups: EventGroup[] = [
     title: "Weddings & Private Events",
     subtitle: "Bespoke celebrations in iconic Italian locations",
     description: "We produce weddings and private celebrations of any size, managing every element from concept to execution.",
-    image: "/events_and_groups/wedding.jpg",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/events_and_groups/wedding.jpg",
     gallery: [
-      "/events_and_groups/wedding.jpg",
-      "/wedding.jpeg"
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/events_and_groups/wedding.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/wedding.jpeg"
     ],
     category: "Private Events",
     included: [

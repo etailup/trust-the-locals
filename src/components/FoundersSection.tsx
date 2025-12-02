@@ -8,7 +8,7 @@ const FoundersSection = () => {
         <div className="w-full flex justify-start pl-2 md:pl-4">
           <div className="rounded-lg overflow-hidden">
             <img
-              src="/founders/founders.jpg"
+              src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/founders/founders.jpg"
               alt="Founders"
               className="w-[1600px] md:w-[1800px] lg:w-[2000px] h-auto object-cover rounded-lg"
             />

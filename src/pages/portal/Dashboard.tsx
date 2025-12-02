@@ -15,7 +15,7 @@ const localCareCard = {
     'Local Care is our dedicated support service for international travel agencies whose clients are visiting Italy. Available 24/7, our team provides instant remote assistance to solve unexpected issues, handle emergencies, manage last-minute reservations, and coordinate reliable local services. Not a physical presence — but a real Italian team, always online and ready to support your guests throughout their stay.',
   longDescription:
     'Local Care is our dedicated support service for international travel agencies whose clients are visiting Italy. Available 24/7, our team provides instant remote assistance to solve unexpected issues, handle emergencies, manage last-minute reservations, and coordinate reliable local services. Not a physical presence — but a real Italian team, always online and ready to support your guests throughout their stay.',
-  image: '/file_final_2.svg',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg',
   gallery: [],
   duration: 'Instant Support · 24/7',
   location: 'Remote · Nationwide Coverage',

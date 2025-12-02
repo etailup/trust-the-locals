@@ -34,7 +34,7 @@ const LocalCareDetail = () => {
         {/* Hero Image */}
         <div className="relative h-[60vh] overflow-hidden">
           <img
-            src="/file_final_2.svg"
+            src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg"
             alt="Local Care"
             className="w-full h-full object-cover"
           />

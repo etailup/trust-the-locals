@@ -4,7 +4,7 @@ const Hero = () => {
   return <section className="relative h-screen w-full overflow-hidden">
       {/* Video Background */}
       <video
-        src="/HEADER_FINALE.mp4"
+        src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/HEADER%20FINALE.mp4"
         autoPlay
         muted
         loop
