@@ -22,7 +22,7 @@ export const mockExperiences: Experience[] = [
     {
     id: 'prem-3',
     title: 'Florence Panoramic Escape',
-    subtitle: 'Private Gallery Experience',
+    subtitle: 'A private escape into the quiet elegance of Florence’s hills',
     category: 'Food & Wine',
     description: 'Exclusive journey through Settignano and Fiesole with olive oil tasting, panoramic stops, and an aperitivo overlooking Florence.',
     longDescription: `An exclusive journey through the hills of Settignano and Fiesole, where breathtaking views and authentic traditions come together.The experience begins with a stop among ancient olive groves for a guided tasting of local extra-virgin olive oil, presented directly by the producer. The route continues along the most scenic roads, with stops at the best viewpoints overlooking Florence, surrounded by quiet landscapes, historic villas, and natural terraces.The tour concludes in Fiesole with an aperitivo overlooking the Renaissance city—an intimate and refined moment that captures the true essence of the Florentine hills.`,
@@ -30,6 +30,7 @@ export const mockExperiences: Experience[] = [
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg',
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wine_and_oil.mp4",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/vino.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escape.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTour.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTouRe.jpg",
@@ -53,6 +54,7 @@ export const mockExperiences: Experience[] = [
     gallery: [ 
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTourrr.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/Experience%20Artisan%20Tour%20%281%29.MP4"
 
     ],
     duration: '3 hours',
@@ -75,9 +77,9 @@ You then move to the chapel for an immersive hands-on cooking class, learning ho
 The experience concludes with a convivial tasting of the dishes you’ve created.
 Available for small groups or as a private, tailor-made experience.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg',
-    gallery: [        
+    gallery: [
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/COOKING%20CLASS%202.jpg",        
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg",
-      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cooking.jpg',
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cooking_classess.mp4",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClass2.jpg"
 
@@ -104,7 +106,9 @@ Pisa & Livorno: Two opposite yet complementary souls: the world-famous Leaning T
 Arezzo & Cortona: Where art meets breathtaking views: the masterpieces of Piero della Francesca and the stone alleyways overlooking the Val di Chiana.
 A tailor-made journey on foot to discover the most authentic heart of Tuscany.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/siena.jpg',
-    gallery: ['https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/siena.jpg',
+    gallery: [
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/pisa2.jpg",
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/siena.jpg',
               'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/sanGIMI.jpg',
               'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/lucca.jpg',
 
@@ -117,7 +121,7 @@ A tailor-made journey on foot to discover the most authentic heart of Tuscany.`,
   },
   {
     id: 'fw-3',
-    title: 'Wine Tour',
+    title: 'Wine Experience',
     subtitle: 'Among Vines, Dust, and Wine',
     category: 'Food & Wine',
     description: 'Vintage Defender tour through Tuscan hills with off-the-beaten-path winery tastings and local pairings.',
@@ -125,6 +129,7 @@ A tailor-made journey on foot to discover the most authentic heart of Tuscany.`,
 Each stop is a meeting with real stories, honest wines, and local tastings created to elevate the moment. No staged settings—just the raw beauty of the Tuscan countryside, the silence of the vines, the scent of the land, and the taste of wine right where it comes to life.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/winetour.jpg",
     gallery: ["https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/winetour.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wine_tour.mp4",
                           "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wintoor.jpg",
                           "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wine.jpg"
     ],
@@ -147,6 +152,8 @@ An authentic path to discover Florence through its cuisine. Guided by a local ex
 A genuine, tailor-made experience designed for those who want to understand the city through its truest flavors, far from the usual tourist routes.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/bicchiere.jpg",
     gallery: ["https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/bicchiere.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/food_tour.mp4",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/crostini-toscani-lardo.jpg",
                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/affogato.jpg",
                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/negroni.jpg"
     ],
