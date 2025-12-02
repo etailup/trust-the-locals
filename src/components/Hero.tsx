@@ -7,9 +7,18 @@ const Hero = () => {
         src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/HEADER%20FINALE.mp4"
         autoPlay
         muted
-        loop
         playsInline
+        loop
         preload="auto"
+        controls={false}
+        onLoadedMetadata={(e) => {
+          const vid = e.currentTarget;
+          if (vid.paused) vid.play().catch(() => {});
+        }}
+        onCanPlay={(e) => {
+          const vid = e.currentTarget;
+          if (vid.paused) vid.play().catch(() => {});
+        }}
         className="absolute inset-0 w-full h-full object-cover"
       ></video>
 

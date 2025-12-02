@@ -12,7 +12,6 @@ import {
   mockConcierges, 
   mockMassageTherapists,
   mockPhysiotherapists,
-  mockLocalCare,
 } from '@/data/mockLocals';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,7 +26,6 @@ const categories = [
   'Personal Concierge and Guides',
   'Massage Therapists',
   'Physiotherapists',
-  'Local Care',
 ];
 
 const Locals = () => {
@@ -45,7 +43,6 @@ const Locals = () => {
     ...mockConcierges.map(l => ({ ...l, categoryDisplay: 'Personal Concierge and Guides' })),
     ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massage Therapists' })),
     ...mockPhysiotherapists.map(l => ({ ...l, categoryDisplay: 'Physiotherapists' })),
-    ...mockLocalCare.map(l => ({ ...l, categoryDisplay: 'Local Care' })),
   ]), []);
 
   // Filter locals
@@ -116,9 +113,11 @@ const Locals = () => {
         </p>
 
         {/* Locals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 justify-items-center md:justify-items-stretch">
           {filteredLocals.map((local) => (
-            <LocalCard key={local.id} local={local} />
+            <div key={local.id} className="w-full max-w-md md:max-w-full">
+              <LocalCard local={local} />
+            </div>
           ))}
         </div>
 

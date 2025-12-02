@@ -530,5 +530,4 @@ export const mockLocals: Local[] = [
   ...mockGuides,
   ...mockMassageTherapists,
   ...mockPhysiotherapists,
-  ...mockLocalCare,
 ];

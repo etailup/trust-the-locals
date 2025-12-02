@@ -18,10 +18,11 @@ const Booking = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
     phone: '',
     guests: '2',
     date: '',
+    pickUpTime: '',
+    dropOffTime: '',
     notes: '',
   });
 
@@ -50,7 +51,7 @@ const Booking = () => {
         <Button
           onClick={() => navigate(-1)}
           variant="outline"
-          className="mb-6"
+          className="mb-6 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
@@ -92,18 +93,6 @@ const Booking = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-lg text-portal-navy">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="text-lg"
-                  />
-                </div>
-
-                <div>
                   <Label htmlFor="phone" className="text-lg text-portal-navy">Phone</Label>
                   <Input
                     id="phone"
@@ -141,6 +130,31 @@ const Booking = () => {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="pickUpTime" className="text-lg text-portal-navy">Pick Up Time</Label>
+                    <Input
+                      id="pickUpTime"
+                      type="time"
+                      required
+                      value={formData.pickUpTime}
+                      onChange={(e) => setFormData({ ...formData, pickUpTime: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="dropOffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
+                    <Input
+                      id="dropOffTime"
+                      type="time"
+                      required
+                      value={formData.dropOffTime}
+                      onChange={(e) => setFormData({ ...formData, dropOffTime: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <Label htmlFor="notes" className="text-lg text-portal-navy">Additional Notes or Preferences</Label>
                   <Textarea
@@ -155,7 +169,7 @@ const Booking = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-portal-gold text-portal-navy hover:bg-portal-gold/90 font-medium h-12 text-xl"
+                  className="w-full bg-portal-navy text-portal-cream hover:bg-portal-navy/90 font-medium h-12 text-xl"
                 >
                   Submit Request
                 </Button>
