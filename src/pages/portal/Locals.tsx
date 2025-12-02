@@ -11,7 +11,8 @@ import {
   mockDrivers,
   mockConcierges, 
   mockMassageTherapists,
-  mockPhysiotherapists 
+  mockPhysiotherapists,
+  mockLocalCare,
 } from '@/data/mockLocals';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,6 +27,7 @@ const categories = [
   'Personal Concierge and Guides',
   'Massage Therapists',
   'Physiotherapists',
+  'Local Care',
 ];
 
 const Locals = () => {
@@ -43,6 +45,7 @@ const Locals = () => {
     ...mockConcierges.map(l => ({ ...l, categoryDisplay: 'Personal Concierge and Guides' })),
     ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massage Therapists' })),
     ...mockPhysiotherapists.map(l => ({ ...l, categoryDisplay: 'Physiotherapists' })),
+    ...mockLocalCare.map(l => ({ ...l, categoryDisplay: 'Local Care' })),
   ]), []);
 
   // Filter locals

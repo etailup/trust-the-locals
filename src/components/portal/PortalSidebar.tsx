@@ -27,6 +27,7 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
         { icon: Users, label: 'Locals', path: '/portal/locals' },
         { icon: Calendar, label: 'Seasonal', path: '/portal/seasonal' },
         { icon: Package, label: 'Events & Groups', path: '/portal/events-groups' },
+        { icon: Heart, label: 'Local Care', path: '/portal/local-care' },
       ]
     },
     {

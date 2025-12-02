@@ -48,7 +48,7 @@ const ConciergeButton = () => {
               variant="outline"
               className="w-full border-portal-navy text-portal-navy hover:bg-portal-navy/5"
             >
-              <a href="mailto:concierge@trustthelocals.com" className="flex items-center justify-center gap-2">
+              <a href="mailto:reservation@trusthelocals.com" className="flex items-center justify-center gap-2">
                 <Mail className="w-4 h-4" />
                 Email Us
               </a>

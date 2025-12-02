@@ -32,7 +32,7 @@ export const mockChefs: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/chef_3.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/chef_3.jpg' },
-      { type: 'video', src: '/locals/Chef_Gianluca.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Chef%20Gianluca%20%281%29.mp4' },
     ],
     specialties: ['Italian Cuisine', 'Yacht Chef'],
     availability: 'Available upon request',
@@ -49,7 +49,7 @@ export const mockChefs: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/chef_2.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/chef_2.jpg' },
-      { type: 'video', src: '/locals/Chef_Rocco.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Chef%20Rocco%20%281%29.mp4' },
     ],
     cropX: 20,
     cropY: 18,
@@ -66,7 +66,7 @@ export const mockChefs: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/chef_1.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/chef_1.jpg' },
-      { type: 'video', src: '/locals/Chef_Pietro.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Chef%20Pietro%20%281%29.mp4' },
     ],
     specialties: ['Fresh Pasta', 'Tuscan Tradition'],
     availability: 'Available upon request',
@@ -138,7 +138,7 @@ export const mockSecurity: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_2.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_2.jpg' },
-      { type: 'video', src: '/locals/Bodyguard_Andrea.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Andrea%20%281%29.mp4' },
     ],
     specialties: ['Personal Protection'],
     availability: 'Available upon request',
@@ -176,11 +176,11 @@ export const mockTrainers: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/pilates.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/pilates.jpg' },
-      { type: 'video', src: '/locals/Pilates_Instructor_Martina.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Pilates_Instructor_Martina.mp4' },
     ],
     specialties: ['Pilates', 'Postural Training'],
     availability: 'Available upon request',
-    languages: ['English', 'French'],
+    languages: ['English', 'Spanish'],
     cropX: defaultCropX,
     cropY: defaultCropY,
   },
@@ -193,7 +193,7 @@ export const mockTrainers: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PT_boxing.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PT_boxing.jpg' },
-      { type: 'video', src: '/locals/Boxing_Coach_Marco.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Boxing_Coach_Marco.mp4' },
     ],
     specialties: ['Boxing', 'Functional Training'],
     availability: 'Available upon request',
@@ -210,7 +210,7 @@ export const mockTrainers: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/pt_fitness.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/pt_fitness.jpg' },
-      { type: 'video', src: '/locals/Fitness_Instructor_Gina.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Fitness_Instructor_Gina.mp4' },
     ],
     specialties: ['Sculpt Training', 'Core Strength'],
     availability: 'Available upon request',
@@ -375,7 +375,7 @@ export const mockDrivers: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/driver_6.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/driver_6.jpg' },
-      { type: 'video', src: '/locals/Driver Giacomo (1).mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Driver%20Giacomo%20%281%29.mp4' },
     ],
     specialties: ['Driver'],
     availability: 'Available upon request',
@@ -396,7 +396,7 @@ export const mockConcierges: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_2.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_2.jpg' },
-      { type: 'video', src: '/locals/Personal_Concierge_Mattia.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Personal%20Concierge%20Mattia%20%281%29.mp4' },
     ],
     specialties: ['Tourism', 'Problem Solving'],
     availability: 'Available upon request',
@@ -410,10 +410,10 @@ export const mockConcierges: Local[] = [
     category: 'Personal Concierge and Guides',
     description: 'Motivated professional ensuring unforgettable holidays; creator of Wine Safari Tour.',
     fullDescription: 'Hello, my name is Cristian. I am a highly motivated local professional committed to delivering exceptional service and ensuring every guest enjoys an unforgettable holiday. I manage complex situations with ease, adapt quickly to different client personalities, and speak English and Spanish fluently. I am also the creator of the Wine Safari Tour, an exclusive experience that takes guests aboard our Defender to discover outstanding local wineries.',
-    image: '/locals/PC_1.jpg',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_1.jpg',
     media: [
-      { type: 'image', src: '/locals/PC_1.jpg' },
-      { type: 'video', src: '/locals/Personal Concierge Cristian (1).mp4' },
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_1.jpg' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Personal%20Concierge%20Cristian%20%281%29.mp4' },
     ],
     specialties: ['Wine Safari Tour'],
     availability: 'Available upon request',
@@ -428,7 +428,10 @@ export const mockConcierges: Local[] = [
     description: 'Florentine local expert and storyteller with deep passion for Tuscany.',
     fullDescription: 'Hello my dear guests! It’s Claudia here, always with a big smile and even a bigger passion for my homeland: Tuscany. Born and raised in Florence, I’m proud to be your local expert and storyteller. I’ll share not only the beauty and history of our cities and countryside, but also the hidden corners, unique traditions and curious anecdotes that bring this land to life. So, what are we waiting for? Let’s start your most personal, authentic, and unforgettable journey!',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_3.jpg',
-    media: [{ type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_3.jpg' }],
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_3.jpg' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Personal%20Concierge%20Claudia%20%281%29.mp4' },
+    ],
     specialties: ['Tourism Agency'],
     availability: 'Available upon request',
     languages: ['English', 'French', 'Spanish'],
@@ -446,7 +449,10 @@ export const mockMassageTherapists: Local[] = [
     description: 'Beauty therapist offering a range of massages and treatments.',
     fullDescription: "My name is Monica. I'm 47 years old and have been working as a beauty therapist for 29 years. I offer various types of massage, including decontracting and relaxing massage, draining and modeling massage, holistic, facial and body treatments, and other treatments for personal well-being. I enjoy transmitting positive energy and inspiring emotions.",
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_2.jpg',
-    media: [{ type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_2.jpg' }],
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_2.jpg' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Massaggiatrice%20Monica%20%281%29.mp4' },
+    ],
     specialties: ['Massage'],
     availability: 'Available upon request',
     languages: ['Italian', 'English'],
@@ -460,7 +466,10 @@ export const mockMassageTherapists: Local[] = [
     description: 'Beauty therapist offering a range of massages and treatments.',
     fullDescription: "Hy, my name is Dolores. I'm 40 years old and have been working as a beauty therapist for 20 years. I offer various types of massage, including decontracting and relaxing massage, draining and modeling massage, holistic, facial and body treatments, and other treatments for personal well-being. I love doing this job because I give well-being and people feel pampered.",
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_1.jpg',
-    media: [{ type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_1.jpg' }],
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_1.jpg' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Massaggiatrice%20Dolores%20%281%29.mp4' },
+    ],  
     specialties: ['Massage'],
     availability: 'Available upon request',
     languages: ['Italian', 'English'],
@@ -478,10 +487,33 @@ export const mockPhysiotherapists: Local[] = [
     description: 'Professional physiotherapist.',
     fullDescription: 'Professional physiotherapist.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/fisioterapista.jpg',
-    media: [{ type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/fisioterapista.jpg' }],
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/fisioterapista.jpg' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Fisioterapista%20Francesco.MP4' },
+    ],
     specialties: [],
     availability: 'Available upon request',
-    languages: [],
+    languages: ['English'],
+    cropX: defaultCropX,
+    cropY: defaultCropY,
+  },
+];
+
+export const mockLocalCare: Local[] = [
+  {
+    id: 'local-care-1',
+    name: 'Local Care',
+    category: 'Local Care',
+    description: '24/7 remote concierge support for agencies whose guests are traveling in Italy.',
+    fullDescription:
+      'Local Care is our exclusive remote assistance service dedicated to international travel agencies and their clients visiting Italy. Our team provides 24/7 real-time support to solve any issue, manage unexpected situations, and arrange last-minute requests — all without requiring physical presence.\n\nFrom urgent reservations to itinerary changes, from on-the-spot guidance to quick problem resolution, Local Care ensures that every traveler feels supported, safe, and fully cared for throughout their entire stay in Italy.\n\nA reliable, human, always-available concierge — directly in your pocket.',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg',
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg' },
+    ],
+    specialties: ['24/7 Remote Assistance', 'Crisis Management'],
+    availability: 'Available 24/7',
+    languages: ['English', 'Italian'],
     cropX: defaultCropX,
     cropY: defaultCropY,
   },
@@ -498,4 +530,5 @@ export const mockLocals: Local[] = [
   ...mockGuides,
   ...mockMassageTherapists,
   ...mockPhysiotherapists,
+  ...mockLocalCare,
 ];

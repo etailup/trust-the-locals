@@ -8,6 +8,7 @@ import {
   mockNannies,
   mockGuides,
   mockConcierges,
+  mockLocalCare,
 } from '@/data/mockLocals';
 
 const OurLocals = () => {
@@ -107,6 +108,20 @@ const OurLocals = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mockGuides.map((guide) => (
               <LocalCard key={guide.id} local={guide} />
+            ))}
+          </div>
+        </div>
+
+        {/* Local Care */}
+        <div className="mb-16">
+          <div className="mb-8 flex items-center gap-4">
+            <div className="h-px flex-1 bg-portal-navy/20"></div>
+            <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Local Care</h2>
+            <div className="h-px flex-1 bg-portal-navy/20"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {mockLocalCare.map((service) => (
+              <LocalCard key={service.id} local={service} />
             ))}
           </div>
         </div>

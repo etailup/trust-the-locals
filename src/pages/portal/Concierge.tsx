@@ -51,7 +51,7 @@ const Concierge = () => {
                 variant="outline"
                 className="border-portal-navy text-portal-navy hover:bg-portal-navy/5 w-full"
               >
-                <a href="mailto:concierge@trustthelocals.com">
+                <a href="mailto:reservation@trusthelocals.com">
                   Send Email
                 </a>
               </Button>

@@ -25,14 +25,15 @@ export const mockExperiences: Experience[] = [
     subtitle: 'Private Gallery Experience',
     category: 'Food & Wine',
     description: 'Experience the Uffizi Gallery after hours with a private art historian.',
-    longDescription: 'Walk through the halls of one of the world\'s most prestigious museums in complete privacy after closing time. Accompanied by a renowned art historian, explore masterpieces by Botticelli, Michelangelo, and Leonardo da Vinci without crowds. Access normally restricted storage areas and conservation laboratories for an unprecedented glimpse behind the scenes.',
-    image: "/experiences/panoramicEscape.jpg",
-    gallery: ['/experiences/panoramicEscape.jpg',
-                                "/experiences/wine_and_oil.mp4",
-                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escape.jpg",
-                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTour.jpg",
-                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTouRe.jpg",
-                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTourrr.jpg"
+    longDescription: `An exclusive journey through the hills of Settignano and Fiesole, where breathtaking views and authentic traditions come together. The experience begins with a stop amid ancient olive groves for a guided tasting of local extra-virgin olive oil, presented directly by the producer. The route continues along the most scenic roads, with stops at the best viewpoints overlooking Florence, surrounded by quiet landscapes, historic villas, and natural terraces. The tour concludes in Fiesole with an aperitivo overlooking the Renaissance city—an intimate and refined moment that captures the true essence of the Florentine hills.`,
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg",
+    gallery: [
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg',
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wine_and_oil.mp4",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escape.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTour.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTouRe.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTourrr.jpg"
     ],
     duration: '3 hours',
     location: 'Uffizi Gallery, Florence',
@@ -49,8 +50,9 @@ export const mockExperiences: Experience[] = [
     description: 'Florence as the cradle of luxury craftsmanship: leather, gold, mosaics, marbled paper.',
     longDescription: 'Florence as the cradle of luxury craftsmanship: leather, gold, mosaics, marbled paper. Visit authentic ateliers and meet master artisans who preserve centuries-old techniques. A deep dive into the artisan soul of Florence.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
-    gallery: [ 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
-                                "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTourrr.jpg",
+    gallery: [ 
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTourrr.jpg",
 
     ],
     duration: '3 hours',
@@ -69,10 +71,11 @@ export const mockExperiences: Experience[] = [
     description: 'A gastronomic journey inside a deconsecrated Renaissance chapel.',
     longDescription: 'A gastronomic journey inside a deconsecrated Renaissance chapel where Leonardo da Vinci once walked. Start at Mercato Centrale to select ingredients with the chef, then cook traditional Florentine dishes inside the chapel. End with a private tasting of the prepared menu.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg',
-    gallery: [            "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg",
-                         'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cooking.jpg',
-                         "/experiences/cooking_classess.mp4",
-                         "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClass2.jpg"
+    gallery: [        
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClasss.jpg",
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cooking.jpg',
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cooking_classess.mp4",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/cookingClass2.jpg"
 
     ],
     duration: '4 hours',
@@ -95,7 +98,7 @@ export const mockExperiences: Experience[] = [
               'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/lucca.jpg',
 
     ],
-    duration: '5 hours',
+    duration: '3 hours',
     location: 'Saturnia Region',
     groupSize: '2-6 guests',
     included: ['Private guide', 'Thermal springs access', 'Spa treatments', 'Organic lunch', 'Wellness consultation', 'Natural skincare products'],
@@ -148,9 +151,10 @@ export const mockExperiences: Experience[] = [
     description: 'Exclusive candlelit dinner on a historic balcony overlooking Ponte Vecchio.',
     longDescription: 'Exclusive candlelit dinner on a historic balcony overlooking Ponte Vecchio. A private chef prepares a Tuscan menu, while guests learn the hidden stories of Florence\'s oldest goldsmith district — including the secret door of the apartment.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
-    gallery: ['https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
+    gallery: [
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDinner2.jpg',,
-                                "/experiences/ponte_vecchio.mp4"
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ponte_vecchio.mp4"
     ],
     duration: '3 hours',
     location: 'Ponte Vecchio, Florence',
@@ -192,7 +196,7 @@ export const mockExperiences: Experience[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
-      '/experiences/Experience_Ginasworkout.mp4',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/Experience%20Gina%27s%20workout.mp4',
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia1.jpg'
 
     ],
@@ -214,7 +218,7 @@ export const mockExperiences: Experience[] = [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia1.jpg',
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia1.jpg',
-      '/experiences/reggia.mp4',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.mp4',
     ],
     duration: '3 hours',
     location: 'Fiesole, Florence',
@@ -233,12 +237,12 @@ export const mockExperiences: Experience[] = [
     category: 'History',
     description: 'Learn the art of Florentine restoration in an authentic atelier.',
     longDescription: 'Learn the art of Florentine restoration in an authentic atelier with an expert restorer. Hands-on workshop with real techniques used after the 1966 flood. Experience the same methods used to restore Florence\'s masterpieces.',
-    image: '/experiences/arteErestauro2.jpg',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro2.jpg',
     gallery: [
-      '/experiences/arteErestauro2.jpg',
-      '/experiences/arteErestauro1.jpg',
-      '/experiences/ARTEerestauro.jpg',
-      '/experiences/ExperienceArteRestauro.mp4',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro2.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro1.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ExperienceArteRestauro.mp4',
     ],
     duration: '3-4 hours',
     location: 'Palazzo Ridolfi Zanchini, Florence',
@@ -259,7 +263,7 @@ export const mockExperiences: Experience[] = [
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/private_goldsmith1.jpg',
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/private_goldsmith.jpg',
-      '/experiences/Experience_Gioiello.mp4',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/Experience_Gioiello.mp4',
     ],
     duration: '2-3 hours',
     location: 'Private In-Villa Service',
@@ -276,11 +280,11 @@ export const mockExperiences: Experience[] = [
     category: 'Food & Wine',
     description: 'An authentic journey into the vineyards of Pievasciata, in the heart of Chianti Classico.',
     longDescription: 'An authentic journey into the vineyards of Pievasciata, in the heart of Chianti Classico. Guided cellar visit, followed by a tasting of the estate\'s signature wines. Guests can also create a personalized wine label and bring home a custom bottle. Optional: private lunch in the winery with dedicated sommelier.',
-    image:               "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/valle_picciola_2.jpg",
-    gallery: [ "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/valle_picciola_2.jpg",
-              "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/valle_picciola_4.jpg",
-              "/experiences/valle_picciola_1.jpg",
-              "/experiences/vallepicciola.mp4"
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/valle_picciola_2.jpg",
+    gallery: [ 
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/valle_picciola_2.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/valle_picciola_4.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/vallepicciola.mp4"
     ],
     duration: '3-4 hours',
     location: 'Pievasciata, Chianti Classico',

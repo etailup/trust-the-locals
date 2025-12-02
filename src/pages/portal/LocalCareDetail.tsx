@@ -20,7 +20,7 @@ const LocalCareDetail = () => {
         />
       )}
 
-      <main className="flex-1 p-4 md:p-6 md:ml-10 transition-all duration-300">
+      <main className="flex-1 p-0 md:p-0 transition-all duration-300">
         <div className="md:hidden mb-4 flex items-center justify-between">
           <button
             aria-label="Open menu"
@@ -32,7 +32,7 @@ const LocalCareDetail = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="relative h-[60vh] overflow-hidden">
+        <div className="relative h-[60vh] overflow-hidden w-full">
           <img
             src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg"
             alt="Local Care"
@@ -60,7 +60,7 @@ const LocalCareDetail = () => {
           </div>
         </div>
 
-        <div className="p-6 bg-portal-cream">
+        <div className="p-4 md:p-6 bg-portal-cream">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
               <div className="lg:col-span-2 space-y-8">

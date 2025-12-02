@@ -25,9 +25,9 @@ const EventGroupDetail = () => {
     <div className="flex min-h-screen bg-portal-cream">
       <PortalSidebar />
       
-      <main className="md:ml-10 flex-1">
+      <main className="flex-1 p-0">
         {/* Hero Image */}
-        <div className="relative h-[60vh] overflow-hidden">
+        <div className="relative h-[60vh] overflow-hidden w-full">
           <img
             src={eventGroup.image}
             alt={eventGroup.title}

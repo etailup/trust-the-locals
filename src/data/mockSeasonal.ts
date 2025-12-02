@@ -97,13 +97,13 @@ export const summerExperiences: SeasonalExperience[] = [
     location: 'Siena, Italy'
   },
   {
-    id: 'summer-2',
-    title: 'Bravio delle Botti',
-    season: 'Summer',
-    description: 'Contestants roll heavy wooden wine barrels uphill through Montepulciano\'s streets. A tradition dating back to the 14th century.',
-    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/seasonal/botti.jpg',
-    duration: 'Last Sunday of August',
-    location: 'Montepulciano, Italy'
+  id: 'summer-6',
+  title: 'Bocelli Concert - Teatro del Silenzio',
+  season: 'Summer',
+  description: 'Andrea Bocelli\'s annual concert in his hometown\'s natural amphitheater. A once-a-year event with monumental stage designs.',
+  image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/seasonal/bocelli.jpg',
+  duration: 'One night every summer',
+  location: 'Lajatico, Italy'
   },
   {
     id: 'summer-3',
@@ -132,15 +132,15 @@ export const summerExperiences: SeasonalExperience[] = [
     duration: 'Every Summer',
     location: 'Torre del Lago, Italy'
   },
-  {
-    id: 'summer-6',
-    title: 'Bocelli Concert - Teatro del Silenzio',
+    {
+    id: 'summer-2',
+    title: 'Bravio delle Botti',
     season: 'Summer',
-    description: 'Andrea Bocelli\'s annual concert in his hometown\'s natural amphitheater. A once-a-year event with monumental stage designs.',
-    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/seasonal/bocelli.jpg',
-    duration: 'One night every summer',
-    location: 'Lajatico, Italy'
-  }
+    description: 'Contestants roll heavy wooden wine barrels uphill through Montepulciano\'s streets. A tradition dating back to the 14th century.',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/seasonal/botti.jpg',
+    duration: 'Last Sunday of August',
+    location: 'Montepulciano, Italy'
+  },
 ];
 
 export const autumnExperiences: SeasonalExperience[] = [
