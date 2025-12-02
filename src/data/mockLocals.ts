@@ -445,7 +445,7 @@ export const mockMassageTherapists: Local[] = [
   {
     id: 'massage-1',
     name: 'Monica',
-    category: 'Massage Therapist',
+    category: 'Massages and Therapists',
     description: 'Beauty therapist offering a range of massages and treatments.',
     fullDescription: "My name is Monica. I'm 47 years old and have been working as a beauty therapist for 29 years. I offer various types of massage, including decontracting and relaxing massage, draining and modeling massage, holistic, facial and body treatments, and other treatments for personal well-being. I enjoy transmitting positive energy and inspiring emotions.",
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_2.jpg',
@@ -462,7 +462,7 @@ export const mockMassageTherapists: Local[] = [
   {
     id: 'massage-2',
     name: 'Dolores',
-    category: 'Massage Therapist',
+    category: 'Massages and Therapists',
     description: 'Beauty therapist offering a range of massages and treatments.',
     fullDescription: "Hy, my name is Dolores. I'm 40 years old and have been working as a beauty therapist for 20 years. I offer various types of massage, including decontracting and relaxing massage, draining and modeling massage, holistic, facial and body treatments, and other treatments for personal well-being. I love doing this job because I give well-being and people feel pampered.",
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/massaggiatrice_1.jpg',
@@ -479,7 +479,7 @@ export const mockMassageTherapists: Local[] = [
   {
     id: 'physio-1',
     name: 'Francesco',
-    category: 'Massage Therapist',
+    category: 'Massages and Therapists',
     description: 'A leading physiotherapist known for refined, personalized treatments.',
     fullDescription:
       'A leading physiotherapist known for refined, personalized treatments designed to restore balance, mobility, and optimal body performance.',

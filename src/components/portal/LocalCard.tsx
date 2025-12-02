@@ -21,13 +21,15 @@ const LocalCard = ({ local }: LocalCardProps) => {
     Guides: '€100/hr',
     'Personal Concierge and Guides': '€750/day',
     Security: '€80/hr',
-    Nanny: '€45/hr',
-    Nannies: '€45/hr',
+    Nanny: '€55/hr',
+    Nannies: '€55/hr',
     Driver: '€85/hr',
     Drivers: '€85/hr',
     'Personal Trainer': '€130/hr',
     Trainer: '€130/hr',
     Trainers: '€130/hr',
+    'Personal Concierge and Guide': '€750/day',
+    'Personal Concierge and Guides': '€750/day',
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -59,21 +61,21 @@ const LocalCard = ({ local }: LocalCardProps) => {
   }, [activeIndex, isOpen]);
 
   useEffect(() => {
-    const liked = JSON.parse(localStorage.getItem('ttl_liked_locals') || '[]');
-    setIsLiked(liked.includes(local.id));
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    setIsLiked(wishlist.includes(local.id));
   }, [local.id]);
 
   const toggleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const liked = JSON.parse(localStorage.getItem('ttl_liked_locals') || '[]');
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
     
     if (isLiked) {
-      const updated = liked.filter((id: string) => id !== local.id);
-      localStorage.setItem('ttl_liked_locals', JSON.stringify(updated));
+      const updated = wishlist.filter((id: string) => id !== local.id);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
       setIsLiked(false);
     } else {
-      liked.push(local.id);
-      localStorage.setItem('ttl_liked_locals', JSON.stringify(liked));
+      wishlist.push(local.id);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
       setIsLiked(true);
     }
   };

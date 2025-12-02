@@ -23,7 +23,7 @@ const categories = [
   'Nannies',
   'Drivers',
   'Personal Concierge and Guides',
-  'Massage Therapists',
+  'Massages and Therapists',
 ];
 
 const Locals = () => {
@@ -39,7 +39,7 @@ const Locals = () => {
     ...mockGuides.map(l => ({ ...l, categoryDisplay: 'Personal Concierge and Guides' })),
     ...mockDrivers.map(l => ({ ...l, categoryDisplay: 'Drivers' })),
     ...mockConcierges.map(l => ({ ...l, categoryDisplay: 'Personal Concierge and Guides' })),
-    ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massage Therapists' })),
+    ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massages and Therapists' })),
   ]), []);
 
   // Filter locals

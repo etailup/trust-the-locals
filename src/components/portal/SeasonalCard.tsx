@@ -11,21 +11,21 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    const liked = JSON.parse(localStorage.getItem('ttl_liked_seasonal') || '[]');
-    setIsLiked(liked.includes(experience.id));
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    setIsLiked(wishlist.includes(experience.id));
   }, [experience.id]);
 
   const toggleLike = (e: React.MouseEvent) => {
     e.preventDefault();
-    const liked = JSON.parse(localStorage.getItem('ttl_liked_seasonal') || '[]');
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
     
     if (isLiked) {
-      const updated = liked.filter((id: string) => id !== experience.id);
-      localStorage.setItem('ttl_liked_seasonal', JSON.stringify(updated));
+      const updated = wishlist.filter((id: string) => id !== experience.id);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
       setIsLiked(false);
     } else {
-      liked.push(experience.id);
-      localStorage.setItem('ttl_liked_seasonal', JSON.stringify(liked));
+      wishlist.push(experience.id);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
       setIsLiked(true);
     }
   };

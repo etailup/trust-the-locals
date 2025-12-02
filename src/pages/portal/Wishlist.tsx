@@ -3,7 +3,11 @@ import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
 import { mockExperiences } from '@/data/mockExperiences';
+import { mockLocals } from '@/data/mockLocals';
+import { mockSeasonal } from '@/data/mockSeasonal';
 import { Heart, Menu } from 'lucide-react';
+import LocalCard from '@/components/portal/LocalCard';
+import SeasonalCard from '@/components/portal/SeasonalCard';
 
 const Wishlist = () => {
   const [wishlistIds, setWishlistIds] = useState<string[]>([]);
@@ -14,9 +18,10 @@ const Wishlist = () => {
     setWishlistIds(wishlist);
   }, []);
 
-  const wishlistExperiences = mockExperiences.filter((exp) =>
-    wishlistIds.includes(exp.id)
-  );
+  const wishlistExperiences = mockExperiences.filter((exp) => wishlistIds.includes(exp.id));
+  const wishlistLocals = mockLocals.filter((loc) => wishlistIds.includes(loc.id));
+  const wishlistSeasonal = mockSeasonal.filter((item) => wishlistIds.includes(item.id));
+  const hasItems = wishlistExperiences.length + wishlistLocals.length + wishlistSeasonal.length > 0;
 
   return (
     <div className="flex min-h-screen bg-portal-cream relative">
@@ -48,12 +53,43 @@ const Wishlist = () => {
           </p>
         </div>
 
-        {wishlistExperiences.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {wishlistExperiences.map((experience) => (
-              <ExperienceCard key={experience.id} experience={experience} />
-            ))}
-          </div>
+        {hasItems ? (
+          <>
+            {wishlistExperiences.length > 0 && (
+              <>
+                <h2 className="font-luxury text-3xl text-portal-navy mb-4">Experiences</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                  {wishlistExperiences.map((experience) => (
+                    <ExperienceCard key={experience.id} experience={experience} />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {wishlistLocals.length > 0 && (
+              <>
+                <h2 className="font-luxury text-3xl text-portal-navy mb-4">Locals</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                  {wishlistLocals.map((local) => (
+                    <div key={local.id} className="w-full max-w-md md:max-w-full">
+                      <LocalCard local={local} />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {wishlistSeasonal.length > 0 && (
+              <>
+                <h2 className="font-luxury text-3xl text-portal-navy mb-4">Seasonal</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {wishlistSeasonal.map((item) => (
+                    <SeasonalCard key={item.id} experience={item} />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center py-20">
             <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-6">

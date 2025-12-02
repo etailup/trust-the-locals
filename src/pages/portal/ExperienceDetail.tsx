@@ -20,6 +20,9 @@ const ExperienceDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockExperiences.find((exp) => exp.id === id);
+  const videoUrl = experience?.gallery?.find((item) =>
+    item.toLowerCase().endsWith('.mp4')
+  );
 
   // Build media array like Villas
   const media = useMemo(() => {
@@ -124,11 +127,27 @@ const ExperienceDetail = () => {
 
         {/* Content */}
         <div className="p-4 md:p-6 bg-portal-cream">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              {/* MAIN CONTENT */}
-              <div className="lg:col-span-2 space-y-8">
-                {/* Description */}
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col gap-8 md:grid md:grid-cols-12 md:gap-16 md:items-start">
+              {/* VIDEO COLUMN */}
+              {videoUrl && (
+                <div className="md:col-span-5 md:col-start-1 order-1 md:pr-6 md:justify-self-start">
+                  <video
+                    src={videoUrl}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto max-h-[750px] object-cover rounded-xl shadow-lg border border-[#e6dfd5]"
+                  />
+                </div>
+              )}
+
+              {/* TEXT COLUMN */}
+              <div
+                className={`order-2 ${
+                  videoUrl ? 'md:col-span-4 md:col-start-6' : 'md:col-span-9'
+                } space-y-8 ${videoUrl ? 'md:pl-6' : ''}`}
+              >
                 <div>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">
                     About This Experience
@@ -138,7 +157,6 @@ const ExperienceDetail = () => {
                   </p>
                 </div>
 
-                {/* Included */}
                 <div>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">
                     What's Included
@@ -152,12 +170,10 @@ const ExperienceDetail = () => {
                     ))}
                   </ul>
                 </div>
-
-                {/* Map Placeholder */}
               </div>
 
-              {/* SIDEBAR */}
-              <div className="space-y-6">
+              {/* BOOKING COLUMN */}
+              <div className="order-3 md:col-span-3 md:col-start-10 space-y-6">
                 <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 sticky top-8">
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center gap-3 text-portal-navy/70">
@@ -170,7 +186,6 @@ const ExperienceDetail = () => {
                     </div>
                   </div>
 
-                  {/* Availability */}
                   <div className="mb-6 p-4 bg-[#FAF7F2] border border-portal-navy/10">
                     <p className="text-lg text-portal-navy/70">
                       <strong className="text-portal-navy">Availability:</strong>
