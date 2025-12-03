@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Heart, MessageCircle, User, LogOut, Sparkles, Users, Calendar, ChevronDown, Package } from 'lucide-react';
+import { Heart, MessageCircle, User, LogOut, Sparkles, Users, Calendar, ChevronDown, Package, Shield } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
         { icon: Users, label: 'Locals', path: '/portal/locals' },
         { icon: Calendar, label: 'Seasonal', path: '/portal/seasonal' },
         { icon: Package, label: 'Events & Groups', path: '/portal/events-groups' },
-        { icon: Heart, label: 'Local Care', path: '/portal/local-care' },
+        { icon: Shield, label: 'Local Care', path: '/portal/local-care' },
       ]
     },
     {

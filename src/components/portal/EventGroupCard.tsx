@@ -15,6 +15,8 @@ const EventGroupCard = ({ eventGroup }: EventGroupCardProps) => {
         <img
           src={eventGroup.image}
           alt={eventGroup.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-lg"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-t-lg" />

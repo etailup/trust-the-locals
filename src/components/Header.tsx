@@ -49,10 +49,10 @@ const Header = ({ transparent = false }: HeaderProps) => {
               {/* Left: Menu Icon */}
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="w-12 h-12 min-h-[48px] min-w-[48px] sm:w-14 sm:h-14 sm:min-h-[56px] sm:min-w-[56px] rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-foreground/50 transition-colors md:hidden"
+                className="w-12 h-12 min-h-[48px] min-w-[48px] sm:w-14 sm:h-14 sm:min-h-[56px] sm:min-w-[56px] rounded-full border-2 border-portal-navy flex items-center justify-center hover:border-portal-navy/80 transition-colors md:hidden"
                 aria-label="Menu"
               >
-                <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-portal-navy" />
               </button>
 
               {/* Center: Logo */}
@@ -73,7 +73,7 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 <Button
                   asChild
                   variant="outline"
-                  className="hidden sm:inline-flex border-2 border-foreground/30 text-foreground hover:border-foreground/50 font-body text-base tracking-[0.25em] px-12 py-6 uppercase rounded-full sm:mr-4 md:mr-8"
+                  className="hidden sm:inline-flex border-2 border-portal-navy text-portal-navy hover:border-portal-navy/80 font-body text-base tracking-[0.25em] px-12 py-6 uppercase rounded-full sm:mr-4 md:mr-8"
                 >
                   <Link to="/portal/login">LOGIN</Link>
                 </Button>
@@ -81,10 +81,10 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 {/* Mobile: User Icon */}
                 <Link 
                   to="/portal/login"
-                  className="sm:hidden w-12 h-12 min-h-[48px] min-w-[48px] rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-foreground/50 transition-colors"
+                  className="sm:hidden w-12 h-12 min-h-[48px] min-w-[48px] rounded-full border-2 border-portal-navy flex items-center justify-center hover:border-portal-navy/80 transition-colors"
                   aria-label="Login"
                 >
-                  <User className="w-5 h-5 text-foreground" />
+                  <User className="w-5 h-5 text-portal-navy" />
                 </Link>
               </div>
             </div>

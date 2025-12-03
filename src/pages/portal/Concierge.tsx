@@ -31,7 +31,7 @@ const Concierge = () => {
                 asChild
                 className="bg-portal-gold text-portal-navy hover:bg-portal-gold/90 w-full"
               >
-                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/393513628747" target="_blank" rel="noopener noreferrer">
                   Start Chat
                 </a>
               </Button>

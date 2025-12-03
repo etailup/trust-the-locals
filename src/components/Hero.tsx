@@ -31,7 +31,7 @@ const Hero = () => {
       {/* Video Background */}
       <video
         ref={videoRef}
-        src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/HEADER%20FINALE.mp4"
+        src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/HEADER_FINALE.mp4"
         autoPlay
         muted
         defaultMuted
@@ -114,7 +114,7 @@ const Hero = () => {
               info@trusthelocals.com
             </a>
             <span className="inline text-white/40">|</span>
-            <a href="tel:+1234567890" className="hover:opacity-70 transition-opacity text-center min-h-[44px] flex items-center justify-center">
+            <a href="tel:+39 351 3628747" className="hover:opacity-70 transition-opacity text-center min-h-[44px] flex items-center justify-center">
               +39 351 3628747
             </a>
           </div>

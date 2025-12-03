@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { FileText, Search, Calendar, CheckCircle } from "lucide-react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const HowItWorks = () => {
   useEffect(() => {
@@ -66,7 +67,7 @@ const HowItWorks = () => {
             <div className="flex justify-center mb-8">
               <div className="w-16 sm:w-20 h-px bg-[#C9A55B]"></div>
             </div>
-            <p className="font-body text-base sm:text-lg text-[#0A1A2F]/70 max-w-2xl mx-auto tracking-wide">
+            <p className="font-body text-lg sm:text-xl md:text-2xl text-[#0A1A2F]/70 max-w-2xl mx-auto tracking-wide">
               Four simple steps to create unforgettable authentic experiences for your clients in Tuscany.
             </p>
           </div>
@@ -100,19 +101,16 @@ const HowItWorks = () => {
                         <h3 className="font-luxury text-3xl sm:text-4xl md:text-5xl text-[#0A1A2F] leading-tight">
                           {step.title}
                         </h3>
-                        <p className="font-body text-base sm:text-lg text-[#0A1A2F]/70 leading-relaxed max-w-md mx-auto md:mx-0">
+                        <p className="font-body text-lg sm:text-xl md:text-2xl text-[#0A1A2F]/70 leading-relaxed max-w-md mx-auto md:mx-0">
                           {step.description}
                         </p>
-                        <div className={`flex ${isTextLeft ? 'justify-center md:justify-end' : 'justify-center md:justify-start'} pt-3`}>
-                          <div className="w-14 h-14 rounded-full bg-[#C9A55B]/10 flex items-center justify-center">
-                            <Icon className="w-7 h-7 text-[#C9A55B]" />
-                          </div>
-                        </div>
                       </div>
 
                       {/* Circular Image */}
                       <div className={`${isTextLeft ? 'md:order-2 md:pl-12 md:justify-start' : 'md:order-1 md:pr-12 md:justify-end'} flex justify-center`}>
-                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-[#C9A55B]/20 to-[#0A1A2F]/10 border-4 border-[#C9A55B]/30 shadow-2xl"></div>
+                        <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-[#C9A55B]/20 to-[#0A1A2F]/10 border-4 border-[#C9A55B]/30 shadow-2xl flex items-center justify-center">
+                          <Icon className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-[#C9A55B]" />
+                        </div>
                       </div>
                     </div>
 
@@ -130,7 +128,14 @@ const HowItWorks = () => {
               asChild
               className="bg-[#0A1A2F] text-[#FAF7F2] hover:bg-[#0A1A2F]/90 font-body text-sm sm:text-base tracking-[0.15em] sm:tracking-[0.2em] px-12 sm:px-16 py-6 sm:py-7 uppercase transition-all duration-300 rounded-sm min-h-[48px] shadow-lg"
             >
-              <a href="/apply">Start Your Journey</a>
+              <Link
+                to="/apply"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "auto" });
+                }}
+              >
+                Start Your Journey
+              </Link>
             </Button>
           </div>
         </div>

@@ -54,6 +54,7 @@ export const mockExperiences: Experience[] = [
     gallery: [ 
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTourrr.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/ARTISAN%20TOUR%202.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/Experience%20Artisan%20Tour%20%281%29.MP4"
 
     ],

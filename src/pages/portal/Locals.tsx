@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import LocalCard from '@/components/portal/LocalCard';
@@ -41,6 +41,48 @@ const Locals = () => {
     ...mockConcierges.map(l => ({ ...l, categoryDisplay: 'Personal Concierge and Guides' })),
     ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massages and Therapists' })),
   ]), []);
+
+  // Preload all static images (non-video) for locals to improve load speed
+  useEffect(() => {
+    const urls = allLocals
+      .flatMap((l) => {
+        const mediaImages =
+          l.media
+            ?.filter(
+              (m: any) =>
+                typeof m.src === 'string' &&
+                m.src.trim().length > 0 &&
+                !m.src.toLowerCase().endsWith('.mp4')
+            )
+            .map((m: any) => m.src) || [];
+        const fallbackImage =
+          l.image && typeof l.image === 'string' && l.image.length > 0
+            ? [l.image]
+            : [];
+        return [...mediaImages, ...fallbackImage];
+      })
+      .filter((url): url is string => typeof url === 'string' && url.length > 0);
+
+    const uniqueUrls = Array.from(new Set(urls));
+
+    const links: HTMLLinkElement[] = [];
+    uniqueUrls.forEach((url) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = url;
+      document.head.appendChild(link);
+      links.push(link);
+    });
+
+    return () => {
+      links.forEach((link) => {
+        if (link.parentNode) {
+          link.parentNode.removeChild(link);
+        }
+      });
+    };
+  }, [allLocals]);
 
   // Filter locals
   const filteredLocals = useMemo(() => allLocals.filter((local) => {

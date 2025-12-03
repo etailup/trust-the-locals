@@ -37,6 +37,9 @@ const formSchema = z.object({
   linkedinUrl: z.string().trim().url("Invalid LinkedIn URL").or(z.literal("")).optional(),
   annualClients: z.string().min(1, "Please select client volume"),
   description: z.string().trim().min(50, "Please provide at least 50 characters").max(1000),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: "Consent is required" }),
+  }),
 });
 
 const countries = [
@@ -78,6 +81,7 @@ const Apply = () => {
       linkedinUrl: "",
       annualClients: "",
       description: "",
+      consent: false,
     },
   });
 
@@ -355,8 +359,32 @@ const Apply = () => {
                       </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}
-                />
+                )}
+              />
+
+              {/* Consent */}
+              <FormField
+                control={form.control}
+                name="consent"
+                render={({ field }) => (
+                  <FormItem className="flex items-start gap-3">
+                    <FormControl>
+                      <input
+                        type="checkbox"
+                        checked={field.value}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                        className="mt-1 h-5 w-5 border-portal-navy/30 text-portal-navy focus:ring-portal-navy"
+                      />
+                    </FormControl>
+                    <div className="space-y-1 pt-0.5">
+                      <FormLabel className="font-body text-portal-navy leading-snug">
+                        I consent to the processing of my personal data according to the Privacy Policy.
+                      </FormLabel>
+                      <FormMessage />
+                    </div>
+                  </FormItem>
+                )}
+              />
 
                 {/* Submit Button */}
                 <Button

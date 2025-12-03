@@ -118,7 +118,7 @@ const ExperienceDetail = () => {
           <Button
             onClick={() => navigate(-1)}
             variant="outline"
-            className="absolute top-8 left-8 bg-white/90 backdrop-blur-sm border-none hover:bg-white"
+            className="absolute top-8 left-8 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
@@ -264,12 +264,12 @@ const ExperienceDetail = () => {
               />
 
               {/* NAV ARROWS */}
-              {images.length > 1 && (
+              {imageSlides.length > 1 && (
                 <>
                   <button
                     onClick={() =>
                       setLightboxIndex(
-                        (prev) => (prev - 1 + images.length) % images.length
+                        (prev) => (prev - 1 + imageSlides.length) % imageSlides.length
                       )
                     }
                     className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-portal-navy rounded-full p-3 shadow"
@@ -280,7 +280,7 @@ const ExperienceDetail = () => {
 
                   <button
                     onClick={() =>
-                      setLightboxIndex((prev) => (prev + 1) % images.length)
+                      setLightboxIndex((prev) => (prev + 1) % imageSlides.length)
                     }
                     className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-portal-navy rounded-full p-3 shadow"
                     aria-label="Next"

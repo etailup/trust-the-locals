@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
@@ -11,10 +11,42 @@ const Experiences = () => {
   const [sortBy, setSortBy] = useState('recommended');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const filteredExperiences = mockExperiences.filter((exp) => {
+  // Preload all experience images (non-video) when the page loads
+  useEffect(() => {
+    const urls = mockExperiences.flatMap((exp) => {
+      const base = exp.image ? [exp.image] : [];
+      const galleryImages = (exp.gallery || []).filter(
+        (item) =>
+          typeof item === 'string' &&
+          item.trim().length > 0 &&
+          !item.toLowerCase().endsWith('.mp4')
+      );
+      return [...base, ...galleryImages];
+    });
+
+    const uniqueUrls = Array.from(
+      new Set(urls.filter((u): u is string => typeof u === 'string' && u.length > 0))
+    );
+
+    const links: HTMLLinkElement[] = [];
+    uniqueUrls.forEach((url) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = url;
+      document.head.appendChild(link);
+      links.push(link);
+    });
+
+    return () => {
+      links.forEach((link) => link.parentNode?.removeChild(link));
+    };
+  }, []);
+
+  const filteredExperiences = useMemo(() => mockExperiences.filter((exp) => {
     const matchesCategory = selectedCategory === 'All' || exp.category === selectedCategory;
     return matchesCategory;
-  });
+  }), [selectedCategory]);
 
   return (
     <div className="flex min-h-screen bg-portal-cream relative">

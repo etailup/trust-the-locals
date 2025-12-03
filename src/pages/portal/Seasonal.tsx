@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import SeasonalCard from '@/components/portal/SeasonalCard';
@@ -18,6 +18,29 @@ const Seasonal = () => {
       return exp.season === selectedSeason;
     });
   }, [selectedSeason]);
+
+  // Preload all seasonal images (non-video) for faster card rendering
+  useEffect(() => {
+    const urls = mockSeasonal
+      .map((exp) => exp.image)
+      .filter((url): url is string => typeof url === 'string' && url.trim().length > 0);
+
+    const uniqueUrls = Array.from(new Set(urls));
+    const links: HTMLLinkElement[] = [];
+
+    uniqueUrls.forEach((url) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = url;
+      document.head.appendChild(link);
+      links.push(link);
+    });
+
+    return () => {
+      links.forEach((link) => link.parentNode?.removeChild(link));
+    };
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-portal-cream relative">

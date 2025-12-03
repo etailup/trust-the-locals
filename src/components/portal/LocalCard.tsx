@@ -16,10 +16,9 @@ const LocalCard = ({ local }: LocalCardProps) => {
   const pricingByCategory: Record<string, string> = {
     Chef: '€80/hr',
     'Private Chef': '€80/hr',
-    'Personal Assistant': '€750/day',
     Guide: '€100/hr',
     Guides: '€100/hr',
-    'Personal Concierge and Guides': '€750/day',
+    'Personal Concierge and Guides': '€100/hour',
     Security: '€80/hr',
     Nanny: '€55/hr',
     Nannies: '€55/hr',
@@ -28,8 +27,9 @@ const LocalCard = ({ local }: LocalCardProps) => {
     'Personal Trainer': '€130/hr',
     Trainer: '€130/hr',
     Trainers: '€130/hr',
-    'Personal Concierge and Guide': '€750/day',
-    'Personal Concierge and Guides': '€750/day',
+    'Personal Concierge and Guide': '€100/hour',
+    'Personal Concierge and Guides': '€100/hour',
+    'Massages and Therapists': 'From €130',
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -92,6 +92,8 @@ const LocalCard = ({ local }: LocalCardProps) => {
           src={cardImage}
           alt={local.name}
           style={{ objectPosition: objectPosCard, height: cardImageHeight }}
+          loading="lazy"
+          decoding="async"
           className="w-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
         />
         
@@ -209,6 +211,8 @@ const LocalCard = ({ local }: LocalCardProps) => {
                   src={activeMedia?.src || local.image}
                   alt={local.name}
                   style={{ objectPosition: objectPosDetail, height: detailImageHeight }}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain rounded-lg bg-black/5"
                 />
               )}

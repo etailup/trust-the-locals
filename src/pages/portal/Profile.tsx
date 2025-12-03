@@ -76,7 +76,7 @@ const Profile = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+1 234 567 8900"
+                  placeholder="+39 351 3628747"
                 />
               </div>
 

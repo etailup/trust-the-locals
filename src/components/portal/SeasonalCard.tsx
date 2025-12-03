@@ -40,6 +40,8 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
           <img
             src={experience.image}
             alt={experience.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
           />
           

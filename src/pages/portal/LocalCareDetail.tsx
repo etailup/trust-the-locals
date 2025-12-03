@@ -43,7 +43,7 @@ const LocalCareDetail = () => {
           <Button
             onClick={() => navigate(-1)}
             variant="outline"
-            className="absolute top-8 left-8 bg-white/90 backdrop-blur-sm border-none hover:bg-white"
+            className="absolute top-8 left-8 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
