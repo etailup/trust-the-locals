@@ -61,15 +61,27 @@ const Footer = () => {
             ©2025 Trust the Locals
           </span>
           <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
-            <Link to="/privacy" className="hover:opacity-70 transition-opacity">
+            <a
+              href="https://www.iubenda.com/privacy-policy/57816541"
+              className="iubenda-nostyle iubenda-noiframe iubenda-embed iubenda-noiframe hover:opacity-70 transition-opacity"
+              title="Privacy Policy"
+            >
               Privacy Policy
-            </Link>
-            <Link to="/terms" className="hover:opacity-70 transition-opacity">
-              Terms of Service
-            </Link>
-            <Link to="/cookies" className="hover:opacity-70 transition-opacity">
+            </a>
+            <a
+              href="https://www.iubenda.com/terms-and-conditions/57816541"
+              className="iubenda-nostyle iubenda-noiframe iubenda-embed iubenda-noiframe hover:opacity-70 transition-opacity"
+              title="Terms and Conditions"
+            >
+              Terms and Conditions
+            </a>
+            <a
+              href="https://www.iubenda.com/privacy-policy/57816541/cookie-policy"
+              className="iubenda-nostyle iubenda-noiframe iubenda-embed iubenda-noiframe hover:opacity-70 transition-opacity"
+              title="Cookie Policy"
+            >
               Cookie Policy
-            </Link>
+            </a>
           </div>
         </div>
       </div>
