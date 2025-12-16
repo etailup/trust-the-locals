@@ -67,8 +67,7 @@ const clientVolumes = [
 
 const Apply = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const WEBHOOK_URL =
-    'https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8';
+  const WEBHOOK_PROXY_URL = '/api/webhook';
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -97,11 +96,13 @@ const Apply = () => {
         form_type: 'apply_form',
       };
 
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        keepalive: true,
       });
+      console.log('Apply webhook response', res.status, res.ok);
     } catch (err) {
       console.error('Apply webhook submission failed', err);
     } finally {

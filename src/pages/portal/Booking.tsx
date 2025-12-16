@@ -14,8 +14,7 @@ const Booking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockExperiences.find((exp) => exp.id === id);
-  const WEBHOOK_URL =
-    'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400';
+  const WEBHOOK_PROXY_URL = '/api/webhook';
   const submittedRef = useRef(false);
   const transferIncludedExperiences = ['prem-3', 'fw-3', 'fw-10']; // Panoramic Escape, Wine Tour, Supercar Grand Tour
   const transferIncluded = experience ? transferIncludedExperiences.includes(experience.id) : false;
@@ -50,7 +49,7 @@ const Booking = () => {
         transferIncluded,
       };
 
-      void fetch(WEBHOOK_URL, {
+      void fetch(WEBHOOK_PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

@@ -16,8 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 const Wishlist = () => {
   const [wishlistIds, setWishlistIds] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const WEBHOOK_URL =
-    'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400';
+  const WEBHOOK_PROXY_URL = '/api/webhook';
   const submittedRef = useRef(false);
 
   const localCareItem = {
@@ -99,7 +98,7 @@ const Wishlist = () => {
     };
 
     try {
-      void fetch(WEBHOOK_URL, {
+      void fetch(WEBHOOK_PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(webhookPayload),
