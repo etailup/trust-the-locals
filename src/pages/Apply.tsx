@@ -67,7 +67,7 @@ const clientVolumes = [
 
 const Apply = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const WEBHOOK_PROXY_URL = '/api/webhook';
+  const WEBHOOK_PROXY_URL = '/api/webhook-apply';
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

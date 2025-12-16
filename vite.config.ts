@@ -9,6 +9,9 @@ export default defineConfig(({ mode }) => {
   const webhookTarget =
     env.AUTOMATION_WEBHOOK_URL ||
     "https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8";
+  const applyWebhookTarget =
+    env.AUTOMATION_WEBHOOK_URL_APPLY ||
+    "https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400";
 
   return {
     server: {
@@ -21,6 +24,12 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           secure: true,
           rewrite: (p) => p.replace(/^\/api\/webhook$/, ""),
+        },
+        "/api/webhook-apply": {
+          target: applyWebhookTarget,
+          changeOrigin: true,
+          secure: true,
+          rewrite: (p) => p.replace(/^\/api\/webhook-apply$/, ""),
         },
       },
     },
