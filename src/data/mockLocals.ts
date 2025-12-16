@@ -104,7 +104,7 @@ export const mockSecurity: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_5.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_5.jpg' },
-      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard_Elyon.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Elyon%20%281%29.mp4' },
     ],
     specialties: ['Personal Security', 'Risk Management'],
     availability: 'Available upon request',
@@ -121,7 +121,7 @@ export const mockSecurity: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_4.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_4.jpg' },
-      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard_Cosimo.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Cosimo%20%281%29.mp4' },
     ],
     specialties: ['Protection', 'Prevention'],
     availability: 'Available upon request',
@@ -138,7 +138,7 @@ export const mockSecurity: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_1.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_1.jpg' },
-      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard_Alessandro.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Alessandro%20%281%29.mp4' },
     ],
     specialties: ['Personal Security'],
     availability: 'Available upon request',
@@ -155,7 +155,7 @@ export const mockSecurity: Local[] = [
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_3.jpg',
     media: [
       { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/bodyguard_3.jpg' },
-      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard_Kuelly.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Bodyguard%20Kuelly%20%281%29.mp4' },
     ],
     specialties: ['Personal Security', 'Risk Management'],
     availability: 'Available upon request',
@@ -231,7 +231,7 @@ export const mockNannies: Local[] = [
     image: '/locals/babysitter.jpg',
     media: [
       { type: 'image', src: '/locals/babysitter.jpg' },
-      { type: 'video', src: '/locals/Babysitter_Giulia.mp4' },
+      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Babysitter_Giulia.mp4' },
     ],
     specialties: ['Childcare'],
     availability: 'Available upon request',

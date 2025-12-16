@@ -68,7 +68,7 @@ const clientVolumes = [
 const Apply = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const WEBHOOK_URL =
-    'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400';
+    'https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8';
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
