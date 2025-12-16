@@ -67,6 +67,8 @@ const clientVolumes = [
 
 const Apply = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const WEBHOOK_URL =
+    'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400';
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,16 +87,28 @@ const Apply = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (isSubmitting) return;
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Application submitted:", values);
+
+    try {
+      const payload = {
+        ...values,
+        form_type: 'apply_form',
+      };
+
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.error('Apply webhook submission failed', err);
+    } finally {
       toast.success("Application submitted successfully! We'll be in touch soon.");
       form.reset();
       setIsSubmitting(false);
-    }, 1500);
+    }
   }
 
   return (

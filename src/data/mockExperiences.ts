@@ -24,8 +24,8 @@ export const mockExperiences: Experience[] = [
     title: 'Florence Panoramic Escape',
     subtitle: 'A private escape into the quiet elegance of Florence’s hills',
     category: 'Food & Wine',
-    description: 'Exclusive journey through Settignano and Fiesole with olive oil tasting, panoramic stops, and an aperitivo overlooking Florence.',
-    longDescription: `An exclusive journey through the hills of Settignano and Fiesole, where breathtaking views and authentic traditions come together.The experience begins with a stop among ancient olive groves for a guided tasting of local extra-virgin olive oil, presented directly by the producer. The route continues along the most scenic roads, with stops at the best viewpoints overlooking Florence, surrounded by quiet landscapes, historic villas, and natural terraces.The tour concludes in Fiesole with an aperitivo overlooking the Renaissance city—an intimate and refined moment that captures the true essence of the Florentine hills.`,
+    description: 'Olive oil tasting with bruschetta, sparkling toast, and a Florentine apericena across the panoramic roads of Settignano and Fiesole.',
+    longDescription: `An intimate escape across the hills of Settignano and Fiesole. Begin among ancient olive groves for a guided tasting of freshly pressed extra-virgin olive oil, paired with warm bruschetta. Follow the most scenic roads to the best viewpoints over Florence’s skyline, passing quiet landscapes, historic villas, and natural terraces. Conclude with a sparkling toast and a typical Florentine apericena on a terrace overlooking the city—capturing the true elegance of the Renaissance hills.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg",
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/panoramicEscape.jpg',
@@ -48,8 +48,8 @@ export const mockExperiences: Experience[] = [
     title: 'Artisan Tour',
     subtitle: 'Florentine Craftsmanship',
     category: 'History',
-    description: 'Exclusive walk through hidden workshops to meet artisans crafting leather, gold, paper, and more.',
-    longDescription: 'Step into the heart of Florence with our Artisan Tour: an exclusive walk through hidden workshops where tradition meets creativity. Watch skilled artisans craft leather, gold, paper, and more, sharing the secrets behind their timeless creations. A unique experience that reveals the soul of the city through its finest handmade treasures.',
+    description: 'Artisan-shopping journey through Florence’s heritage workshops and boutiques with a personal concierge by your side.',
+    longDescription: 'An artisan-shopping journey through Florence with a concierge escort. Step inside storied ateliers—goldsmiths like Penko, leather and silk houses such as Bottega Giotti, mosaics at Lastrucci—and see how master artisans shape leather, gold, paper, mosaics, and more. Discover signature pieces, hidden courtyards, and the heritage of Florentine craft, guided start to finish by your local concierge.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
     gallery: [ 
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/artisanTUURR.jpg',
@@ -96,16 +96,9 @@ Available for small groups or as a private, tailor-made experience.`,
     id: 'prem-4',
     title: 'Tuscany Walk',
     subtitle: 'Florence, Siena, San Gimignano, Lucca, Forte dei Marmi, Pisa, Livorno, Arezzo, and Cortona',
-    description: 'Tailor-made walking itineraries with Local guides across Florence, Siena, San Gimignano, Lucca, Pisa, Livorno, Arezzo, and more.',
+    description: 'Tailor-made walking tours with private guides, seamless transfers, and insider stories across Florence, Siena, San Gimignano, Pisa, Lucca, Livorno, Arezzo, Cortona, and more.',
     category: 'History',
-    longDescription: `Discovering Tuscany on foot, accompanied by a Local guide, is the most authentic way to step into the heart of this land.
-Every itinerary is crafted on demand, allowing you to experience the history, curiosities, and beauty of its most iconic cities.
-Florence: Cradle of the Renaissance and an open-air museum, where every step reveals art, architecture, and timeless masterpieces.
-Siena & San Gimignano: Between medieval squares and ancient towers: uncover the secrets of the Palio of Siena and be mesmerized by the untouched charm of San Gimignano.
-Lucca & Forte dei Marmi: From Lucca’s Renaissance walls and its oval piazza to a seaside lunch in the elegant beach clubs of Forte dei Marmi.
-Pisa & Livorno: Two opposite yet complementary souls: the world-famous Leaning Tower and the historic canals of Livorno’s Venezia district.
-Arezzo & Cortona: Where art meets breathtaking views: the masterpieces of Piero della Francesca and the stone alleyways overlooking the Val di Chiana.
-A tailor-made journey on foot to discover the most authentic heart of Tuscany.`,
+    longDescription: `Tailor-made walking tours across Tuscany with private guides, smooth transfers, and insider city secrets. Curate your route through Florence’s Renaissance marvels, Siena and San Gimignano’s medieval towers, Lucca’s walls and Forte dei Marmi’s coast, Pisa’s Leaning Tower and Livorno’s canals, or the hilltop charm of Arezzo and Cortona. Each itinerary is built on demand to reveal local stories, hidden corners, and the authentic rhythm of Tuscany—on foot, at your pace.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/siena.jpg',
     gallery: [
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/pisa2.jpg",
@@ -125,9 +118,8 @@ A tailor-made journey on foot to discover the most authentic heart of Tuscany.`,
     title: 'Wine Experience',
     subtitle: 'Among Vines, Dust, and Wine',
     category: 'Food & Wine',
-    description: 'Vintage Defender tour through Tuscan hills with off-the-beaten-path winery tastings and local pairings.',
-    longDescription: `Leave the paved roads behind and climb aboard an iconic vintage Defender: this is how our Wine Safari begins—an authentic journey through the Tuscan hills, where wine is still born and breathed between earth and sky. Guided by someone who knows these fields as home, you’ll cross vineyards, country roads, and endless rows of vines, stopping at local wineries far from the usual tourist routes.
-Each stop is a meeting with real stories, honest wines, and local tastings created to elevate the moment. No staged settings—just the raw beauty of the Tuscan countryside, the silence of the vines, the scent of the land, and the taste of wine right where it comes to life.`,
+    description: 'Curated winery visits with private transfer to estates like Poggio Torselli, Badia a Coltibuono, Tenuta degli Dei, Casa Ruffino, and Isole Olena.',
+    longDescription: `A curated wine journey through Chianti and beyond, with private transfer and a dedicated host. Visit celebrated estates such as Poggio Torselli and Badia a Coltibuono, Tenuta degli Dei and Casa Ruffino, or Isole Olena—meeting the people and tasting the vintages that define Tuscan terroir. Expect intimate cellar tours, guided tastings, and thoughtful pairings in authentic settings, without crowds or rushed schedules—just time to savor the land, the stories, and the wine.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/winetour.jpg",
     gallery: ["https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/winetour.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wine_tour.mp4",
@@ -147,10 +139,8 @@ Each stop is a meeting with real stories, honest wines, and local tastings creat
     title: 'Florence Food Tour',
     subtitle: 'Fiorentine Flavors',
     category: 'Food & Wine',
-    description: 'Authentic culinary walk through Florence’s historic shops, markets, and artisan workshops with a local expert.',
-    longDescription: `Florentine Flavors – A Culinary Journey Through History and Tradition.
-An authentic path to discover Florence through its cuisine. Guided by a local expert, you’ll explore historic shops, markets, and artisan workshops frequented by real Florentines. Each stop reveals a different facet of everyday Tuscan life: from the city’s most beloved schiacciata to traditional pastries, from artisanal gelato to the iconic Negroni, born right here in Florence.
-A genuine, tailor-made experience designed for those who want to understand the city through its truest flavors, far from the usual tourist routes.`,
+    description: 'Culinary walk through Florence with wine windows, Florentine street food, historic shops, and market tastings guided by a local expert.',
+    longDescription: `Discover Florence through its authentic flavors: wine windows, beloved street food, historic botteghe, and lively markets. With a local food expert, taste schiacciata, pastries, artisanal gelato, and the city’s signature drinks while hearing the stories behind each stop. A tailored, crowd-free route that reveals how real Florentines eat and drink every day.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/bicchiere.jpg",
     gallery: ["https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/bicchiere.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/food_tour.mp4",
@@ -170,10 +160,8 @@ A genuine, tailor-made experience designed for those who want to understand the 
     title: 'Private Dinner on Ponte Vecchio',
     subtitle: 'Exclusive Candlelit Experience',
     category: 'Food & Wine',
-    description: 'Private chef dinner on a historic Ponte Vecchio balcony with stories and curiosities about the location.',
-    longDescription: `Private Experience with a View of Ponte Vecchio – Where Taste Meets History.
-In an apartment overlooking the Ponte Vecchio—once home to the city’s butcher shops and today the heart of Florentine goldsmithing—you can enjoy a private dinner on a unique little balcony, perfect for a candlelit evening. Our private chef will guide guests through the magic of Florence using its most authentic flavors.
-Fully customizable, the experience allows you to discover Tuscan cuisine in an exclusive setting filled with history and charm. During the evening, stories and curiosities about the location are revealed, including a hidden door that guards one of Florence’s most fascinating mysteries.`,
+    description: 'Chef-led private dinner on a Ponte Vecchio balcony, with optional storytelling concierge at each course.',
+    longDescription: `An exclusive dinner on a private balcony overlooking the Ponte Vecchio. Your chef curates a Tuscan menu served in the heart of Florence’s goldsmith quarter, with the option to add a storytelling concierge who unveils the balcony’s hidden tales—course by course. An intimate, customizable evening where cuisine, history, and the view come together.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/privateDInner.jpg',
@@ -216,9 +204,8 @@ Whether you choose the Chianti hills or the coastal route, you will experience a
     title: 'Private Wellness Experience',
     subtitle: 'Nature, Art & Wellbeing',
     category: 'Premium',
-    description: 'Private yoga session with dedicated instructor in evocative Florentine locations, followed by brunch or aperitivo.',
-    longDescription: `Exclusive Yoga in Florence: nature, art, and well-being.
-Enjoy a private yoga experience guided by a dedicated instructor in some of the most evocative locations in Florence, such as the Boboli Gardens or panoramic villas overlooking the hills. After the session, unwind with a healthy brunch or aperitivo prepared with top-quality ingredients—a perfect moment to restore body and mind while socializing in a refined and intimate atmosphere.`,
+    description: 'Private yoga and wellness with a dedicated instructor in evocative Florentine settings, followed by a refined brunch or aperitivo.',
+    longDescription: `A tailored wellness session guided by your private instructor in Florence’s most atmospheric settings—panoramic villas, secret gardens, or serene studios. After practice, enjoy a healthy brunch or aperitivo crafted with premium ingredients. A refined way to restore body and mind in an intimate, elegant ambiance.`,
     image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/yoga.jpg",
     gallery: [
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/yoga.jpg",
@@ -236,8 +223,8 @@ Enjoy a private yoga experience guided by a dedicated instructor in some of the 
     title: 'Vertical Wine Tasting',
     subtitle: 'Dal Leo',
     category: 'Food & Wine',
-    description: 'Private ascending tasting in Fiesole with chauffeured transfer and panoramic dinner at Reggia degli Etruschi.',
-    longDescription: 'A private experience in Fiesole overlooking Florence. Guests are chauffeured to the Reggia degli Etruschi, a former convent now a panoramic restaurant. A local sommelier guides guests through a curated, ascending vertical tasting of iconic wines paired with freshly prepared dishes. Best enjoyed at sunset, with Florence at your feet.',
+    description: 'Curated vertical tasting in Fiesole with chauffeured transfer, guided by a sommelier, best at sunset over Florence.',
+    longDescription: 'A private, ascending vertical tasting in Fiesole, overlooking Florence. Chauffeured to Reggia degli Etruschi—a former convent turned panoramic restaurant—you’ll be guided by a local sommelier through iconic labels paired with freshly prepared dishes. Ideally experienced at sunset, with the Renaissance city at your feet.',
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/reggia.jpg',
@@ -260,11 +247,8 @@ Enjoy a private yoga experience guided by a dedicated instructor in some of the 
     title: 'Restoration Workshop',
     subtitle: 'Palazzo Ridolfi Zanchini',
     category: 'History',
-    description: 'Inside Palazzo Ridolfi Zanchini, learn real Florentine restoration techniques in an authentic atelier.',
-    longDescription: `The Art of Florentine Restoration
-An exclusive and truly unique experience in Florence, hosted inside Palazzo Ridolfi Zanchini, home to an authentic restoration workshop. Here, participants discover the techniques and secrets behind the recovery of artworks—from traditional artisan practices to methods developed after the 1966 flood.
-Around a shared worktable, an expert restorer will guide you step by step through the restoration process on a model painting, explaining what can be done, from cleaning to pictorial reconstruction.
-A rare opportunity to step into the heart of Florentine artistic craftsmanship and witness up close the meticulous, quiet care that brings masterpieces of the past back to life.`,
+    description: 'Hands-on glimpse into Florentine art restoration inside a historic palazzo atelier.',
+    longDescription: `Step inside a real restoration atelier at Palazzo Ridolfi Zanchini to learn how Florentine artisans revive artworks. Guided by an expert restorer, see and try the techniques—some born after the 1966 flood—that bring damaged paintings back to life. A close-up look at the craft behind preserving Renaissance masterpieces, from careful cleaning to delicate reconstruction.`,
     image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro2.jpg',
     gallery: [
       'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/arteErestauro2.jpg',

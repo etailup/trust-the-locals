@@ -51,6 +51,7 @@ const ExperienceDetail = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -79,6 +80,26 @@ const ExperienceDetail = () => {
       videoRef.current.currentTime = 0;
     }
   }, [lightboxIndex]);
+
+  useEffect(() => {
+    if (!experience) return;
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    setIsSaved(wishlist.includes(experience.id));
+  }, [experience]);
+
+  const toggleWishlist = () => {
+    if (!experience) return;
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    if (isSaved) {
+      const updated = wishlist.filter((id: string) => id !== experience.id);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
+      setIsSaved(false);
+    } else {
+      wishlist.push(experience.id);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
+      setIsSaved(true);
+    }
+  };
 
   if (!experience) {
     return (
@@ -215,10 +236,11 @@ const ExperienceDetail = () => {
 
                   <Button
                     variant="outline"
+                    onClick={toggleWishlist}
                     className="w-full mt-3 border-portal-navy/30 text-portal-navy hover:bg-portal-navy/5 text-lg"
                   >
-                    <Heart className="w-4 h-4 mr-2" />
-                    Save to Wishlist
+                    <Heart className={`w-4 h-4 mr-2 ${isSaved ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`} />
+                    {isSaved ? 'Saved to Wishlist' : 'Save to Wishlist'}
                   </Button>
 
                   {experience.pricing && (

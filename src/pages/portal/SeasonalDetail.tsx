@@ -3,12 +3,35 @@ import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import { mockSeasonal } from '@/data/mockSeasonal';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Clock, Check } from 'lucide-react';
+import { ArrowLeft, Clock, Check, Heart } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const SeasonalDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockSeasonal.find((exp) => exp.id === id);
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    if (experience && stored.includes(experience.id)) {
+      setIsSaved(true);
+    }
+  }, [experience]);
+
+  const toggleWishlist = () => {
+    if (!experience) return;
+    const stored = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]') as string[];
+    let updated: string[];
+    if (stored.includes(experience.id)) {
+      updated = stored.filter((item) => item !== experience.id);
+      setIsSaved(false);
+    } else {
+      updated = [...stored, experience.id];
+      setIsSaved(true);
+    }
+    localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
+  };
 
   if (!experience) {
     return (
@@ -101,6 +124,15 @@ const SeasonalDetail = () => {
                     className="w-full border-portal-navy text-portal-navy hover:bg-portal-navy hover:text-white font-medium h-12 transition-all duration-300"
                   >
                     Request Information
+                  </Button>
+
+                  <Button
+                    onClick={toggleWishlist}
+                    variant="outline"
+                    className="w-full mt-3 border-portal-navy/30 text-portal-navy hover:bg-portal-navy/5 font-medium h-12 transition-all duration-300"
+                  >
+                    <Heart className={`w-4 h-4 mr-2 ${isSaved ? 'fill-portal-navy text-portal-navy' : ''}`} />
+                    {isSaved ? 'Saved to Wishlist' : 'Save to Wishlist'}
                   </Button>
                 </div>
               </div>

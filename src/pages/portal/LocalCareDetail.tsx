@@ -4,10 +4,31 @@ import ConciergeButton from '@/components/portal/ConciergeButton';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Heart } from 'lucide-react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const LocalCareDetail = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const itemId = 'local-care';
+
+  useEffect(() => {
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    setIsSaved(wishlist.includes(itemId));
+  }, []);
+
+  const toggleWishlist = () => {
+    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
+    if (isSaved) {
+      const updated = wishlist.filter((id: string) => id !== itemId);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
+      setIsSaved(false);
+    } else {
+      wishlist.push(itemId);
+      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
+      setIsSaved(true);
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-portal-cream relative">
@@ -93,10 +114,11 @@ const LocalCareDetail = () => {
 
                   <Button
                     variant="outline"
+                    onClick={toggleWishlist}
                     className="w-full mt-3 border-portal-navy/30 text-portal-navy hover:bg-portal-navy/5 text-lg"
                   >
-                    <Heart className="w-4 h-4 mr-2" />
-                    Save to Wishlist
+                    <Heart className={`w-4 h-4 mr-2 ${isSaved ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`} />
+                    {isSaved ? 'Saved to Wishlist' : 'Save to Wishlist'}
                   </Button>
                 </div>
               </div>

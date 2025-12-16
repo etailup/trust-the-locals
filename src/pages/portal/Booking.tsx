@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
@@ -14,12 +14,16 @@ const Booking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockExperiences.find((exp) => exp.id === id);
+  const WEBHOOK_URL =
+    'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400';
+  const submittedRef = useRef(false);
   const transferIncludedExperiences = ['prem-3', 'fw-3', 'fw-10']; // Panoramic Escape, Wine Tour, Supercar Grand Tour
   const transferIncluded = experience ? transferIncludedExperiences.includes(experience.id) : false;
   
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    countryCode: '+39',
     phone: '',
     guests: '2',
     date: '',
@@ -33,6 +37,36 @@ const Booking = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (submittedRef.current) return;
+    submittedRef.current = true;
+
+    try {
+      const payload = {
+        form_type: 'experience_request_form',
+        experienceId: experience?.id,
+        experienceTitle: experience?.title,
+        experienceSubtitle: experience?.subtitle,
+        ...formData,
+        transferIncluded,
+      };
+
+      void fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      })
+        .catch((err) => {
+          console.error('Booking webhook submission failed', err);
+        })
+        .finally(() => {
+          submittedRef.current = false;
+        });
+    } catch (err) {
+      console.error('Booking webhook payload build failed', err);
+      submittedRef.current = false;
+    }
+
     toast.success('Your request has been sent! Our concierge team will contact you shortly.');
     navigate('/portal/dashboard');
   };
@@ -101,14 +135,50 @@ const Booking = () => {
 
                 <div>
                   <Label htmlFor="phone" className="text-lg text-portal-navy">Phone</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="text-lg"
-                  />
+                  <div className="flex gap-2">
+                    <select
+                      name="countryCode"
+                      className="w-32 border border-input bg-background text-lg rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
+                      value={formData.countryCode}
+                      onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
+                      required
+                    >
+                      <option value="+1">+1 (US/CA)</option>
+                      <option value="+39">+39 (Italy)</option>
+                      <option value="+33">+33 (France)</option>
+                      <option value="+34">+34 (Spain)</option>
+                      <option value="+44">+44 (UK)</option>
+                      <option value="+49">+49 (Germany)</option>
+                      <option value="+41">+41 (Switzerland)</option>
+                      <option value="+971">+971 (UAE)</option>
+                      <option value="+61">+61 (Australia)</option>
+                      <option value="+64">+64 (New Zealand)</option>
+                      <option value="+81">+81 (Japan)</option>
+                      <option value="+82">+82 (South Korea)</option>
+                      <option value="+86">+86 (China)</option>
+                      <option value="+852">+852 (Hong Kong)</option>
+                      <option value="+853">+853 (Macau)</option>
+                      <option value="+886">+886 (Taiwan)</option>
+                      <option value="+91">+91 (India)</option>
+                      <option value="+65">+65 (Singapore)</option>
+                      <option value="+60">+60 (Malaysia)</option>
+                      <option value="+62">+62 (Indonesia)</option>
+                      <option value="+66">+66 (Thailand)</option>
+                      <option value="+55">+55 (Brazil)</option>
+                      <option value="+52">+52 (Mexico)</option>
+                      <option value="+54">+54 (Argentina)</option>
+                      <option value="+57">+57 (Colombia)</option>
+                      <option value="+27">+27 (South Africa)</option>
+                    </select>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="text-lg flex-1"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
