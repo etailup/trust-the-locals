@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const webhookTarget =
     env.AUTOMATION_WEBHOOK_URL ||
-    "https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8";
+    "https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400/";
   const applyWebhookTarget =
     env.AUTOMATION_WEBHOOK_URL_APPLY ||
     "https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400/";

@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const DEFAULT_TARGET =
-  'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400/';
+  'https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
