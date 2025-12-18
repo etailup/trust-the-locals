@@ -32,9 +32,9 @@ const formSchema = z.object({
   email: z.string().trim().email("Invalid email address").max(255),
   phone: z.string().trim().min(1, "Phone number is required").max(20),
   countryCode: z.string().default("+39"),
-  website: z.string().trim().url("Invalid URL").or(z.literal("")).optional(),
+  website: z.string().trim().max(255).optional(),
   country: z.string().min(1, "Country is required"),
-  linkedinUrl: z.string().trim().url("Invalid LinkedIn URL").or(z.literal("")).optional(),
+  linkedinUrl: z.string().trim().max(255).optional(),
   annualClients: z.string().min(1, "Please select client volume"),
   description: z.string().trim().min(50, "Please provide at least 50 characters").max(1000),
   consent: z.literal(true, {
@@ -267,8 +267,8 @@ const Apply = () => {
                       <FormControl>
                         <Input 
                           {...field}
-                          type="url"
-                          placeholder="https://"
+                          type="text"
+                          placeholder="e.g. trusthelocals.com"
                           className="border-portal-navy/20 focus:border-portal-navy"
                         />
                       </FormControl>
@@ -317,8 +317,8 @@ const Apply = () => {
                       <FormControl>
                         <Input 
                           {...field}
-                          type="url"
-                          placeholder="https://linkedin.com/in/..."
+                          type="text"
+                          placeholder="e.g. linkedin.com/in/yourprofile"
                           className="border-portal-navy/20 focus:border-portal-navy"
                         />
                       </FormControl>
