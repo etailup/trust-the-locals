@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const DEFAULT_TARGET =
-  'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400';
+  'https://automation.smarteer.it/webhook-test/5b125308-0ae6-4192-92eb-02947b761400/';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -9,7 +9,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const targetUrl = process.env.AUTOMATION_WEBHOOK_URL_APPLY || DEFAULT_TARGET;
+  const rawTargetUrl = process.env.AUTOMATION_WEBHOOK_URL_APPLY || DEFAULT_TARGET;
+  const targetUrl =
+    rawTargetUrl.includes('automation.smarteer.it/webhook-test/') && !rawTargetUrl.endsWith('/')
+      ? `${rawTargetUrl}/`
+      : rawTargetUrl;
 
   try {
     const body =
@@ -28,4 +32,3 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(502).json({ error: 'Apply webhook proxy failed' });
   }
 }
-

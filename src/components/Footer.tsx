@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram } from "lucide-react";
 const Footer = () => {
+  const scrollToTop = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
   return <footer className="bg-[#0A1A2F] text-white pt-16 pb-24">
       {/* Logo/Brand Section */}
       <div className="container mx-auto px-4 sm:px-8">
@@ -14,16 +16,16 @@ const Footer = () => {
 
         {/* Navigation Links */}
         <nav className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 mb-16">
-          <Link to="/how-it-works" className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
+          <Link to="/how-it-works" onClick={scrollToTop} className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
             How It Works
           </Link>
-          <Link to="/apply" className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
+          <Link to="/apply" onClick={scrollToTop} className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
             Apply
           </Link>
-          <Link to="/about" className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
+          <Link to="/about" onClick={scrollToTop} className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
             About Us
           </Link>
-          <Link to="/contact" className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
+          <Link to="/contact" onClick={scrollToTop} className="font-body text-xs sm:text-sm tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">
             Contact Us
           </Link>
         </nav>
