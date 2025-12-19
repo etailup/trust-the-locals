@@ -6,30 +6,45 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const webhookTarget =
-    env.AUTOMATION_WEBHOOK_URL ||
-    "https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8";
-  const applyWebhookTarget =
-    env.AUTOMATION_WEBHOOK_URL_APPLY ||
-    "https://webhook.site/30d9b223-4693-4366-acf0-df46b48bdff8";
+  const defaultTarget =
+    "https://automation.smarteer.it/webhook/5b125308-0ae6-4192-92eb-02947b761400";
+
+  const webhookTarget = env.AUTOMATION_WEBHOOK_URL || defaultTarget;
+  const applyWebhookTarget = env.AUTOMATION_WEBHOOK_URL_APPLY || defaultTarget;
+
+  const toProxyTarget = (rawUrl: string) => {
+    try {
+      const url = new URL(rawUrl);
+      const pathname = url.pathname.startsWith("/") ? url.pathname : `/${url.pathname}`;
+      return { origin: url.origin, pathname };
+    } catch {
+      const url = new URL(defaultTarget);
+      return { origin: url.origin, pathname: url.pathname };
+    }
+  };
+
+  const webhookProxy = toProxyTarget(webhookTarget);
+  const applyWebhookProxy = toProxyTarget(applyWebhookTarget);
 
   return {
     server: {
       host: "::",
       port: 8080,
-      allowedHosts: ["cherish-subacid-malcontentedly.ngrok-free.dev"],
+      allowedHosts: ["cherish-subacid-malcontentedly.ngrok-free.dev", "localhost", "127.0.0.1"],
       proxy: {
         "/api/webhook": {
-          target: webhookTarget,
+          target: webhookProxy.origin,
           changeOrigin: true,
           secure: true,
-          rewrite: (p) => p.replace(/^\/api\/webhook$/, ""),
+          // Forward to the configured webhook path.
+          rewrite: () => webhookProxy.pathname,
         },
         "/api/webhook-apply": {
-          target: applyWebhookTarget,
+          target: applyWebhookProxy.origin,
           changeOrigin: true,
           secure: true,
-          rewrite: (p) => p.replace(/^\/api\/webhook-apply$/, ""),
+          // Forward to the configured webhook path.
+          rewrite: () => applyWebhookProxy.pathname,
         },
       },
     },

@@ -102,12 +102,19 @@ const Apply = () => {
         body: JSON.stringify(payload),
         keepalive: true,
       });
-      console.log('Apply webhook response', res.status, res.ok);
-    } catch (err) {
-      console.error('Apply webhook submission failed', err);
-    } finally {
+      const bodyText = await res.text();
+      console.log('Apply webhook response', res.status, res.ok, bodyText);
+
+      if (!res.ok) {
+        throw new Error(bodyText || `Apply webhook failed with status ${res.status}`);
+      }
+
       toast.success("Application submitted successfully! We'll be in touch soon.");
       form.reset();
+    } catch (err) {
+      console.error('Apply webhook submission failed', err);
+      toast.error("We couldn't submit your application right now. Please try again.");
+    } finally {
       setIsSubmitting(false);
     }
   }
