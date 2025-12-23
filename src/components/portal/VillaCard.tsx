@@ -34,13 +34,13 @@ const VillaCard = ({ villa }: VillaCardProps) => {
 
   return (
     <Link to={`/portal/villas/${villa.id}`} className="block">
-      <div className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg">
+      <div className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg">
         {/* Image */}
         <div className="relative h-64 overflow-hidden rounded-t-lg">
           <img
             src={coverImage}
             alt={villa.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
+            className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
           />
           
           {/* Like Button */}

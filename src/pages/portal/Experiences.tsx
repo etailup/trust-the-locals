@@ -11,22 +11,30 @@ const Experiences = () => {
   const [sortBy, setSortBy] = useState('recommended');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Preload all experience images (non-video) when the page loads
+  // Preload only the first few card images to avoid decode spikes.
   useEffect(() => {
-    const urls = mockExperiences.flatMap((exp) => {
-      const base = exp.image ? [exp.image] : [];
-      const galleryImages = (exp.gallery || []).filter(
-        (item) =>
-          typeof item === 'string' &&
-          item.trim().length > 0 &&
-          !item.toLowerCase().endsWith('.mp4')
-      );
-      return [...base, ...galleryImages];
-    });
+    const PRELOAD_COUNT = 6;
+    const preloadExperiences = mockExperiences.slice(0, PRELOAD_COUNT);
 
-    const uniqueUrls = Array.from(
-      new Set(urls.filter((u): u is string => typeof u === 'string' && u.length > 0))
-    );
+    const urls = preloadExperiences
+      .map((exp) => {
+        const media = exp.media?.length
+          ? exp.media
+          : exp.gallery?.length
+          ? exp.gallery
+          : [];
+        const firstImage =
+          media.find(
+            (item) =>
+              typeof item === 'string' &&
+              item.trim().length > 0 &&
+              !item.toLowerCase().endsWith('.mp4')
+          ) || exp.image;
+        return firstImage;
+      })
+      .filter((u): u is string => typeof u === 'string' && u.length > 0);
+
+    const uniqueUrls = Array.from(new Set(urls));
 
     const links: HTMLLinkElement[] = [];
     uniqueUrls.forEach((url) => {
@@ -108,9 +116,17 @@ const Experiences = () => {
         </p>
 
         {/* Experience Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          style={{ contain: 'layout paint style' }}
+        >
           {filteredExperiences.map((experience) => (
-            <ExperienceCard key={experience.id} experience={experience} />
+            <div
+              key={experience.id}
+              style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+            >
+              <ExperienceCard experience={experience} />
+            </div>
           ))}
         </div>
 

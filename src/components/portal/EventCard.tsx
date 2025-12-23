@@ -30,13 +30,13 @@ const EventCard = ({ event }: EventCardProps) => {
   };
 
   return (
-    <div className="group relative bg-white border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500">
+    <div className="group ttl-card relative bg-white border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500">
       {/* Image */}
       <div className="relative h-64 overflow-hidden">
         <img
           src={event.image}
           alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         
         {/* Like Button */}

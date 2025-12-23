@@ -61,13 +61,13 @@ const EventGroupDetail = () => {
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-8">
                 {/* Description */}
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-2xl text-portal-navy mb-4">About This Service</h2>
                   <p className="text-foreground/80 leading-relaxed">{eventGroup.description}</p>
                 </div>
 
                 {/* What's Included */}
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 360px' }}>
                   <h2 className="font-luxury text-2xl text-portal-navy mb-4">
                     {eventGroup.id === 'corporate-leadership-groups' ? 'Networks Served' : 
                      eventGroup.id === 'corporate-event-solutions' ? 'Programs Offered' : 
@@ -84,7 +84,10 @@ const EventGroupDetail = () => {
                 </div>
 
                 {/* Note */}
-                <div className="p-6 bg-[#FAF7F2] border-l-4 border-portal-navy">
+                <div
+                  className="p-6 bg-[#FAF7F2] border-l-4 border-portal-navy"
+                  style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 240px' }}
+                >
                   <p className="text-portal-navy/70 italic text-lg">
                     {eventGroup.note}
                   </p>

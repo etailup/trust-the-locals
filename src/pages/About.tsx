@@ -35,7 +35,7 @@ const About = () => {
       <section className="relative h-screen w-full overflow-hidden">
         {/* Background Image */}
         <img
-          src="/about_us/duomo.jpg"
+          src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/duomo.jpg"
           alt="Tuscany hills"
           loading="eager"
           style={{ objectPosition: heroImagePosition }}
@@ -118,7 +118,7 @@ const About = () => {
 
       {/* Our Team Hero Section */}
       <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] w-full mb-12 sm:mb-16 md:mb-20">
-        <img src="/about_us/Our_team.jpg" alt="Our team" className="w-full h-full object-cover" />
+        <img src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/Our_team%20%281%29.jpg" alt="Our team" className="w-full h-full object-cover" />
         <div className="absolute inset-0 flex items-center justify-center px-4">
           <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center">
                Our Team  

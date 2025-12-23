@@ -1,39 +1,29 @@
 import { SeasonalExperience } from '@/data/mockSeasonal';
-import { useState, useEffect } from 'react';
+import { memo } from 'react';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 interface SeasonalCardProps {
   experience: SeasonalExperience;
 }
 
 const SeasonalCard = ({ experience }: SeasonalCardProps) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const isLiked = isWishlisted(experience.id);
 
-  useEffect(() => {
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    setIsLiked(wishlist.includes(experience.id));
-  }, [experience.id]);
-
-  const toggleLike = (e: React.MouseEvent) => {
+  const handleToggleLike = (e: React.MouseEvent) => {
     e.preventDefault();
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    
-    if (isLiked) {
-      const updated = wishlist.filter((id: string) => id !== experience.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
-      setIsLiked(false);
-    } else {
-      wishlist.push(experience.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
-      setIsLiked(true);
-    }
+    toggleWishlist(experience.id);
   };
+  const imageSrcSet = buildResponsiveSrcSet(experience.image);
 
   return (
     <Link to={`/portal/seasonal/${experience.id}`} className="block">
       <div 
-        className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg h-full flex flex-col"
+        className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg h-full flex flex-col"
+        style={{ contain: 'layout paint style' }}
       >
         {/* Image */}
         <div className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
@@ -42,12 +32,14 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
             alt={experience.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
+            srcSet={imageSrcSet}
+            sizes={imageSrcSet ? cardImageSizes : undefined}
+            className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
           />
           
           {/* Like Button */}
           <button
-            onClick={toggleLike}
+            onClick={handleToggleLike}
             className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors rounded-full"
           >
             <Heart
@@ -83,4 +75,4 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
   );
 };
 
-export default SeasonalCard;
+export default memo(SeasonalCard);

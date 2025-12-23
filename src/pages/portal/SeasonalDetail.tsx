@@ -4,33 +4,18 @@ import ConciergeButton from '@/components/portal/ConciergeButton';
 import { mockSeasonal } from '@/data/mockSeasonal';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Clock, Check, Heart } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 const SeasonalDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const experience = mockSeasonal.find((exp) => exp.id === id);
-  const [isSaved, setIsSaved] = useState(false);
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const isSaved = experience ? isWishlisted(experience.id) : false;
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    if (experience && stored.includes(experience.id)) {
-      setIsSaved(true);
-    }
-  }, [experience]);
-
-  const toggleWishlist = () => {
+  const handleToggleWishlist = () => {
     if (!experience) return;
-    const stored = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]') as string[];
-    let updated: string[];
-    if (stored.includes(experience.id)) {
-      updated = stored.filter((item) => item !== experience.id);
-      setIsSaved(false);
-    } else {
-      updated = [...stored, experience.id];
-      setIsSaved(true);
-    }
-    localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
+    toggleWishlist(experience.id);
   };
 
   if (!experience) {
@@ -83,12 +68,12 @@ const SeasonalDetail = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-8">
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">About This Experience</h2>
                   <p className="text-lg text-foreground/80 leading-relaxed">{experience.description}</p>
                 </div>
 
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">What's Included</h2>
                   <ul className="space-y-3">
                     {[`Duration: ${experience.duration}`, `${experience.season} Highlights`].map((item) => (
@@ -127,7 +112,7 @@ const SeasonalDetail = () => {
                   </Button>
 
                   <Button
-                    onClick={toggleWishlist}
+                    onClick={handleToggleWishlist}
                     variant="outline"
                     className="w-full mt-3 border-portal-navy/30 text-portal-navy hover:bg-portal-navy/5 font-medium h-12 transition-all duration-300"
                   >

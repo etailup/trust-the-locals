@@ -34,7 +34,10 @@ const OurLocals = () => {
             <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Private Chefs</h2>
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             {mockChefs.map((chef) => (
               <LocalCard key={chef.id} local={chef} />
             ))}
@@ -48,7 +51,10 @@ const OurLocals = () => {
             <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Personal Concierge</h2>
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             {mockConcierges.map((concierge) => (
               <LocalCard key={concierge.id} local={concierge} />
             ))}
@@ -62,7 +68,10 @@ const OurLocals = () => {
             <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Security</h2>
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             {mockSecurity.map((security) => (
               <LocalCard key={security.id} local={security} />
             ))}
@@ -76,7 +85,10 @@ const OurLocals = () => {
             <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Personal Trainers</h2>
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             {mockTrainers.map((trainer) => (
               <LocalCard key={trainer.id} local={trainer} />
             ))}
@@ -90,7 +102,10 @@ const OurLocals = () => {
             <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Nannies</h2>
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             {mockNannies.map((nanny) => (
               <LocalCard key={nanny.id} local={nanny} />
             ))}
@@ -104,7 +119,10 @@ const OurLocals = () => {
             <h2 className="font-luxury text-3xl text-portal-navy tracking-wide letter-spacing-luxury">Guides</h2>
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             {mockGuides.map((guide) => (
               <LocalCard key={guide.id} local={guide} />
             ))}

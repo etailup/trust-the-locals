@@ -19,7 +19,10 @@ const Security = () => {
           <div className="mt-6 w-12 h-px bg-portal-navy/30"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          style={{ contain: 'layout paint style' }}
+        >
           {mockSecurity.map((security) => (
             <LocalCard key={security.id} local={security} />
           ))}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useCallback, useState, type ElementType } from 'react';
 import { Heart, MessageCircle, User, LogOut, Sparkles, Users, Calendar, ChevronDown, Package, Shield } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,37 +8,55 @@ interface PortalSidebarProps {
   isOpen?: boolean;
 }
 
+interface SidebarLinkItemProps {
+  to: string;
+  icon: ElementType;
+  label: string;
+  className: string;
+  activeClassName: string;
+  labelClassName?: string;
+}
+
+const SidebarLinkItem = memo(
+  ({ to, icon: Icon, label, className, activeClassName, labelClassName }: SidebarLinkItemProps) => (
+    <NavLink to={to} className={className} activeClassName={activeClassName}>
+      <Icon className="w-6 h-6 flex-shrink-0" />
+      <span className={labelClassName || 'font-body text-lg'}>{label}</span>
+    </NavLink>
+  )
+);
+
+const navigationStructure = [
+  {
+    section: 'offer',
+    label: 'Our Offer',
+    items: [
+      { icon: Sparkles, label: 'Experiences', path: '/portal/experiences' },
+      { icon: Users, label: 'Locals', path: '/portal/locals' },
+      { icon: Calendar, label: 'Seasonal', path: '/portal/seasonal' },
+      { icon: Package, label: 'Events & Groups', path: '/portal/events-groups' },
+      { icon: Shield, label: 'Local Care', path: '/portal/local-care' },
+    ]
+  },
+  {
+    section: 'other',
+    items: [
+      { icon: Heart, label: 'Wishlist', path: '/portal/wishlist' },
+      { icon: MessageCircle, label: 'Concierge', path: '/portal/concierge' },
+      { icon: User, label: 'Profile', path: '/portal/profile' },
+    ]
+  },
+];
+
 const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [isOfferExpanded, setIsOfferExpanded] = useState(true);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     logout();
     navigate('/');
-  };
-
-  const navigationStructure = [
-    {
-      section: 'offer',
-      label: 'Our Offer',
-      items: [
-        { icon: Sparkles, label: 'Experiences', path: '/portal/experiences' },
-        { icon: Users, label: 'Locals', path: '/portal/locals' },
-        { icon: Calendar, label: 'Seasonal', path: '/portal/seasonal' },
-        { icon: Package, label: 'Events & Groups', path: '/portal/events-groups' },
-        { icon: Shield, label: 'Local Care', path: '/portal/local-care' },
-      ]
-    },
-    {
-      section: 'other',
-      items: [
-        { icon: Heart, label: 'Wishlist', path: '/portal/wishlist' },
-        { icon: MessageCircle, label: 'Concierge', path: '/portal/concierge' },
-        { icon: User, label: 'Profile', path: '/portal/profile' },
-      ]
-    },
-  ];
+  }, [logout, navigate]);
 
   return (
     <aside
@@ -62,7 +80,7 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
               return (
                 <li key={section.section} className="my-4">
                   <button
-                    onClick={() => setIsOfferExpanded(!isOfferExpanded)}
+                    onClick={() => setIsOfferExpanded((prev) => !prev)}
                     className="flex items-center justify-between w-full gap-3 px-2 md:px-4 py-3 text-[#FAF7F2]/80 hover:text-[#FAF7F2] hover:bg-white/10 rounded-md transition-all duration-200"
                   >
                     <div className="flex items-center gap-3">
@@ -76,17 +94,17 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
                   }`}>
                     <ul className="space-y-1 mt-1">
                       {section.items.map((item) => {
-                        const ItemIcon = item.icon;
+                        const labelClassName = `font-body text-lg ${isOpen ? 'inline' : 'hidden'} md:block`;
                         return (
                           <li key={item.path}>
-                            <NavLink
+                            <SidebarLinkItem
                               to={item.path}
+                              icon={item.icon}
+                              label={item.label}
                               className="flex items-center gap-3 px-2 md:px-4 py-2 text-[#FAF7F2]/80 hover:text-[#FAF7F2] hover:bg-white/10 rounded-md transition-all duration-200"
                               activeClassName="bg-white/10 text-[#FAF7F2] border-l-2 border-white"
-                            >
-                              <ItemIcon className="w-6 h-6 flex-shrink-0" />
-                              <span className={`font-body text-lg ${isOpen ? 'inline' : 'hidden'} md:block`}>{item.label}</span>
-                            </NavLink>
+                              labelClassName={labelClassName}
+                            />
                           </li>
                         );
                       })}
@@ -99,17 +117,15 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
             }
             
             return section.items.map((item) => {
-              const ItemIcon = item.icon;
               return (
                 <li key={item.path}>
-                  <NavLink
+                  <SidebarLinkItem
                     to={item.path}
+                    icon={item.icon}
+                    label={item.label}
                     className="flex items-center gap-3 px-4 py-3 text-[#FAF7F2]/80 hover:text-[#FAF7F2] hover:bg-white/10 rounded-md transition-all duration-200"
                     activeClassName="bg-white/10 text-[#FAF7F2] border-l-2 border-white"
-                  >
-                    <ItemIcon className="w-6 h-6 flex-shrink-0" />
-                    <span className="font-body text-lg">{item.label}</span>
-                  </NavLink>
+                  />
                 </li>
               );
             });
@@ -131,4 +147,4 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
   );
 };
 
-export default PortalSidebar;
+export default memo(PortalSidebar);

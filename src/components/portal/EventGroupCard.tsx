@@ -9,7 +9,7 @@ const EventGroupCard = ({ eventGroup }: EventGroupCardProps) => {
   return (
     <Link
       to={`/portal/events-groups/${eventGroup.id}`}
-      className="group block bg-[#FAF7F2] overflow-hidden transition-all duration-300 hover:shadow-lg rounded-lg"
+      className="group ttl-card block bg-[#FAF7F2] overflow-hidden transition-all duration-300 hover:shadow-lg rounded-lg"
     >
       <div className="relative h-64 overflow-hidden rounded-t-lg">
         <img
@@ -17,7 +17,7 @@ const EventGroupCard = ({ eventGroup }: EventGroupCardProps) => {
           alt={eventGroup.title}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-lg"
+          className="ttl-card-media w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-lg"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-t-lg" />
         <div className="absolute bottom-0 left-0 right-0 p-6">

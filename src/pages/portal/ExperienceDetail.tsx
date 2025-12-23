@@ -4,6 +4,7 @@ import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import { mockExperiences } from '@/data/mockExperiences';
 import { Button } from '@/components/ui/button';
+import { useWishlist } from '@/contexts/WishlistContext';
 import {
   ArrowLeft,
   MapPin,
@@ -51,9 +52,10 @@ const ExperienceDetail = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const isSaved = experience ? isWishlisted(experience.id) : false;
 
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const inlineVideoRef = useRef<HTMLVideoElement | null>(null);
 
   // Lightbox keyboard controls — MATCH VILLAS
   useEffect(() => {
@@ -73,32 +75,39 @@ const ExperienceDetail = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [isLightboxOpen, imageSlides.length]);
 
-  // Pause/reset videos on slide change
+  // Pause inline video when it leaves the viewport or the tab is hidden.
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  }, [lightboxIndex]);
+    const videoEl = inlineVideoRef.current;
+    if (!videoEl || !videoUrl) return;
 
-  useEffect(() => {
-    if (!experience) return;
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    setIsSaved(wishlist.includes(experience.id));
-  }, [experience]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          videoEl.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
 
-  const toggleWishlist = () => {
+    observer.observe(videoEl);
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        videoEl.pause();
+      }
+    };
+
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+  }, [videoUrl]);
+
+  const handleToggleWishlist = () => {
     if (!experience) return;
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    if (isSaved) {
-      const updated = wishlist.filter((id: string) => id !== experience.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
-      setIsSaved(false);
-    } else {
-      wishlist.push(experience.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
-      setIsSaved(true);
-    }
+    toggleWishlist(experience.id);
   };
 
   if (!experience) {
@@ -169,6 +178,7 @@ const ExperienceDetail = () => {
                     controlsList="nofullscreen noremoteplayback nodownload"
                     disablePictureInPicture
                     preload="metadata"
+                    ref={inlineVideoRef}
                     className="w-full h-auto max-h-[750px] object-cover rounded-xl shadow-lg border border-[#e6dfd5]"
                   />
                 </div>
@@ -180,7 +190,7 @@ const ExperienceDetail = () => {
                   videoUrl ? 'md:col-span-4 md:col-start-6' : 'md:col-span-9'
                 } space-y-8 ${videoUrl ? 'md:pl-6' : ''}`}
               >
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">
                     About This Experience
                   </h2>
@@ -189,7 +199,7 @@ const ExperienceDetail = () => {
                   </p>
                 </div>
 
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 360px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">
                     What's Included
                   </h2>
@@ -236,7 +246,7 @@ const ExperienceDetail = () => {
 
                   <Button
                     variant="outline"
-                    onClick={toggleWishlist}
+                    onClick={handleToggleWishlist}
                     className="w-full mt-3 border-portal-navy/30 text-portal-navy hover:bg-portal-navy/5 text-lg"
                   >
                     <Heart className={`w-4 h-4 mr-2 ${isSaved ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`} />
@@ -245,7 +255,7 @@ const ExperienceDetail = () => {
 
                   {experience.pricing && (
                     <div className="pt-6 mt-6 border-t border-portal-navy/10 flex justify-center">
-                      <p className="text-xl text-portal-navy/80 font-medium text-center">
+                      <p className="text-xl text-portal-navy/80 font-medium text-left whitespace-pre-line inline-block">
                         {experience.pricing}
                       </p>
                     </div>

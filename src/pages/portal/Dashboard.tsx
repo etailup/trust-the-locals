@@ -66,7 +66,10 @@ const Dashboard = () => {
         {/* Recommended For You Section */}
         <div className="mb-12">
           <h2 className="font-luxury text-2xl text-portal-navy mb-6 tracking-wide">Recommended For You</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            style={{ contain: 'layout paint style' }}
+          >
             <div>
               <ExperienceCard experience={localCareCard as any} linkTo="/portal/local-care" />
             </div>

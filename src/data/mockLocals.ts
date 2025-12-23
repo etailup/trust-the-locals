@@ -228,9 +228,9 @@ export const mockNannies: Local[] = [
     category: 'Nanny',
     description: 'Professional, loving childcare expert.',
     fullDescription: 'Hello, I am Giulia, everyone’s Mamma. During your stay in Italy, I will lovingly take care of your children. With professionalism, discretion, and an eye for every detail, I ensure your holiday becomes truly special. Don’t trust just anyone. Trust our Italian luxury excellence in childcare.',
-    image: '/locals/babysitter.jpg',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/babysitter%20%281%29.jpg',
     media: [
-      { type: 'image', src: '/locals/babysitter.jpg' },
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/babysitter%20%281%29.jpg' },
       { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Babysitter_Giulia.mp4' },
     ],
     specialties: ['Childcare'],

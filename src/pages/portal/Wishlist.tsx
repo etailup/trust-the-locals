@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
@@ -12,9 +12,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 const Wishlist = () => {
-  const [wishlistIds, setWishlistIds] = useState<string[]>([]);
+  const { wishlistIds, clearWishlist } = useWishlist();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const WEBHOOK_PROXY_URL = '/api/webhook';
   const submittedRef = useRef(false);
@@ -35,11 +36,6 @@ const Wishlist = () => {
     availability: 'Available 24/7',
   };
 
-  useEffect(() => {
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    setWishlistIds(wishlist);
-  }, []);
-
   const wishlistExperiences = mockExperiences.filter((exp) => wishlistIds.includes(exp.id));
   const wishlistLocals = mockLocals.filter((loc) => wishlistIds.includes(loc.id));
   const wishlistSeasonal = mockSeasonal.filter((item) => wishlistIds.includes(item.id));
@@ -55,8 +51,7 @@ const Wishlist = () => {
     0;
 
   const handleClearAll = () => {
-    localStorage.setItem('ttl_wishlist', JSON.stringify([]));
-    setWishlistIds([]);
+    clearWishlist();
   };
 
   const handleRequestSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -264,13 +259,20 @@ const Wishlist = () => {
             {wishlistExperiencesCombined.length > 0 && (
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Experiences</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <div
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+                  style={{ contain: 'layout paint style' }}
+                >
                   {wishlistExperiencesCombined.map((experience) => (
-                    <ExperienceCard
+                    <div
                       key={experience.id}
-                      experience={experience as any}
-                      linkTo={experience.id === 'local-care' ? '/portal/local-care' : undefined}
-                    />
+                      style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+                    >
+                      <ExperienceCard
+                        experience={experience as any}
+                        linkTo={experience.id === 'local-care' ? '/portal/local-care' : undefined}
+                      />
+                    </div>
                   ))}
                 </div>
               </>
@@ -279,9 +281,16 @@ const Wishlist = () => {
             {wishlistLocals.length > 0 && (
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Locals</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <div
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+                  style={{ contain: 'layout paint style' }}
+                >
                   {wishlistLocals.map((local) => (
-                    <div key={local.id} className="w-full max-w-md md:max-w-full">
+                    <div
+                      key={local.id}
+                      className="w-full max-w-md md:max-w-full"
+                      style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+                    >
                       <LocalCard local={local} />
                     </div>
                   ))}
@@ -292,9 +301,17 @@ const Wishlist = () => {
             {wishlistSeasonal.length > 0 && (
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Seasonal</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  style={{ contain: 'layout paint style' }}
+                >
                   {wishlistSeasonal.map((item) => (
-                    <SeasonalCard key={item.id} experience={item} />
+                    <div
+                      key={item.id}
+                      style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+                    >
+                      <SeasonalCard experience={item} />
+                    </div>
                   ))}
                 </div>
               </>

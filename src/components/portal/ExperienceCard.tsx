@@ -1,53 +1,40 @@
-import { useState, useEffect, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { Heart } from 'lucide-react';
 import { Experience } from '@/data/mockExperiences';
 import { Link } from 'react-router-dom';
+import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 interface ExperienceCardProps {
   experience: Experience;
   linkTo?: string;
 }
 
+const priceByTitle: Record<string, string> = {
+  'Vertical Wine Tasting': '€375 / person',
+  'Wine Tour': '€700 (2–8 pax)',
+  'Florence Panoramic Escape': 'From €550',
+  'Florence Food Tour': 'From €450',
+  'Private Dinner on Ponte Vecchio': 'From €750 / 2 people',
+  'Tuscany Walk': 'From €300',
+  'Restoration Workshop': '€180 / person',
+  'Artisan Tour': '€165 / person',
+  'The Private Goldsmith': '€1400 / person',
+  'Mugello Grand Tour': '€1110 / person',
+  'Private Wellness Experience': '€210 / person',
+  'Cooking Class': '€155 / person',
+  'Wine Experience': 'From €700 / 2 people',
+  'Supercar Grand Tour - Tuscany Landscape': '€900',
+  'Wine Tasting and Custom Label Crafting': '€195',
+};
+
 const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
-  const priceByTitle: Record<string, string> = {
-    'Vertical Wine Tasting': '€375 / person',
-    'Wine Tour': '€700 (2–8 pax)',
-    'Florence Panoramic Escape': 'From €550',
-    'Florence Food Tour': '€149 / person',
-    'Private Dinner on Ponte Vecchio': '€600 / 2 people',
-    'Tuscany Walk': '€300',
-    'Restoration Workshop': '€180 / person',
-    'Artisan Tour': '€165 / person',
-    'The Private Goldsmith': '€1400 / person',
-    'Mugello Grand Tour': '€1110 / person',
-    'Private Wellness Experience': '€210 / person',
-    'Cooking Class': '€155 / person',
-    'Wine Tour': '€700',
-    'Wine Experience': '€700',
-    'Supercar Grand Tour - Tuscany Landscape': '€900',
-    'Wine Tasting and Custom Label Crafting': '€195',
-  };
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const isSaved = isWishlisted(experience.id);
 
-  const [isSaved, setIsSaved] = useState(false);
-
-  useEffect(() => {
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    setIsSaved(wishlist.includes(experience.id));
-  }, [experience.id]);
-
-  const toggleWishlist = (e: React.MouseEvent) => {
+  const handleToggleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    
-    if (isSaved) {
-      const updated = wishlist.filter((id: string) => id !== experience.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
-      setIsSaved(false);
-    } else {
-      wishlist.push(experience.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
-      setIsSaved(true);
-    }
+    toggleWishlist(experience.id);
   };
 
   const coverImage = useMemo(() => {
@@ -62,13 +49,17 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
       ) || experience.image;
     return firstImage;
   }, [experience]);
+  const coverSrcSet = buildResponsiveSrcSet(coverImage);
 
   const href = linkTo || `/portal/experience/${experience.id}`;
   const priceLabel = priceByTitle[experience.title] || '';
 
   return (
     <Link to={href}>
-      <div className="group relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg h-full flex flex-col">
+      <div
+        className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg h-full flex flex-col"
+        style={{ contain: 'layout paint style' }}
+      >
         {/* Image */}
         <div className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
           <img
@@ -76,12 +67,14 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
             alt={experience.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
+            srcSet={coverSrcSet}
+            sizes={coverSrcSet ? cardImageSizes : undefined}
+            className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
           />
           
           {/* Wishlist Button */}
           <button
-            onClick={toggleWishlist}
+            onClick={handleToggleWishlist}
             className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors rounded-full"
           >
             <Heart
@@ -128,4 +121,4 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
   );
 };
 
-export default ExperienceCard;
+export default memo(ExperienceCard);

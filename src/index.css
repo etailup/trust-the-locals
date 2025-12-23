@@ -169,4 +169,15 @@ All colors MUST be HSL.
       touch-action: manipulation;
     }
   }
+
+  /* Disable hover-driven transforms/shadows on touch devices */
+  @media (hover: none) {
+    .ttl-card:hover {
+      box-shadow: none !important;
+    }
+
+    .ttl-card .ttl-card-media {
+      transform: none !important;
+    }
+  }
 }

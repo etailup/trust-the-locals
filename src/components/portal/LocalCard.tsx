@@ -1,5 +1,5 @@
 import { Local } from '@/data/mockLocals';
-import { useState, useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Heart } from 'lucide-react';
 import {
   Dialog,
@@ -7,35 +7,37 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 interface LocalCardProps {
   local: Local;
 }
 
-const LocalCard = ({ local }: LocalCardProps) => {
-  const pricingByCategory: Record<string, string> = {
-    Chef: '€80/hr',
-    'Private Chef': '€80/hr',
-    Guide: '€100/hr',
-    Guides: '€100/hr',
-    'Personal Concierge and Guides': '€100/hour',
-    Security: '€80/hr',
-    Nanny: '€55/hr',
-    Nannies: '€55/hr',
-    Driver: '€85/hr',
-    Drivers: '€85/hr',
-    'Personal Trainer': '€130/hr',
-    Trainer: '€130/hr',
-    Trainers: '€130/hr',
-    'Personal Concierge and Guide': '€100/hour',
-    'Personal Concierge and Guides': '€100/hour',
-    'Massages and Therapists': 'From €130',
-  };
+const pricingByCategory: Record<string, string> = {
+  Chef: '€80/hr',
+  'Private Chef': '€80/hr',
+  Guide: '€100/hr',
+  Guides: '€100/hr',
+  'Personal Concierge and Guides': '€100/hour',
+  Security: '€80/hr',
+  Nanny: '€55/hr',
+  Nannies: '€55/hr',
+  Driver: '€85/hr',
+  Drivers: '€85/hr',
+  'Personal Trainer': '€130/hr',
+  Trainer: '€130/hr',
+  Trainers: '€130/hr',
+  'Personal Concierge and Guide': '€100/hour',
+  'Massages and Therapists': 'From €130',
+};
 
+const LocalCard = ({ local }: LocalCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const isLiked = isWishlisted(local.id);
   // Clamp heights so images scale gracefully on mobile without zooming
   const cardImageHeight = local.imageHeight ?? 'clamp(18rem, 58vw, 24rem)';
   const detailImageHeight = local.detailImageHeight ?? 'clamp(22rem, 60vh, 32rem)';
@@ -50,6 +52,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
       ? [{ type: 'image' as const, src: local.image }]
       : [];
   const cardImage = mediaItems[0]?.src ?? local.image;
+  const cardSrcSet = buildResponsiveSrcSet(cardImage);
   const activeMedia = mediaItems[activeIndex] ?? mediaItems[0];
   const priceLabel = pricingByCategory[local.category] || '';
 
@@ -60,31 +63,17 @@ const LocalCard = ({ local }: LocalCardProps) => {
     }
   }, [activeIndex, isOpen]);
 
-  useEffect(() => {
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    setIsLiked(wishlist.includes(local.id));
-  }, [local.id]);
-
-  const toggleLike = (e: React.MouseEvent) => {
+  const handleToggleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    
-    if (isLiked) {
-      const updated = wishlist.filter((id: string) => id !== local.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
-      setIsLiked(false);
-    } else {
-      wishlist.push(local.id);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
-      setIsLiked(true);
-    }
+    toggleWishlist(local.id);
   };
 
   return (
     <>
       <div 
         onClick={() => setIsOpen(true)}
-        className="group relative bg-white border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg"
+        className="group ttl-card relative bg-white border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg"
+        style={{ contain: 'layout paint style' }}
       >
       {/* Image */}
       <div className="relative overflow-hidden rounded-t-lg" style={{ height: cardImageHeight }}>
@@ -94,12 +83,14 @@ const LocalCard = ({ local }: LocalCardProps) => {
           style={{ objectPosition: objectPosCard, height: cardImageHeight }}
           loading="lazy"
           decoding="async"
-          className="w-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
+          srcSet={cardSrcSet}
+          sizes={cardSrcSet ? cardImageSizes : undefined}
+          className="ttl-card-media w-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
         />
         
         {/* Like Button */}
         <button
-          onClick={toggleLike}
+          onClick={handleToggleLike}
           className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors rounded-full"
         >
           <Heart
@@ -201,6 +192,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
                   playsInline
                   controlsList="nofullscreen noremoteplayback nodownload"
                   disablePictureInPicture
+                  preload="metadata"
                   className="w-full h-full object-contain rounded-lg bg-black/5"
                   ref={videoRef}
                   style={{ objectPosition: objectPosDetail }}
@@ -260,4 +252,4 @@ const LocalCard = ({ local }: LocalCardProps) => {
   );
 };
 
-export default LocalCard;
+export default memo(LocalCard);

@@ -42,24 +42,25 @@ const Locals = () => {
     ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massages and Therapists' })),
   ]), []);
 
-  // Preload all static images (non-video) for locals to improve load speed
+  // Preload only the first few card images to avoid decode spikes.
   useEffect(() => {
-    const urls = allLocals
-      .flatMap((l) => {
-        const mediaImages =
+    const PRELOAD_COUNT = 6;
+    const preloadLocals = allLocals.slice(0, PRELOAD_COUNT);
+
+    const urls = preloadLocals
+      .map((l) => {
+        const mediaImage =
           l.media
-            ?.filter(
-              (m: any) =>
-                typeof m.src === 'string' &&
-                m.src.trim().length > 0 &&
-                !m.src.toLowerCase().endsWith('.mp4')
-            )
-            .map((m: any) => m.src) || [];
-        const fallbackImage =
-          l.image && typeof l.image === 'string' && l.image.length > 0
-            ? [l.image]
-            : [];
-        return [...mediaImages, ...fallbackImage];
+            ?.map((m: any) => m?.src)
+            .find(
+              (src: any) =>
+                typeof src === 'string' &&
+                src.trim().length > 0 &&
+                !src.toLowerCase().endsWith('.mp4')
+            ) || null;
+        if (mediaImage) return mediaImage;
+        if (typeof l.image === 'string' && l.image.trim().length > 0) return l.image;
+        return null;
       })
       .filter((url): url is string => typeof url === 'string' && url.length > 0);
 
@@ -153,9 +154,16 @@ const Locals = () => {
           </p>
 
           {/* Locals Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 justify-items-center md:justify-items-stretch">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 justify-items-center md:justify-items-stretch"
+            style={{ contain: 'layout paint style' }}
+          >
             {filteredLocals.map((local) => (
-              <div key={local.id} className="w-full max-w-md md:max-w-full">
+              <div
+                key={local.id}
+                className="w-full max-w-md md:max-w-full"
+                style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+              >
                 <LocalCard local={local} />
               </div>
             ))}

@@ -43,7 +43,10 @@ const EventsGroups = () => {
           </div>
 
           {/* Event Group Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          style={{ contain: 'layout paint style' }}
+        >
             {mockEventsGroups.map((eventGroup) => (
               <EventGroupCard key={eventGroup.id} eventGroup={eventGroup} />
             ))}

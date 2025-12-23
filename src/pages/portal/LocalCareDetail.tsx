@@ -4,30 +4,17 @@ import ConciergeButton from '@/components/portal/ConciergeButton';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Heart } from 'lucide-react';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useWishlist } from '@/contexts/WishlistContext';
 
 const LocalCareDetail = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
   const itemId = 'local-care';
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const isSaved = isWishlisted(itemId);
 
-  useEffect(() => {
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    setIsSaved(wishlist.includes(itemId));
-  }, []);
-
-  const toggleWishlist = () => {
-    const wishlist = JSON.parse(localStorage.getItem('ttl_wishlist') || '[]');
-    if (isSaved) {
-      const updated = wishlist.filter((id: string) => id !== itemId);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(updated));
-      setIsSaved(false);
-    } else {
-      wishlist.push(itemId);
-      localStorage.setItem('ttl_wishlist', JSON.stringify(wishlist));
-      setIsSaved(true);
-    }
+  const handleToggleWishlist = () => {
+    toggleWishlist(itemId);
   };
 
   return (
@@ -85,7 +72,7 @@ const LocalCareDetail = () => {
           <div className="max-w-5xl mx-auto px-3 md:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
               <div className="lg:col-span-2 space-y-8">
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">About Local Care</h2>
                   <p className="text-lg text-foreground/80 leading-relaxed">
                     Local Care is our dedicated support service for international travel agencies whose
@@ -114,7 +101,7 @@ const LocalCareDetail = () => {
 
                   <Button
                     variant="outline"
-                    onClick={toggleWishlist}
+                    onClick={handleToggleWishlist}
                     className="w-full mt-3 border-portal-navy/30 text-portal-navy hover:bg-portal-navy/5 text-lg"
                   >
                     <Heart className={`w-4 h-4 mr-2 ${isSaved ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`} />

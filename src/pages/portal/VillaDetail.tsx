@@ -97,12 +97,12 @@ const VillaDetail = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-8">
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">About This Villa</h2>
                   <p className="text-lg text-foreground/80 leading-relaxed">{villa.description}</p>
                 </div>
 
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 360px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">Amenities</h2>
                   <ul className="space-y-3">
                     {villa.amenities.map((item) => (
@@ -114,7 +114,7 @@ const VillaDetail = () => {
                   </ul>
                 </div>
 
-                <div>
+                <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">Location</h2>
                   <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
                     <p className="text-base text-foreground/70">Map will be displayed here</p>

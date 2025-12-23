@@ -19,9 +19,11 @@ const Seasonal = () => {
     });
   }, [selectedSeason]);
 
-  // Preload all seasonal images (non-video) for faster card rendering
+  // Preload only the first few card images to avoid decode spikes.
   useEffect(() => {
+    const PRELOAD_COUNT = 6;
     const urls = mockSeasonal
+      .slice(0, PRELOAD_COUNT)
       .map((exp) => exp.image)
       .filter((url): url is string => typeof url === 'string' && url.trim().length > 0);
 
@@ -96,9 +98,17 @@ const Seasonal = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-0">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-0"
+          style={{ contain: 'layout paint style' }}
+        >
           {filteredSeasonal.map((experience) => (
-            <SeasonalCard key={experience.id} experience={experience} />
+            <div
+              key={experience.id}
+              style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+            >
+              <SeasonalCard experience={experience} />
+            </div>
           ))}
         </div>
 
