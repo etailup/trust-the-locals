@@ -38,6 +38,8 @@ const About = () => {
           src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/duomo.jpg"
           alt="Tuscany hills"
           loading="eager"
+          fetchPriority="high"
+          decoding="async"
           style={{ objectPosition: heroImagePosition }}
           className="absolute inset-0 w-full h-full object-cover"
         />

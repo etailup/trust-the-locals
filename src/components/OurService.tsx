@@ -23,11 +23,11 @@ const OurService = () => {
   const services = [{
     title: "Tailor-Made",
     description: "We design bespoke journeys built entirely around your preferences, pace, and interests. Every detail is shaped by our experts to create a personalised, meaningful trip.",
-    image: "/our_service/tailorMade.jpg"
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/our_service/tailorMade%20%281%29.jpg"
   }, {
     title: "Expert Locals",
     description: "From secret ateliers to private tastings and off-the-map wonders, our expert locals open doors only insiders know — turning every moment into an unforgettable, truly authentic experience.",
-    image: "/our_service/expertLocals.jpg"
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/our_service/expertLocals.jpg"
   }, {
     title: "Local Care",
     description: "Local Care is our dedicated support service for international travel agencies whose clients are visiting Italy. Available 24/7, our team provides instant remote assistance to solve unexpected issues, handle emergencies, manage last-minute reservations, and coordinate reliable local services. Not only a physical presence — but a real Italian team, always online and ready to support your guests throughout their stay.",
@@ -35,7 +35,7 @@ const OurService = () => {
   }, {
     title: "Exceptional Experiences",
     description: "We curate journeys designed entirely around who you are — your rhythm, your tastes, your way of exploring the world. Each detail is thoughtfully shaped by our specialists to create a personalised journey that feels effortless, intimate, and truly unforgettable.",
-    image: "/our_service/Excep.Experiences.jpg"
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/our_service/Excep.Experiences.jpg"
   }];
   const categories = ["TAILOR-MADE", "EXPERT LOCALS", "LOCAL CARE", "EXCEPTIONAL EXPERIENCES"];
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -94,6 +94,9 @@ const OurService = () => {
                 <img 
                   src={services[activeTab].image} 
                   alt={services[activeTab].title} 
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover" 
                 />
               </div>
