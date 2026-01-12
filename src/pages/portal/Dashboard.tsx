@@ -67,7 +67,7 @@ const Dashboard = () => {
         <div className="mb-12">
           <h2 className="font-luxury text-2xl text-portal-navy mb-6 tracking-wide">Recommended For You</h2>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             <div>

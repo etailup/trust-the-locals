@@ -4,6 +4,7 @@ import { Experience } from '@/data/mockExperiences';
 import { Link } from 'react-router-dom';
 import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
 import { useWishlist } from '@/contexts/WishlistContext';
+import { useInView } from '@/hooks/useInView';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -50,6 +51,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
     return firstImage;
   }, [experience]);
   const coverSrcSet = buildResponsiveSrcSet(coverImage);
+  const { ref: mediaRef, isInView } = useInView();
 
   const href = linkTo || `/portal/experience/${experience.id}`;
   const priceLabel = priceByTitle[experience.title] || '';
@@ -61,16 +63,18 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
         style={{ contain: 'layout paint style' }}
       >
         {/* Image */}
-        <div className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
-          <img
-            src={coverImage}
-            alt={experience.title}
-            loading="lazy"
-            decoding="async"
-            srcSet={coverSrcSet}
-            sizes={coverSrcSet ? cardImageSizes : undefined}
-            className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
-          />
+        <div ref={mediaRef} className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
+          {isInView && (
+            <img
+              src={coverImage}
+              alt={experience.title}
+              loading="lazy"
+              decoding="async"
+              srcSet={coverSrcSet}
+              sizes={coverSrcSet ? cardImageSizes : undefined}
+              className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
+            />
+          )}
           
           {/* Wishlist Button */}
           <button

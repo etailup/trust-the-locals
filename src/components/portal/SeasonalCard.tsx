@@ -4,6 +4,7 @@ import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
 import { useWishlist } from '@/contexts/WishlistContext';
+import { useInView } from '@/hooks/useInView';
 
 interface SeasonalCardProps {
   experience: SeasonalExperience;
@@ -18,6 +19,7 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
     toggleWishlist(experience.id);
   };
   const imageSrcSet = buildResponsiveSrcSet(experience.image);
+  const { ref: mediaRef, isInView } = useInView();
 
   return (
     <Link to={`/portal/seasonal/${experience.id}`} className="block">
@@ -26,16 +28,18 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
         style={{ contain: 'layout paint style' }}
       >
         {/* Image */}
-        <div className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
-          <img
-            src={experience.image}
-            alt={experience.title}
-            loading="lazy"
-            decoding="async"
-            srcSet={imageSrcSet}
-            sizes={imageSrcSet ? cardImageSizes : undefined}
-            className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
-          />
+        <div ref={mediaRef} className="relative h-80 sm:h-[22rem] overflow-hidden rounded-t-lg">
+          {isInView && (
+            <img
+              src={experience.image}
+              alt={experience.title}
+              loading="lazy"
+              decoding="async"
+              srcSet={imageSrcSet}
+              sizes={imageSrcSet ? cardImageSizes : undefined}
+              className="ttl-card-media w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-lg"
+            />
+          )}
           
           {/* Like Button */}
           <button

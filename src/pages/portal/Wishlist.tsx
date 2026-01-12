@@ -85,6 +85,7 @@ const Wishlist = () => {
       ...payload,
       form_type: 'wishlist_request_form',
       wishlistIds,
+      requestedExperienceNames: requestedExperiences.map((item) => item.title).join(', '),
       requestedItems: {
         experiences: requestedExperiences,
         locals: requestedLocals,
@@ -174,6 +175,10 @@ const Wishlist = () => {
                   <Input id="lastName" name="lastName" required />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" name="email" type="email" required />
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="phone">Phone</Label>
                   <div className="flex gap-2">
                     <select
@@ -260,7 +265,7 @@ const Wishlist = () => {
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Experiences</h2>
                 <div
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+                  className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
                   style={{ contain: 'layout paint style' }}
                 >
                   {wishlistExperiencesCombined.map((experience) => (
@@ -282,7 +287,7 @@ const Wishlist = () => {
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Locals</h2>
                 <div
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+                  className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
                   style={{ contain: 'layout paint style' }}
                 >
                   {wishlistLocals.map((local) => (
@@ -302,7 +307,7 @@ const Wishlist = () => {
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Seasonal</h2>
                 <div
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                   style={{ contain: 'layout paint style' }}
                 >
                   {wishlistSeasonal.map((item) => (

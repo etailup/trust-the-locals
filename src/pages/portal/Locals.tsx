@@ -155,7 +155,7 @@ const Locals = () => {
 
           {/* Locals Grid */}
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 justify-items-center md:justify-items-stretch"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 justify-items-center md:justify-items-stretch"
             style={{ contain: 'layout paint style' }}
           >
             {filteredLocals.map((local) => (

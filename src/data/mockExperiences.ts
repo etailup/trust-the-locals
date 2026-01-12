@@ -39,6 +39,7 @@ export const mockExperiences: Experience[] = [
     duration: '3 hours',
     location: 'Uffizi Gallery, Florence',
     groupSize: '2-8 guests',
+    
     included: ['After-hours access', 'Private art historian', 'Restricted areas', 'Conservation lab tour', 'Champagne reception', 'Art book'],
     availability: 'Limited dates, 3 months advance booking',
     featured: true,

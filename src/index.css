@@ -180,4 +180,9 @@ All colors MUST be HSL.
       transform: none !important;
     }
   }
+
+  .ttl-scroll-container {
+    transform: translateZ(0);
+    will-change: transform;
+  }
 }

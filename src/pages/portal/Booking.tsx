@@ -42,12 +42,12 @@ const Booking = () => {
     try {
       const payload = {
         form_type: 'experience_request_form',
-        experienceId: experience?.id,
-        experienceTitle: experience?.title,
-        experienceSubtitle: experience?.subtitle,
+        experienceName: experience?.title,
         ...formData,
         transferIncluded,
       };
+
+      console.log('Experience request payload', payload);
 
       void fetch(WEBHOOK_PROXY_URL, {
         method: 'POST',

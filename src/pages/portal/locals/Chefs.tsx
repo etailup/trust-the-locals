@@ -35,7 +35,7 @@ const OurLocals = () => {
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             {mockChefs.map((chef) => (
@@ -52,7 +52,7 @@ const OurLocals = () => {
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             {mockConcierges.map((concierge) => (
@@ -69,7 +69,7 @@ const OurLocals = () => {
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             {mockSecurity.map((security) => (
@@ -86,7 +86,7 @@ const OurLocals = () => {
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             {mockTrainers.map((trainer) => (
@@ -103,7 +103,7 @@ const OurLocals = () => {
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             {mockNannies.map((nanny) => (
@@ -120,7 +120,7 @@ const OurLocals = () => {
             <div className="h-px flex-1 bg-portal-navy/20"></div>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             style={{ contain: 'layout paint style' }}
           >
             {mockGuides.map((guide) => (

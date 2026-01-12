@@ -1,4 +1,5 @@
 const UNSPLASH_HOST = 'images.unsplash.com';
+const BLOB_HOST = 'public.blob.vercel-storage.com';
 
 const CARD_IMAGE_WIDTHS = [480, 768, 1024, 1280];
 
@@ -13,7 +14,9 @@ const parseDimension = (value: string | null) => {
 
 export const buildResponsiveSrcSet = (url?: string) => {
   if (!url || !url.startsWith('http')) return undefined;
-  if (!url.includes(UNSPLASH_HOST)) return undefined;
+  const isUnsplash = url.includes(UNSPLASH_HOST);
+  const isBlob = url.includes(BLOB_HOST);
+  if (!isUnsplash && !isBlob) return undefined;
 
   try {
     const base = new URL(url);
@@ -24,7 +27,7 @@ export const buildResponsiveSrcSet = (url?: string) => {
     return CARD_IMAGE_WIDTHS.map((width) => {
       const next = new URL(base.toString());
       next.searchParams.set('w', String(width));
-      if (ratio) {
+      if (isUnsplash && ratio) {
         next.searchParams.set('h', String(Math.round(width * ratio)));
       }
       return `${next.toString()} ${width}w`;
