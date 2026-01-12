@@ -22,6 +22,7 @@ const Booking = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    email: '',
     countryCode: '+39',
     phone: '',
     guests: '2',
@@ -127,6 +128,17 @@ const Booking = () => {
                       required
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email" className="text-lg text-portal-navy">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="text-lg"
                     />
                   </div>
