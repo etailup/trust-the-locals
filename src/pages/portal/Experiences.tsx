@@ -11,9 +11,9 @@ const Experiences = () => {
   const [sortBy, setSortBy] = useState('recommended');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Preload only the first few card images to avoid decode spikes.
+  // Preload the first viewport of card images to avoid decode spikes.
   useEffect(() => {
-    const PRELOAD_COUNT = 6;
+    const PRELOAD_COUNT = 9;
     const preloadExperiences = mockExperiences.slice(0, PRELOAD_COUNT);
 
     const urls = preloadExperiences
@@ -37,11 +37,15 @@ const Experiences = () => {
     const uniqueUrls = Array.from(new Set(urls));
 
     const links: HTMLLinkElement[] = [];
-    uniqueUrls.forEach((url) => {
+    uniqueUrls.forEach((url, index) => {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
       link.href = url;
+      // High priority for first 3 images (above the fold)
+      if (index < 3) {
+        link.setAttribute('fetchpriority', 'high');
+      }
       document.head.appendChild(link);
       links.push(link);
     });

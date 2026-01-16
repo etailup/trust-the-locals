@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useWishlist } from '@/contexts/WishlistContext';
+import { toast } from 'sonner';
 
 const Wishlist = () => {
   const { wishlistIds, clearWishlist } = useWishlist();
@@ -113,7 +114,7 @@ const Wishlist = () => {
 
     console.log('Wishlist request submitted', webhookPayload);
     e.currentTarget.reset();
-    alert('Request sent. Our concierge will get back to you shortly.');
+    toast.success('Your request has been sent! Our concierge team will contact you shortly.');
   };
 
   return (
@@ -167,23 +168,23 @@ const Wishlist = () => {
               </p>
               <form onSubmit={handleRequestSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" name="firstName" required />
+                  <Label htmlFor="firstName" className="text-lg text-portal-navy">First Name</Label>
+                  <Input id="firstName" name="firstName" className="text-lg" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" name="lastName" required />
+                  <Label htmlFor="lastName" className="text-lg text-portal-navy">Last Name</Label>
+                  <Input id="lastName" name="lastName" className="text-lg" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" type="email" required />
+                  <Label htmlFor="email" className="text-lg text-portal-navy">Email</Label>
+                  <Input id="email" name="email" type="email" className="text-lg" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
+                  <Label htmlFor="phone" className="text-lg text-portal-navy">Phone</Label>
                   <div className="flex gap-2">
                     <select
                       name="countryCode"
-                      className="w-28 border border-input bg-background text-sm rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
+                      className="w-32 border border-input bg-background text-lg rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
                       defaultValue="+39"
                       required
                     >
@@ -214,40 +215,41 @@ const Wishlist = () => {
                       <option value="+57">+57 (Colombia)</option>
                       <option value="+27">+27 (South Africa)</option>
                     </select>
-                    <Input id="phone" name="phone" type="tel" className="flex-1" required />
+                    <Input id="phone" name="phone" type="tel" className="flex-1 text-lg" required />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="guests">Number of Guests</Label>
-                  <Input id="guests" name="guests" type="number" min="1" defaultValue={2} required />
+                  <Label htmlFor="guests" className="text-lg text-portal-navy">Number of Guests</Label>
+                  <Input id="guests" name="guests" type="number" min="1" defaultValue={2} className="text-lg" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="date">Preferred Date</Label>
-                  <Input id="date" name="date" placeholder="gg/mm/aaaa" required />
+                  <Label htmlFor="date" className="text-lg text-portal-navy">Preferred Date</Label>
+                  <Input id="date" name="date" type="date" className="text-lg" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="pickupSpot">Pick Up Spot</Label>
-                  <Input id="pickupSpot" name="pickupSpot" placeholder="e.g., Hotel Savoy, Florence" />
+                  <Label htmlFor="pickupSpot" className="text-lg text-portal-navy">Pick Up Spot</Label>
+                  <Input id="pickupSpot" name="pickupSpot" className="text-lg" placeholder="e.g., Hotel Savoy, Florence" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="dropoffSpot">Drop Off Spot</Label>
-                  <Input id="dropoffSpot" name="dropoffSpot" placeholder="e.g., Piazza del Duomo" />
+                  <Label htmlFor="dropoffSpot" className="text-lg text-portal-navy">Drop Off Spot</Label>
+                  <Input id="dropoffSpot" name="dropoffSpot" className="text-lg" placeholder="e.g., Piazza del Duomo" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="pickupTime">Pick Up Time</Label>
-                  <Input id="pickupTime" name="pickupTime" type="time" />
+                  <Label htmlFor="pickupTime" className="text-lg text-portal-navy">Pick Up Time</Label>
+                  <Input id="pickupTime" name="pickupTime" type="time" className="text-lg" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="dropoffTime">Drop Off Time</Label>
-                  <Input id="dropoffTime" name="dropoffTime" type="time" />
+                  <Label htmlFor="dropoffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
+                  <Input id="dropoffTime" name="dropoffTime" type="time" className="text-lg" />
                 </div>
                 <div className="space-y-2 sm:col-span-2">
-                  <Label htmlFor="notes">Additional Notes or Preferences</Label>
+                  <Label htmlFor="notes" className="text-lg text-portal-navy">Additional Notes or Preferences</Label>
                   <Textarea
                     id="notes"
                     name="notes"
                     placeholder="Any special requests, dietary restrictions, or preferences..."
                     rows={4}
+                    className="text-lg"
                   />
                 </div>
                 <div className="sm:col-span-2 flex justify-end">

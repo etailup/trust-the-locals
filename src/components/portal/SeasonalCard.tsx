@@ -3,28 +3,28 @@ import { memo } from 'react';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
-import { useWishlist } from '@/contexts/WishlistContext';
-import { useInView } from '@/hooks/useInView';
+import { useWishlist, useIsWishlisted } from '@/contexts/WishlistContext';
+import { useSharedInView } from '@/hooks/useSharedInView';
 
 interface SeasonalCardProps {
   experience: SeasonalExperience;
 }
 
 const SeasonalCard = ({ experience }: SeasonalCardProps) => {
-  const { isWishlisted, toggleWishlist } = useWishlist();
-  const isLiked = isWishlisted(experience.id);
+  const { toggleWishlist } = useWishlist();
+  const isLiked = useIsWishlisted(experience.id);
 
   const handleToggleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     toggleWishlist(experience.id);
   };
   const imageSrcSet = buildResponsiveSrcSet(experience.image);
-  const { ref: mediaRef, isInView } = useInView();
+  const { ref: mediaRef, isInView } = useSharedInView();
 
   return (
     <Link to={`/portal/seasonal/${experience.id}`} className="block">
-      <div 
-        className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer rounded-lg h-full flex flex-col"
+      <div
+        className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer rounded-lg h-full flex flex-col"
         style={{ contain: 'layout paint style' }}
       >
         {/* Image */}
@@ -44,16 +44,16 @@ const SeasonalCard = ({ experience }: SeasonalCardProps) => {
           {/* Like Button */}
           <button
             onClick={handleToggleLike}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors rounded-full"
+            className="absolute top-4 right-4 w-10 h-10 bg-white/95 flex items-center justify-center hover:bg-white transition-colors duration-200 rounded-full shadow-sm"
           >
             <Heart
               className={`w-5 h-5 ${isLiked ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`}
             />
           </button>
-          
+
           {/* Season Tag */}
           <div className="absolute bottom-4 left-4">
-            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/90 backdrop-blur-sm text-portal-navy font-medium rounded-full border border-gray-200 shadow-sm">
+            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/95 text-portal-navy font-medium rounded-full border border-gray-200 shadow-sm">
               {experience.season}
             </span>
           </div>

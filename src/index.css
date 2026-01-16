@@ -181,8 +181,28 @@ All colors MUST be HSL.
     }
   }
 
+  /* Promote scroll container to own layer */
   .ttl-scroll-container {
     transform: translateZ(0);
-    will-change: transform;
+  }
+
+  /* Simple GPU acceleration for card images */
+  .ttl-card-media {
+    backface-visibility: hidden;
+  }
+
+  /* Contain card layout to prevent layout thrashing */
+  .ttl-card {
+    contain: layout style;
+  }
+
+  /* CSS-only fade-in for images - no JS re-renders needed */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 200ms ease-out forwards;
   }
 }

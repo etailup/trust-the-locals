@@ -1,15 +1,15 @@
 import { useMemo, useState, useEffect } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
-import LocalCard from '@/components/portal/LocalCard';
-import { 
-  mockChefs, 
-  mockSecurity, 
-  mockTrainers, 
-  mockNannies, 
-  mockGuides, 
+import VirtualizedGrid from '@/components/portal/VirtualizedGrid';
+import {
+  mockChefs,
+  mockSecurity,
+  mockTrainers,
+  mockNannies,
+  mockGuides,
   mockDrivers,
-  mockConcierges, 
+  mockConcierges,
   mockMassageTherapists,
 } from '@/data/mockLocals';
 import { Menu } from 'lucide-react';
@@ -42,9 +42,9 @@ const Locals = () => {
     ...mockMassageTherapists.map(l => ({ ...l, categoryDisplay: 'Massages and Therapists' })),
   ]), []);
 
-  // Preload only the first few card images to avoid decode spikes.
+  // Preload the first viewport of card images to avoid decode spikes.
   useEffect(() => {
-    const PRELOAD_COUNT = 6;
+    const PRELOAD_COUNT = 9;
     const preloadLocals = allLocals.slice(0, PRELOAD_COUNT);
 
     const urls = preloadLocals
@@ -67,11 +67,15 @@ const Locals = () => {
     const uniqueUrls = Array.from(new Set(urls));
 
     const links: HTMLLinkElement[] = [];
-    uniqueUrls.forEach((url) => {
+    uniqueUrls.forEach((url, index) => {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
       link.href = url;
+      // High priority for first 3 images (above the fold)
+      if (index < 3) {
+        link.setAttribute('fetchpriority', 'high');
+      }
       document.head.appendChild(link);
       links.push(link);
     });
@@ -114,7 +118,7 @@ const Locals = () => {
             </button>
           </div>
           {/* Header */}
-          <div className="mb-8 animate-fade-up">
+          <div className="mb-8">
             <h1 className="font-luxury text-5xl text-portal-navy mb-2 font-semibold">
               Our Locals
             </h1>
@@ -153,23 +157,10 @@ const Locals = () => {
             Showing {filteredLocals.length} {filteredLocals.length === 1 ? 'local' : 'locals'}
           </p>
 
-          {/* Locals Grid */}
-          <div
-            className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 justify-items-center md:justify-items-stretch"
-            style={{ contain: 'layout paint style' }}
-          >
-            {filteredLocals.map((local) => (
-              <div
-                key={local.id}
-                className="w-full max-w-md md:max-w-full"
-                style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
-              >
-                <LocalCard local={local} />
-              </div>
-            ))}
-          </div>
-
-          {filteredLocals.length === 0 && (
+          {/* Virtualized Locals Grid - only renders visible items */}
+          {filteredLocals.length > 0 ? (
+            <VirtualizedGrid items={filteredLocals} />
+          ) : (
             <div className="text-center py-12">
               <p className="text-portal-navy/60">No locals found matching your criteria.</p>
             </div>

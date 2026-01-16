@@ -3,8 +3,8 @@ import { Heart } from 'lucide-react';
 import { Experience } from '@/data/mockExperiences';
 import { Link } from 'react-router-dom';
 import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
-import { useWishlist } from '@/contexts/WishlistContext';
-import { useInView } from '@/hooks/useInView';
+import { useWishlist, useIsWishlisted } from '@/contexts/WishlistContext';
+import { useSharedInView } from '@/hooks/useSharedInView';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -30,8 +30,8 @@ const priceByTitle: Record<string, string> = {
 };
 
 const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
-  const { isWishlisted, toggleWishlist } = useWishlist();
-  const isSaved = isWishlisted(experience.id);
+  const { toggleWishlist } = useWishlist();
+  const isSaved = useIsWishlisted(experience.id);
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -39,19 +39,22 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
   };
 
   const coverImage = useMemo(() => {
-    const media = experience.media?.length
-      ? experience.media
-      : experience.gallery?.length
-      ? experience.gallery
-      : [];
-    const firstImage =
-      media.find(
-        (item) => typeof item === 'string' && !item.toLowerCase().endsWith('.mp4')
-      ) || experience.image;
-    return firstImage;
-  }, [experience]);
+    // Early return for direct image
+    if (!experience.media?.length && !experience.gallery?.length) {
+      return experience.image;
+    }
+
+    const media = experience.media?.length ? experience.media : experience.gallery!;
+
+    // Find first non-video image
+    const firstImage = media.find(
+      (item) => typeof item === 'string' && !item.toLowerCase().endsWith('.mp4')
+    );
+
+    return firstImage || experience.image;
+  }, [experience.media, experience.gallery, experience.image]);
   const coverSrcSet = buildResponsiveSrcSet(coverImage);
-  const { ref: mediaRef, isInView } = useInView();
+  const { ref: mediaRef, isInView } = useSharedInView();
 
   const href = linkTo || `/portal/experience/${experience.id}`;
   const priceLabel = priceByTitle[experience.title] || '';
@@ -59,7 +62,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
   return (
     <Link to={href}>
       <div
-        className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-all duration-500 rounded-lg h-full flex flex-col"
+        className="group ttl-card relative bg-[#FAF7F2] border border-portal-navy/10 overflow-hidden hover:shadow-2xl transition-shadow duration-300 rounded-lg h-full flex flex-col"
         style={{ contain: 'layout paint style' }}
       >
         {/* Image */}
@@ -79,7 +82,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
           {/* Wishlist Button */}
           <button
             onClick={handleToggleWishlist}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors rounded-full"
+            className="absolute top-4 right-4 w-10 h-10 bg-white/95 flex items-center justify-center hover:bg-white transition-colors duration-200 rounded-full shadow-sm"
           >
             <Heart
               className={`w-5 h-5 ${isSaved ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`}
@@ -88,7 +91,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
 
           {/* Category Tag */}
           <div className="absolute bottom-4 left-4">
-            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/90 backdrop-blur-sm text-portal-navy font-medium rounded-full border border-gray-200 shadow-sm">
+            <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/95 text-portal-navy font-medium rounded-full border border-gray-200 shadow-sm">
               {experience.category}
             </span>
           </div>
@@ -96,7 +99,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
           {/* Price Tag */}
           {priceLabel && (
             <div className="absolute bottom-4 right-4">
-              <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/90 backdrop-blur-sm text-gray-800 font-medium rounded-full border border-gray-200 shadow-sm text-right">
+              <span className="inline-block px-3 py-1 text-sm md:px-3.5 md:py-1.5 md:text-base bg-white/95 text-gray-800 font-medium rounded-full border border-gray-200 shadow-sm text-right">
                 {priceLabel}
               </span>
             </div>
