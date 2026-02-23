@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     // Check credentials
     if (email === 'giuliom2000@gmail.com' && password === 'trust') {
       const mockUser: User = {
@@ -42,7 +42,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email,
         name: 'Giulio',
       };
-      
+
+      // Clear wishlist for new session
+      localStorage.removeItem('ttl_wishlist');
+      window.dispatchEvent(new StorageEvent('storage', { key: 'ttl_wishlist', newValue: null }));
+
       setUser(mockUser);
       localStorage.setItem('ttl_user', JSON.stringify(mockUser));
     } else {
@@ -53,13 +57,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = async (email: string, password: string, name: string) => {
     // Mock registration
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     const mockUser: User = {
       id: '1',
       email,
       name,
     };
-    
+
+    // Clear wishlist for new session
+    localStorage.removeItem('ttl_wishlist');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'ttl_wishlist', newValue: null }));
+
     setUser(mockUser);
     localStorage.setItem('ttl_user', JSON.stringify(mockUser));
   };

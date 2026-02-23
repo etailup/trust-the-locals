@@ -2,9 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
+import BottomNav from "./components/BottomNav";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Apply from "./pages/Apply";
@@ -46,18 +48,35 @@ import LocalCareDetail from "./pages/portal/LocalCareDetail";
 
 const queryClient = new QueryClient();
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useAuth();
-  
+
   if (isLoading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
-  
+
   if (!user) {
     return <Navigate to="/portal/login" replace />;
   }
-  
-  return <>{children}</>;
+
+  return (
+    <>
+      <div className="pb-20 md:pb-0">
+        {children}
+      </div>
+      <BottomNav />
+    </>
+  );
 };
 
 const App = () => (
@@ -68,6 +87,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />

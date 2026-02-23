@@ -14,6 +14,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { toast } from 'sonner';
+import PageTransition from '@/components/PageTransition';
+import { StaggerContainer, StaggerItem } from '@/components/StaggerContainer';
 
 const Wishlist = () => {
   const { wishlistIds, clearWishlist } = useWishlist();
@@ -129,16 +131,17 @@ const Wishlist = () => {
       )}
       
       <main className="flex-1 p-4 md:p-6 transition-all duration-300 md:ml-10">
-        <div className="md:hidden mb-4 flex items-center justify-between">
-          <button
-            aria-label="Open menu"
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-md bg-portal-navy text-portal-cream"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-        </div>
-        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <PageTransition>
+          <div className="md:hidden mb-4 flex items-center justify-between">
+            <button
+              aria-label="Open menu"
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-md bg-portal-navy text-portal-cream"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="font-luxury text-4xl text-portal-navy mb-2">
               Your Wishlist
@@ -166,7 +169,7 @@ const Wishlist = () => {
               <p className="text-foreground/70 mb-6 text-center md:text-left">
                 Send a single request for everything you saved. Our concierge will coordinate the details.
               </p>
-              <form onSubmit={handleRequestSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleRequestSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-lg text-portal-navy">First Name</Label>
                   <Input id="firstName" name="firstName" className="text-lg" required />
@@ -184,7 +187,7 @@ const Wishlist = () => {
                   <div className="flex gap-2">
                     <select
                       name="countryCode"
-                      className="w-32 border border-input bg-background text-lg rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
+                      className="w-28 sm:w-32 border border-input bg-background text-lg rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
                       defaultValue="+39"
                       required
                     >
@@ -242,7 +245,7 @@ const Wishlist = () => {
                   <Label htmlFor="dropoffTime" className="text-lg text-portal-navy">Drop Off Time</Label>
                   <Input id="dropoffTime" name="dropoffTime" type="time" className="text-lg" />
                 </div>
-                <div className="space-y-2 sm:col-span-2">
+                <div className="space-y-2 md:col-span-2">
                   <Label htmlFor="notes" className="text-lg text-portal-navy">Additional Notes or Preferences</Label>
                   <Textarea
                     id="notes"
@@ -252,7 +255,7 @@ const Wishlist = () => {
                     className="text-lg"
                   />
                 </div>
-                <div className="sm:col-span-2 flex justify-end">
+                <div className="md:col-span-2 flex justify-end">
                   <Button
                     type="submit"
                     className="bg-portal-navy text-portal-cream hover:bg-portal-navy/90 px-6 py-3 rounded-full"
@@ -266,61 +269,57 @@ const Wishlist = () => {
             {wishlistExperiencesCombined.length > 0 && (
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Experiences</h2>
-                <div
+                <StaggerContainer
                   className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
-                  style={{ contain: 'layout paint style' }}
                 >
                   {wishlistExperiencesCombined.map((experience) => (
-                    <div
-                      key={experience.id}
-                      style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
-                    >
-                      <ExperienceCard
-                        experience={experience as any}
-                        linkTo={experience.id === 'local-care' ? '/portal/local-care' : undefined}
-                      />
-                    </div>
+                    <StaggerItem key={experience.id}>
+                      <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}>
+                        <ExperienceCard
+                          experience={experience as any}
+                          linkTo={experience.id === 'local-care' ? '/portal/local-care' : undefined}
+                        />
+                      </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerContainer>
               </>
             )}
 
             {wishlistLocals.length > 0 && (
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Locals</h2>
-                <div
+                <StaggerContainer
                   className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
-                  style={{ contain: 'layout paint style' }}
                 >
                   {wishlistLocals.map((local) => (
-                    <div
-                      key={local.id}
-                      className="w-full max-w-md md:max-w-full"
-                      style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
-                    >
-                      <LocalCard local={local} />
-                    </div>
+                    <StaggerItem key={local.id}>
+                      <div
+                        className="w-full max-w-md md:max-w-full"
+                        style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+                      >
+                        <LocalCard local={local} />
+                      </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerContainer>
               </>
             )}
 
             {wishlistSeasonal.length > 0 && (
               <>
                 <h2 className="font-luxury text-3xl text-portal-navy mb-4">Seasonal</h2>
-                <div
+                <StaggerContainer
                   className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                  style={{ contain: 'layout paint style' }}
                 >
                   {wishlistSeasonal.map((item) => (
-                    <div
-                      key={item.id}
-                      style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
-                    >
-                      <SeasonalCard experience={item} />
-                    </div>
+                    <StaggerItem key={item.id}>
+                      <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}>
+                        <SeasonalCard experience={item} />
+                      </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerContainer>
               </>
             )}
           </>
@@ -343,6 +342,7 @@ const Wishlist = () => {
             </a>
           </div>
         )}
+        </PageTransition>
       </main>
 
       <ConciergeButton />

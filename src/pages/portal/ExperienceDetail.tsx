@@ -16,6 +16,7 @@ import {
   ChevronRight,
   X,
 } from 'lucide-react';
+import PageTransition from '@/components/PageTransition';
 
 const ExperienceDetail = () => {
   const { id } = useParams();
@@ -75,6 +76,18 @@ const ExperienceDetail = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [isLightboxOpen, imageSlides.length]);
 
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (isLightboxOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isLightboxOpen]);
+
   // Pause inline video when it leaves the viewport or the tab is hidden.
   useEffect(() => {
     const videoEl = inlineVideoRef.current;
@@ -129,8 +142,9 @@ const ExperienceDetail = () => {
       <PortalSidebar />
 
       <main className="flex-1 p-0">
-        {/* Hero Image (MATCHES VILLAS STRUCTURE) */}
-        <div className="relative h-[60vh] overflow-hidden w-full">
+        <PageTransition>
+          {/* Hero Image (MATCHES VILLAS STRUCTURE) */}
+          <div className="relative h-[60vh] overflow-hidden w-full">
           <img
             src={heroImage}
             alt={experience.title}
@@ -148,19 +162,19 @@ const ExperienceDetail = () => {
           <Button
             onClick={() => navigate(-1)}
             variant="outline"
-            className="absolute top-8 left-8 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
+            className="absolute top-[max(1.5rem,env(safe-area-inset-top))] left-[max(1.5rem,env(safe-area-inset-left))] md:top-8 md:left-8 bg-portal-navy text-portal-cream hover:bg-portal-navy/90 border-none rounded-full px-5"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
 
           {/* Title Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 text-white">
             <span className="inline-block px-3 py-1 bg-white text-portal-navy text-sm font-medium mb-4">
               {experience.category}
             </span>
-            <h1 className="font-luxury text-6xl mb-3">{experience.title}</h1>
-            <p className="text-2xl text-white/90">{experience.subtitle}</p>
+            <h1 className="font-luxury text-4xl md:text-6xl mb-3">{experience.title}</h1>
+            <p className="text-xl md:text-2xl text-white/90">{experience.subtitle}</p>
           </div>
         </div>
 
@@ -216,7 +230,7 @@ const ExperienceDetail = () => {
 
               {/* BOOKING COLUMN */}
               <div className="order-3 md:col-span-3 md:col-start-10 space-y-6">
-                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 sticky top-8">
+                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 md:sticky md:top-8">
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center gap-3 text-portal-navy/70">
                       <Clock className="w-5 h-5 text-portal-navy" />
@@ -265,6 +279,7 @@ const ExperienceDetail = () => {
             </div>
           </div>
         </div>
+        </PageTransition>
       </main>
 
       {/* LIGHTBOX — EXACT VILLAS STYLE */}
@@ -304,7 +319,7 @@ const ExperienceDetail = () => {
                         (prev) => (prev - 1 + imageSlides.length) % imageSlides.length
                       )
                     }
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-portal-navy rounded-full p-3 shadow"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-portal-navy rounded-full p-4 shadow"
                     aria-label="Previous"
                   >
                     <ChevronLeft className="w-6 h-6" />
@@ -314,7 +329,7 @@ const ExperienceDetail = () => {
                     onClick={() =>
                       setLightboxIndex((prev) => (prev + 1) % imageSlides.length)
                     }
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-portal-navy rounded-full p-3 shadow"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-portal-navy rounded-full p-4 shadow"
                     aria-label="Next"
                   >
                     <ChevronRight className="w-6 h-6" />

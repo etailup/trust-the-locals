@@ -85,7 +85,7 @@ const LocalCareDetail = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 sticky top-8">
+                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 md:sticky md:top-8">
                   <div className="space-y-3 mb-6 text-portal-navy/80">
                     <div>Instant Support · 24/7</div>
                     <div>Remote · Nationwide Coverage</div>

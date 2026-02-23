@@ -124,7 +124,7 @@ const VillaDetail = () => {
 
               {/* Sidebar */}
               <div className="space-y-6">
-                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 sticky top-8">
+                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 md:sticky md:top-8">
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center gap-3 text-portal-navy/70">
                       <Bed className="w-5 h-5 text-portal-navy" />

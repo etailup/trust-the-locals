@@ -14,6 +14,8 @@ import {
 } from '@/data/mockLocals';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import PageTransition from '@/components/PageTransition';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const categories = [
   'All',
@@ -105,9 +107,9 @@ const Locals = () => {
           className="fixed inset-0 bg-black/40 z-40 md:hidden"
         />
       )}
-      
+
       <main className="md:ml-10 ml-0 flex-1 p-4 md:p-6 transition-all duration-300">
-        <div className="w-full">
+        <PageTransition className="w-full">
           <div className="md:hidden mb-4 flex items-center justify-between">
             <button
               aria-label="Open menu"
@@ -131,24 +133,27 @@ const Locals = () => {
           {/* Search & Filters */}
           <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4">
             {/* Category Filters */}
-            <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  onClick={() => {
-                    setSelectedCategory(category);
-                    setSidebarOpen(false);
-                  }}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  className={
-                    selectedCategory === category
-                      ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-base font-medium rounded-full'
-                      : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-base font-medium bg-[#FAF7F2] rounded-full'
-                  }
-                >
-                  {category}
-                </Button>
-              ))}
+            <div className="relative">
+              <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 pr-8 snap-x snap-mandatory scrollbar-hide">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    onClick={() => {
+                      setSelectedCategory(category);
+                      setSidebarOpen(false);
+                    }}
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    className={`snap-start flex-shrink-0 ${
+                      selectedCategory === category
+                        ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-base font-medium rounded-full'
+                        : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-base font-medium bg-[#FAF7F2] rounded-full'
+                    }`}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+              <div className="absolute right-0 top-0 bottom-1 w-8 bg-gradient-to-l from-portal-cream to-transparent pointer-events-none md:hidden" />
             </div>
           </div>
 
@@ -157,15 +162,25 @@ const Locals = () => {
             Showing {filteredLocals.length} {filteredLocals.length === 1 ? 'local' : 'locals'}
           </p>
 
-          {/* Virtualized Locals Grid - only renders visible items */}
-          {filteredLocals.length > 0 ? (
-            <VirtualizedGrid items={filteredLocals} />
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-portal-navy/60">No locals found matching your criteria.</p>
-            </div>
-          )}
-        </div>
+          {/* Virtualized Locals Grid with filter transition */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCategory}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {filteredLocals.length > 0 ? (
+                <VirtualizedGrid items={filteredLocals} />
+              ) : (
+                <div className="text-center py-12">
+                  <p className="text-portal-navy/60">No locals found matching your criteria.</p>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </PageTransition>
       </main>
 
       <ConciergeButton />

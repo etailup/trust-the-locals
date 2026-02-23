@@ -81,13 +81,14 @@ const LocalCard = ({ local }: LocalCardProps) => {
             srcSet={cardSrcSet}
             sizes={cardSrcSet ? cardImageSizes : undefined}
             className="ttl-card-media w-full object-cover rounded-t-lg animate-fade-in"
-            loading="eager"
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Like Button */}
           <button
             onClick={handleToggleLike}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/95 flex items-center justify-center hover:bg-white rounded-full shadow-sm"
+            className="absolute top-3 right-3 w-12 h-12 bg-white/95 flex items-center justify-center hover:bg-white rounded-full shadow-sm"
           >
             <Heart
               className={`w-5 h-5 ${isLiked ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`}

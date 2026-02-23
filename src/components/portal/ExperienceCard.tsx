@@ -14,7 +14,7 @@ interface ExperienceCardProps {
 const priceByTitle: Record<string, string> = {
   'Vertical Wine Tasting': '€375 / person',
   'Wine Tour': '€700 (2–8 pax)',
-  'Florence Panoramic Escape': 'From €550',
+  'Florence Panoramic Escape': '€490 (1-2 pax)',
   'Florence Food Tour': 'From €450',
   'Private Dinner on Ponte Vecchio': 'From €750 / 2 people',
   'Tuscany Walk': 'From €300',
@@ -22,8 +22,8 @@ const priceByTitle: Record<string, string> = {
   'Artisan Tour': '€165 / person',
   'The Private Goldsmith': '€1400 / person',
   'Mugello Grand Tour': '€1110 / person',
-  'Private Wellness Experience': '€210 / person',
-  'Cooking Class': '€155 / person',
+  'Private Wellness Experience': '€250 / person',
+  'Cooking Class': '€235 / person',
   'Wine Experience': 'From €700 / 2 people',
   'Supercar Grand Tour - Tuscany Landscape': '€900',
   'Wine Tasting and Custom Label Crafting': '€195',
@@ -82,7 +82,7 @@ const ExperienceCard = ({ experience, linkTo }: ExperienceCardProps) => {
           {/* Wishlist Button */}
           <button
             onClick={handleToggleWishlist}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/95 flex items-center justify-center hover:bg-white transition-colors duration-200 rounded-full shadow-sm"
+            className="absolute top-3 right-3 w-12 h-12 bg-white/95 flex items-center justify-center hover:bg-white transition-colors duration-200 rounded-full shadow-sm"
           >
             <Heart
               className={`w-5 h-5 ${isSaved ? 'fill-portal-navy text-portal-navy' : 'text-portal-navy'}`}

@@ -43,6 +43,7 @@ export const mockExperiences: Experience[] = [
     included: ['After-hours access', 'Private art historian', 'Restricted areas', 'Conservation lab tour', 'Champagne reception', 'Art book'],
     availability: 'Limited dates, 3 months advance booking',
     featured: true,
+    pricing: '3 hours €490 (1-2 pax)\n+€70 per additional person',
   },
   {
     id: 'hist-3',
@@ -207,12 +208,15 @@ Whether you choose the Chianti hills or the coastal route, you will experience a
     subtitle: 'Nature, Art & Wellbeing',
     category: 'Premium',
     description: 'Private yoga and wellness with a dedicated instructor in evocative Florentine settings, followed by a refined brunch or aperitivo.',
-    longDescription: `A tailored wellness session guided by your private instructor in Florence’s most atmospheric settings—panoramic villas, secret gardens, or serene studios. After practice, enjoy a healthy brunch or aperitivo crafted with premium ingredients. A refined way to restore body and mind in an intimate, elegant ambiance.`,
-    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/yoga.jpg",
+    longDescription: `A tailored wellness session guided by your private instructor in Florence's most atmospheric settings—panoramic villas, secret gardens, or serene studios. After practice, enjoy a healthy brunch or aperitivo crafted with premium ingredients. A refined way to restore body and mind in an intimate, elegant ambiance.`,
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_2.jpg",
     gallery: [
-      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/yoga.jpg",
-      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/Experience%20Gina%27s%20workout.mp4',
-
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_2.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_1.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_3.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_4.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_5.jpg',
+      'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/wellness_experience_6.jpg',
     ],
     duration: '2-3 hours',
     location: 'Various locations in Florence',

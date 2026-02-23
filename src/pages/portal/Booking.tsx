@@ -110,7 +110,7 @@ const Booking = () => {
             {/* Form */}
             <div className="lg:col-span-2 bg-[#FAF7F2] border border-border rounded-lg p-6 md:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="firstName" className="text-lg text-portal-navy">First Name</Label>
                     <Input
@@ -149,7 +149,7 @@ const Booking = () => {
                   <div className="flex gap-2">
                     <select
                       name="countryCode"
-                      className="w-32 border border-input bg-background text-lg rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
+                      className="w-28 sm:w-32 border border-input bg-background text-lg rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-portal-navy/40"
                       value={formData.countryCode}
                       onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
                       required
@@ -192,7 +192,7 @@ const Booking = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="guests" className="text-lg text-portal-navy">Number of Guests</Label>
                     <Input
@@ -235,7 +235,7 @@ const Booking = () => {
 
                 {transferIncluded || formData.transfer === 'Yes' ? (
                   <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="pickUpSpot" className="text-lg text-portal-navy">Pick Up Spot</Label>
                         <Input
@@ -262,7 +262,7 @@ const Booking = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="pickUpTime" className="text-lg text-portal-navy">Pick Up Time</Label>
                         <Input
@@ -311,7 +311,7 @@ const Booking = () => {
             </div>
 
             {/* Summary */}
-            <div className="bg-[#FAF7F2] border border-border rounded-lg p-6 h-fit sticky top-8">
+            <div className="bg-[#FAF7F2] border border-border rounded-lg p-6 h-fit md:sticky md:top-8">
               <h3 className="font-luxury text-3xl text-portal-navy mb-4">Summary</h3>
               
               <img

@@ -164,10 +164,18 @@ All colors MUST be HSL.
     * {
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     button, a {
       touch-action: manipulation;
     }
+  }
+
+  /* Active state feedback for touch interactions */
+  button:active:not(:disabled),
+  a:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
   }
 
   /* Disable hover-driven transforms/shadows on touch devices */
@@ -204,5 +212,17 @@ All colors MUST be HSL.
 
   .animate-fade-in {
     animation: fadeIn 200ms ease-out forwards;
+  }
+
+  /* Respect user preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

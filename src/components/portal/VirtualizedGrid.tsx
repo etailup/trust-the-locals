@@ -108,6 +108,9 @@ const VirtualizedGrid = ({ items }: VirtualizedGridProps) => {
   const lastRangeRef = useRef<VisibleRange>({ startRow: 0, endRow: 10 });
   const rafIdRef = useRef<number>(0);
 
+  // Loading state - show skeletons until first images are ready
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
   // Only these cause re-renders - and they change infrequently
   const [visibleRange, setVisibleRange] = useState<VisibleRange>({ startRow: 0, endRow: 10 });
   const [columnCount, setColumnCount] = useState(3);
@@ -181,9 +184,16 @@ const VirtualizedGrid = ({ items }: VirtualizedGridProps) => {
     };
   }, [updateVisibleRange]);
 
-  // Preload first batch on mount
+  // Preload first batch on mount and wait for them to be ready
   useEffect(() => {
-    preloadImages(items, 0, Math.min(items.length, 15));
+    setIsInitialLoading(true);
+
+    // Preload initial viewport images with promise
+    preloadImagesWithPromise(items, INITIAL_PRELOAD_COUNT).then(() => {
+      setIsInitialLoading(false);
+      // Also preload next batch in background
+      preloadImages(items, INITIAL_PRELOAD_COUNT, Math.min(items.length, INITIAL_PRELOAD_COUNT + 12));
+    });
   }, [items]);
 
   // Calculate visible items
@@ -204,6 +214,34 @@ const VirtualizedGrid = ({ items }: VirtualizedGridProps) => {
     : columnCount === 2
       ? 'grid-cols-2'
       : 'grid-cols-3';
+
+  // Show skeleton grid during initial loading
+  if (isInitialLoading) {
+    const skeletonCount = Math.min(INITIAL_PRELOAD_COUNT, items.length);
+    const skeletonRows = Math.ceil(skeletonCount / columnCount);
+
+    return (
+      <div ref={containerRef} className="relative">
+        {Array.from({ length: skeletonRows }).map((_, rowIndex) => (
+          <div
+            key={rowIndex}
+            className={`grid gap-6 mb-6 justify-items-center md:justify-items-stretch ${gridClass}`}
+            style={{ height: ROW_HEIGHT }}
+          >
+            {Array.from({ length: columnCount }).map((_, colIndex) => {
+              const itemIndex = rowIndex * columnCount + colIndex;
+              if (itemIndex >= skeletonCount) return null;
+              return (
+                <div key={colIndex} className="w-full max-w-md md:max-w-full h-full">
+                  <SkeletonCard />
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div

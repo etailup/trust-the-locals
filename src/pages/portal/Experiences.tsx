@@ -5,6 +5,9 @@ import ExperienceCard from '@/components/portal/ExperienceCard';
 import { mockExperiences, categories } from '@/data/mockExperiences';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import PageTransition from '@/components/PageTransition';
+import { StaggerContainer, StaggerItem } from '@/components/StaggerContainer';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Experiences = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -70,75 +73,90 @@ const Experiences = () => {
           className="fixed inset-0 bg-black/40 z-40 md:hidden"
         />
       )}
-      
+
       <main className="flex-1 p-4 md:p-6 transition-all duration-300 md:ml-10">
-        <div className="md:hidden mb-4 flex items-center justify-between">
-          <button
-            aria-label="Open menu"
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-md bg-portal-navy text-portal-cream"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="font-luxury text-4xl sm:text-5xl text-portal-navy mb-2 font-semibold leading-tight">
-            All Experiences
-          </h1>
-          <p className="text-foreground/60 text-lg md:text-[24px] leading-relaxed">
-            Explore our curated collection of exclusive Tuscan experiences
-          </p>
-        </div>
-
-        {/* Filters */}
-        <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4">
-          {/* Category Filters */}
-          <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                className={
-                  selectedCategory === category
-                    ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-base font-medium rounded-full'
-                    : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-base font-medium bg-[#FAF7F2] rounded-full'
-                }
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-
-        </div>
-
-        {/* Results Count */}
-        <p className="text-base text-foreground/90 mb-6">
-          Showing {filteredExperiences.length} {filteredExperiences.length === 1 ? 'experience' : 'experiences'}
-        </p>
-
-        {/* Experience Grid */}
-        <div
-          className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          style={{ contain: 'layout paint style' }}
-        >
-          {filteredExperiences.map((experience) => (
-            <div
-              key={experience.id}
-              style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}
+        <PageTransition>
+          <div className="md:hidden mb-4 flex items-center justify-between">
+            <button
+              aria-label="Open menu"
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-md bg-portal-navy text-portal-cream"
             >
-              <ExperienceCard experience={experience} />
-            </div>
-          ))}
-        </div>
-
-        {filteredExperiences.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-foreground/60">No experiences found matching your criteria.</p>
+              <Menu className="w-5 h-5" />
+            </button>
           </div>
-        )}
+
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="font-luxury text-4xl sm:text-5xl text-portal-navy mb-2 font-semibold leading-tight">
+              All Experiences
+            </h1>
+            <p className="text-foreground/60 text-lg md:text-[24px] leading-relaxed">
+              Explore our curated collection of exclusive Tuscan experiences
+            </p>
+          </div>
+
+          {/* Filters */}
+          <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4">
+            {/* Category Filters */}
+            <div className="relative">
+              <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 pr-8 snap-x snap-mandatory scrollbar-hide">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    className={`snap-start flex-shrink-0 ${
+                      selectedCategory === category
+                        ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-base font-medium rounded-full'
+                        : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-base font-medium bg-[#FAF7F2] rounded-full'
+                    }`}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+              <div className="absolute right-0 top-0 bottom-1 w-8 bg-gradient-to-l from-portal-cream to-transparent pointer-events-none md:hidden" />
+            </div>
+
+          </div>
+
+          {/* Results Count */}
+          <p className="text-base text-foreground/90 mb-6">
+            Showing {filteredExperiences.length} {filteredExperiences.length === 1 ? 'experience' : 'experiences'}
+          </p>
+
+          {/* Experience Grid with Staggered Animation */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCategory}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <StaggerContainer
+                className="ttl-scroll-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {filteredExperiences.map((experience) => (
+                  <StaggerItem
+                    key={experience.id}
+                  >
+                    <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 600px' }}>
+                      <ExperienceCard experience={experience} />
+                    </div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </motion.div>
+          </AnimatePresence>
+
+          {filteredExperiences.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-foreground/60">No experiences found matching your criteria.</p>
+            </div>
+          )}
+        </PageTransition>
       </main>
 
       <ConciergeButton />

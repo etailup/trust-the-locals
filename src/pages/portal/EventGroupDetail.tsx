@@ -97,7 +97,7 @@ const EventGroupDetail = () => {
               {/* Sidebar */}
               <div className="space-y-6">
                 {/* CTA Card */}
-                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 sticky top-8">
+                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 md:sticky md:top-8">
                   <h3 className="font-luxury text-xl text-portal-navy mb-4">
                     Interested in this service?
                   </h3>
