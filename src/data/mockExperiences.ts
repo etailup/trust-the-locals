@@ -34,7 +34,10 @@ export const mockExperiences: Experience[] = [
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escape.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTour.jpg",
       "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTouRe.jpg",
-      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTourrr.jpg"
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/escapeTourrr.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/DSC00054.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/DSC09943.jpg",
+      "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/experiences/DSC09999.jpg"
     ],
     duration: '3 hours',
     location: 'Uffizi Gallery, Florence',

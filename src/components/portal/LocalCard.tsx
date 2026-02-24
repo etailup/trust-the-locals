@@ -1,11 +1,9 @@
 import { Local } from '@/data/mockLocals';
-import { memo, useMemo, useState, useCallback, lazy, Suspense } from 'react';
+import { memo, useMemo, useState, useCallback } from 'react';
 import { Heart } from 'lucide-react';
 import { buildResponsiveSrcSet, cardImageSizes } from '@/utils/imageSrcSet';
 import { useIsWishlisted, useWishlist } from '@/contexts/WishlistContext';
-
-// Lazy load the dialog component
-const LocalDetailDialog = lazy(() => import('./LocalDetailDialog'));
+import LocalDetailDialog from './LocalDetailDialog';
 
 interface LocalCardProps {
   local: Local;
@@ -34,7 +32,7 @@ const LocalCard = ({ local }: LocalCardProps) => {
   const { toggleWishlist } = useWishlist();
   const isLiked = useIsWishlisted(local.id);
 
-  const cardImageHeight = local.imageHeight ?? 'clamp(18rem, 58vw, 24rem)';
+  const cardImageHeight = local.imageHeight ?? 'clamp(14rem, 52vw, 24rem)';
 
   const objectPosCard = useMemo(() =>
     local.cropX !== undefined || local.cropY !== undefined
@@ -73,14 +71,14 @@ const LocalCard = ({ local }: LocalCardProps) => {
         style={{ contain: 'layout paint style' }}
       >
         {/* Image with CSS-only fade-in */}
-        <div className="relative overflow-hidden rounded-t-lg bg-gray-100" style={{ height: cardImageHeight }}>
+        <div className="relative overflow-hidden rounded-t-lg bg-black" style={{ height: cardImageHeight }}>
           <img
             src={cardImage}
             alt={local.name}
             style={{ objectPosition: objectPosCard, height: cardImageHeight }}
             srcSet={cardSrcSet}
             sizes={cardSrcSet ? cardImageSizes : undefined}
-            className="ttl-card-media w-full object-cover rounded-t-lg animate-fade-in"
+            className="ttl-card-media w-full object-contain md:object-cover rounded-t-lg animate-fade-in"
             loading="lazy"
             decoding="async"
           />
@@ -152,15 +150,12 @@ const LocalCard = ({ local }: LocalCardProps) => {
         </div>
       </div>
 
-      {/* Dialog - lazy loaded */}
       {isOpen && (
-        <Suspense fallback={null}>
-          <LocalDetailDialog
-            local={local}
-            isOpen={isOpen}
-            onClose={handleCloseDialog}
-          />
-        </Suspense>
+        <LocalDetailDialog
+          local={local}
+          isOpen={isOpen}
+          onClose={handleCloseDialog}
+        />
       )}
     </>
   );

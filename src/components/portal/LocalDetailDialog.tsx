@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface LocalDetailDialogProps {
   local: Local;
@@ -70,26 +69,17 @@ const LocalDetailDialog = ({ local, isOpen, onClose }: LocalDetailDialogProps) =
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-          <DialogContent
-            className="bg-[#FAF7F2] w-full max-w-full md:max-w-2xl max-h-[80vh] overflow-y-auto"
-            aria-describedby="local-description"
-            asChild
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-            >
-              <DialogHeader>
-                <DialogTitle className="font-luxury text-2xl md:text-3xl text-portal-navy">
-                  {local.name}
-                </DialogTitle>
-                <p className="text-sm md:text-base text-portal-navy/70 mt-2">{local.category}</p>
-              </DialogHeader>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      <DialogContent
+        className="bg-[#FAF7F2] w-full max-w-full md:max-w-2xl max-h-[80vh] overflow-y-auto"
+        aria-describedby="local-description"
+      >
+        <DialogHeader>
+          <DialogTitle className="font-luxury text-2xl md:text-3xl text-portal-navy">
+            {local.name}
+          </DialogTitle>
+          <p className="text-sm md:text-base text-portal-navy/70 mt-2">{local.category}</p>
+        </DialogHeader>
 
         <div className="mt-4">
           <div className="relative overflow-hidden mb-6 rounded-lg" style={{ height: detailImageHeight }}>
@@ -172,11 +162,8 @@ const LocalDetailDialog = ({ local, isOpen, onClose }: LocalDetailDialogProps) =
             </div>
           </div>
         </div>
-            </motion.div>
-          </DialogContent>
-        </Dialog>
-      )}
-    </AnimatePresence>
+      </DialogContent>
+    </Dialog>
   );
 };
 

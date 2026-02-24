@@ -4,14 +4,14 @@ const About = () => {
   const teamMembers = [{
     name: "Duccio",
     role: "Co-Founder & Experience Curator",
-    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/duccio.jpg",
-    imagePosition: "50% 50%",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/Duccio.jpg",
+    imagePosition: "20% 16%",
     description: "Passionate about creating authentic local experiences"
   }, {
     name: "Lorenzo",
     role: "Co-Founder & CEO",
-    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/lorenzo.jpg",
-    imagePosition: "50% 50%",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/Lorenzo.jpg",
+    imagePosition: "20% 16%",
     description: "Oversees every detail of our operations to ensure flawless, high-quality experiences."
   }, {
     name: "Carolina",
@@ -22,7 +22,7 @@ const About = () => {
   }, {
     name: "Sofia",
     role: "Guest Relations",
-    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/sofia.jpeg",
+    image: "https://gsxd43np3iiszkai.public.blob.vercel-storage.com/about_us/Sofia.jpg",
     imagePosition: "20% 12%",
     description: "The warm, welcoming presence behind our guest experience, ensuring every visitor feels understood, supported, and at home."
   }];

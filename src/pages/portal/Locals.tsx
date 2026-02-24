@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import VirtualizedGrid from '@/components/portal/VirtualizedGrid';
+import LocalCard from '@/components/portal/LocalCard';
 import {
   mockChefs,
   mockSecurity,
@@ -15,7 +16,9 @@ import {
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageTransition from '@/components/PageTransition';
+import { StaggerContainer, StaggerItem } from '@/components/StaggerContainer';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const categories = [
   'All',
@@ -31,6 +34,7 @@ const categories = [
 const Locals = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   // Combine all locals
   const allLocals = useMemo(() => ([
@@ -120,21 +124,21 @@ const Locals = () => {
             </button>
           </div>
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="font-luxury text-5xl text-portal-navy mb-2 font-semibold">
+          <div className="mb-8 px-3 md:px-0">
+            <h1 className="font-luxury text-4xl md:text-5xl text-portal-navy mb-2 font-semibold">
               Our Locals
             </h1>
-            <p className="text-portal-navy/60 text-[24px]">
+            <p className="text-portal-navy/70 text-base md:text-lg max-w-3xl leading-relaxed">
               Meet our trusted network of local experts and service providers
             </p>
             <div className="mt-6 w-12 h-px bg-portal-navy/30"></div>
           </div>
 
           {/* Search & Filters */}
-          <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4">
+          <div className="mb-8 space-y-4 sticky top-0 z-20 bg-portal-cream pb-4 px-3 md:px-0">
             {/* Category Filters */}
             <div className="relative">
-              <div className="flex flex-nowrap gap-2 overflow-x-auto pb-1 pr-8 snap-x snap-mandatory scrollbar-hide">
+              <div className="flex flex-wrap gap-2 md:flex-nowrap md:overflow-x-auto md:pb-1 md:pr-8 md:snap-x md:snap-mandatory md:scrollbar-hide">
                 {categories.map((category) => (
                   <Button
                     key={category}
@@ -145,20 +149,19 @@ const Locals = () => {
                     variant={selectedCategory === category ? 'default' : 'outline'}
                     className={`snap-start flex-shrink-0 ${
                       selectedCategory === category
-                        ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-base font-medium rounded-full'
-                        : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-base font-medium bg-[#FAF7F2] rounded-full'
+                        ? 'bg-portal-navy text-[#FAF7F2] hover:bg-portal-navy/90 text-sm md:text-base font-medium rounded-full'
+                        : 'border-portal-navy/20 text-portal-navy hover:bg-portal-navy/5 text-sm md:text-base font-medium bg-[#FAF7F2] rounded-full'
                     }`}
                   >
                     {category}
                   </Button>
                 ))}
               </div>
-              <div className="absolute right-0 top-0 bottom-1 w-8 bg-gradient-to-l from-portal-cream to-transparent pointer-events-none md:hidden" />
             </div>
           </div>
 
           {/* Results Count */}
-          <p className="text-base text-portal-navy/90 mb-6">
+          <p className="text-base text-portal-navy/90 mb-6 px-3 md:px-0">
             Showing {filteredLocals.length} {filteredLocals.length === 1 ? 'local' : 'locals'}
           </p>
 
@@ -172,7 +175,17 @@ const Locals = () => {
               transition={{ duration: 0.2 }}
             >
               {filteredLocals.length > 0 ? (
-                <VirtualizedGrid items={filteredLocals} />
+                isMobile ? (
+                  <StaggerContainer className="ttl-scroll-container grid grid-cols-1 gap-6 px-3 md:px-0">
+                    {filteredLocals.map((local) => (
+                      <StaggerItem key={local.id}>
+                        <LocalCard local={local} />
+                      </StaggerItem>
+                    ))}
+                  </StaggerContainer>
+                ) : (
+                  <VirtualizedGrid items={filteredLocals} />
+                )
               ) : (
                 <div className="text-center py-12">
                   <p className="text-portal-navy/60">No locals found matching your criteria.</p>

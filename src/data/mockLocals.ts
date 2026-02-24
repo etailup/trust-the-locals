@@ -243,6 +243,57 @@ export const mockNannies: Local[] = [
 
 // Guides (merged under Personal Concierge and Guides)
 export const mockGuides: Local[] = [
+  {
+    id: 'guide-1',
+    name: 'Tommaso',
+    category: 'Personal Concierge and Guides',
+    description: 'Local guide for curated, authentic Tuscan experiences.',
+    fullDescription:
+      'Tommaso is a local guide focused on creating authentic, seamless experiences across Tuscany, from historic city walks to tailored cultural itineraries.',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/tommaso.jpg',
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/tommaso.jpg' },
+    ],
+    specialties: ['Local Guiding', 'Cultural Experiences'],
+    availability: 'Available upon request',
+    languages: ['English'],
+    cropX: 20,
+    cropY: 15,
+  },
+  {
+    id: 'guide-2',
+    name: 'Padrya',
+    category: 'Personal Concierge and Guides',
+    description: 'Personal guide for tailored city and countryside tours.',
+    fullDescription:
+      'Padrya provides personalized guiding services designed around each guest, combining local insight, flexibility, and attention to detail throughout every experience.',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Padrya.jpg',
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Padrya.jpg' },
+    ],
+    specialties: ['Tailored Tours', 'Guest Assistance'],
+    availability: 'Available upon request',
+    languages: ['English'],
+    cropX: 20,
+    cropY: 15,
+  },
+  {
+    id: 'guide-3',
+    name: 'Anastasia',
+    category: 'Personal Concierge and Guides',
+    description: 'Local guide for bespoke city and countryside itineraries.',
+    fullDescription:
+      'Anastasia offers personalized guiding services across Florence and Tuscany, combining cultural insight, smooth planning, and attentive guest care for a refined and authentic experience.',
+    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Anastasia.jpg',
+    media: [
+      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Anastasia.jpg' },
+    ],
+    specialties: ['Tailored Itineraries', 'Cultural Guiding'],
+    availability: 'Available upon request',
+    languages: ['English'],
+    cropX: 20,
+    cropY: 15,
+  },
 ];
 
 // Drivers
