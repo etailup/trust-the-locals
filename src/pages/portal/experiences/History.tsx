@@ -1,10 +1,10 @@
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 
 const History = () => {
-  const historyExperiences = mockExperiences.filter(exp => 
+  const historyExperiences = visibleMockExperiences.filter(exp => 
     exp.category === 'Private Tours' || exp.category === 'Cultural'
   );
 

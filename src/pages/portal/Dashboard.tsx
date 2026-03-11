@@ -2,7 +2,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
@@ -73,7 +73,7 @@ const Dashboard = () => {
             <div>
               <ExperienceCard experience={localCareCard as any} linkTo="/portal/local-care" />
             </div>
-            {mockExperiences.slice(3, 5).map((experience) => (
+            {visibleMockExperiences.slice(3, 5).map((experience) => (
               <div key={experience.id}>
                 <ExperienceCard experience={experience} />
               </div>

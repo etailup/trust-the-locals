@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 import { Button } from '@/components/ui/button';
 import { useWishlist } from '@/contexts/WishlistContext';
 import {
@@ -21,7 +21,7 @@ import PageTransition from '@/components/PageTransition';
 const ExperienceDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const experience = mockExperiences.find((exp) => exp.id === id);
+  const experience = visibleMockExperiences.find((exp) => exp.id === id);
   const videoUrl = experience?.gallery?.find(
     (item) => typeof item === 'string' && item.toLowerCase().endsWith('.mp4')
   );
@@ -181,10 +181,10 @@ const ExperienceDetail = () => {
         {/* Content */}
         <div className="p-4 md:p-6 bg-portal-cream">
           <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-            <div className="flex flex-col gap-8 md:grid md:grid-cols-12 md:gap-16 md:items-start">
+            <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:gap-16 lg:items-start">
               {/* VIDEO COLUMN */}
               {videoUrl && (
-                <div className="md:col-span-5 md:col-start-1 order-1 md:pr-6 md:justify-self-start">
+                <div className="order-1 lg:col-span-5 lg:col-start-1 lg:pr-6 lg:justify-self-start">
                   <video
                     src={videoUrl}
                     controls
@@ -201,8 +201,8 @@ const ExperienceDetail = () => {
               {/* TEXT COLUMN */}
               <div
                 className={`order-2 ${
-                  videoUrl ? 'md:col-span-4 md:col-start-6' : 'md:col-span-9'
-                } space-y-8 ${videoUrl ? 'md:pl-6' : ''}`}
+                  videoUrl ? 'lg:col-span-4 lg:col-start-6' : 'lg:col-span-9'
+                } space-y-8 ${videoUrl ? 'lg:pl-6' : ''}`}
               >
                 <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px 320px' }}>
                   <h2 className="font-luxury text-3xl text-portal-navy mb-5">
@@ -229,8 +229,8 @@ const ExperienceDetail = () => {
               </div>
 
               {/* BOOKING COLUMN */}
-              <div className="order-3 md:col-span-3 md:col-start-10 space-y-6">
-                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-6 md:sticky md:top-8">
+              <div className="order-3 w-full lg:col-span-3 lg:col-start-10 space-y-6">
+                <div className="bg-[#FAF7F2] border-t-2 border-portal-navy p-4 sm:p-6 lg:sticky lg:top-8">
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center gap-3 text-portal-navy/70">
                       <Clock className="w-5 h-5 text-portal-navy" />
@@ -253,7 +253,7 @@ const ExperienceDetail = () => {
                   <Button
                     onClick={() => navigate(`/portal/booking/${experience.id}`)}
                     variant="outline"
-                    className="w-full border-portal-navy text-portal-navy hover:bg-portal-navy hover:text-white font-medium h-12 transition-all duration-300 text-lg"
+                    className="w-full min-h-12 h-auto px-4 py-3 border-portal-navy text-portal-navy hover:bg-portal-navy hover:text-white font-medium transition-all duration-300 text-base leading-snug whitespace-normal sm:text-lg"
                   >
                     Request This Experience
                   </Button>

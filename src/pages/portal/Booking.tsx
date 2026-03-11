@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 const Booking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const experience = mockExperiences.find((exp) => exp.id === id);
+  const experience = visibleMockExperiences.find((exp) => exp.id === id);
   const WEBHOOK_PROXY_URL = '/api/webhook';
   const submittedRef = useRef(false);
   const transferIncludedExperiences = ['prem-3', 'fw-3', 'fw-10']; // Panoramic Escape, Wine Tour, Supercar Grand Tour

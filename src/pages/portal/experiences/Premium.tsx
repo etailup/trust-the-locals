@@ -1,10 +1,10 @@
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 
 const Premium = () => {
-  const premiumExperiences = mockExperiences.filter(exp => exp.featured);
+  const premiumExperiences = visibleMockExperiences.filter(exp => exp.featured);
 
   return (
     <div className="flex min-h-screen bg-portal-cream">

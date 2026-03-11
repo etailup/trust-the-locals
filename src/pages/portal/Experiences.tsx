@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
-import { mockExperiences, categories } from '@/data/mockExperiences';
+import { visibleMockExperiences, categories } from '@/data/mockExperiences';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageTransition from '@/components/PageTransition';
@@ -17,7 +17,7 @@ const Experiences = () => {
   // Preload the first viewport of card images to avoid decode spikes.
   useEffect(() => {
     const PRELOAD_COUNT = 9;
-    const preloadExperiences = mockExperiences.slice(0, PRELOAD_COUNT);
+    const preloadExperiences = visibleMockExperiences.slice(0, PRELOAD_COUNT);
 
     const urls = preloadExperiences
       .map((exp) => {
@@ -58,7 +58,7 @@ const Experiences = () => {
     };
   }, []);
 
-  const filteredExperiences = useMemo(() => mockExperiences.filter((exp) => {
+  const filteredExperiences = useMemo(() => visibleMockExperiences.filter((exp) => {
     const matchesCategory = selectedCategory === 'All' || exp.category === selectedCategory;
     return matchesCategory;
   }), [selectedCategory]);

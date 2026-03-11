@@ -1,10 +1,10 @@
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 
 const FoodWine = () => {
-  const foodWineExperiences = mockExperiences.filter(exp => 
+  const foodWineExperiences = visibleMockExperiences.filter(exp => 
     exp.category === 'Luxury Dining' || exp.category === 'Wine Tasting'
   );
 

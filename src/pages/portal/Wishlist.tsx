@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import ExperienceCard from '@/components/portal/ExperienceCard';
-import { mockExperiences } from '@/data/mockExperiences';
+import { visibleMockExperiences } from '@/data/mockExperiences';
 import { mockLocals } from '@/data/mockLocals';
 import { mockSeasonal } from '@/data/mockSeasonal';
 import { Heart, Menu } from 'lucide-react';
@@ -39,7 +39,7 @@ const Wishlist = () => {
     availability: 'Available 24/7',
   };
 
-  const wishlistExperiences = mockExperiences.filter((exp) => wishlistIds.includes(exp.id));
+  const wishlistExperiences = visibleMockExperiences.filter((exp) => wishlistIds.includes(exp.id));
   const wishlistLocals = mockLocals.filter((loc) => wishlistIds.includes(loc.id));
   const wishlistSeasonal = mockSeasonal.filter((item) => wishlistIds.includes(item.id));
   const localCareInWishlist = wishlistIds.includes('local-care');
