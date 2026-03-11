@@ -60,7 +60,7 @@ const Footer = () => {
         {/* Bottom Legal Links */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 pt-20 pb-16">
           <span className="font-body text-lg md:text-xl tracking-[0.1em]">
-            ©2025 Trust the Locals
+            ©2026 Trust the Locals
           </span>
           <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
             <a
