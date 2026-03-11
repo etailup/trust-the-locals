@@ -472,23 +472,6 @@ export const mockConcierges: Local[] = [
     cropX: 20,
     cropY: 13,
   },
-  {
-    id: 'concierge-3',
-    name: 'Claudia',
-    category: 'Personal Concierge and Guide',
-    description: 'Florentine local expert and storyteller with deep passion for Tuscany.',
-    fullDescription: 'Hello my dear guests! It’s Claudia here, always with a big smile and even a bigger passion for my homeland: Tuscany. Born and raised in Florence, I’m proud to be your local expert and storyteller. I’ll share not only the beauty and history of our cities and countryside, but also the hidden corners, unique traditions and curious anecdotes that bring this land to life. So, what are we waiting for? Let’s start your most personal, authentic, and unforgettable journey!',
-    image: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_3.jpg',
-    media: [
-      { type: 'image', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/PC_3.jpg' },
-      { type: 'video', src: 'https://gsxd43np3iiszkai.public.blob.vercel-storage.com/locals/Personal%20Concierge%20Claudia%20%281%29.mp4' },
-    ],
-    specialties: ['Tourism Agency'],
-    availability: 'Available upon request',
-    languages: ['English', 'French', 'Spanish'],
-    cropX: 20,
-    cropY: 9,
-  },
 ];
 
 // Massage Therapists
