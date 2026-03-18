@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
+import { supabase, initialHash } from '@/lib/supabase';
 import type { Session } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,9 +30,17 @@ const SetPassword = () => {
       }
     };
 
+    // If the page loaded with a magic link hash, skip INITIAL_SESSION — it fires
+    // with the stale localStorage session BEFORE the hash is processed. Wait for
+    // SIGNED_IN which fires after Supabase exchanges the OTP for a real session.
+    const hasMagicLinkHash = initialHash.includes('type=magiclink');
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('[SetPassword] onAuthStateChange event:', event, 'session user id:', session?.user?.id ?? 'none');
-      if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+      if (event === 'SIGNED_IN') {
+        checkAndSetReady(session);
+      } else if (event === 'INITIAL_SESSION' && !hasMagicLinkHash) {
+        // Only validate an existing session if we weren't redirected via magic link
         checkAndSetReady(session);
       }
     });

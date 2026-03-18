@@ -87,6 +87,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 <html>
 <head><meta charset="utf-8"></head>
 <body style="font-family: Georgia, serif; background: #FAF7F2; padding: 40px; color: #1a2744;">
+  <!-- Gmail preheader spacer — prevents Gmail from collapsing email content -->
+  <div style="display:none;max-height:0;overflow:hidden;">&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
   <div style="max-width: 600px; margin: 0 auto; background: white; border: 1px solid #e8e4db; padding: 48px; text-align: center;">
     <div style="margin-bottom: 32px;">
       <img src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg" alt="Trust the Locals" style="height: 48px; width: auto;" />
