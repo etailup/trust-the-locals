@@ -61,6 +61,20 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Catches magic link redirects that land on any page (e.g. root) and sends them to set-password
+const MagicLinkHandler = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.includes('type=magiclink')) {
+      navigate('/portal/set-password', { replace: true });
+    }
+  }, []);
+
+  return null;
+};
+
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useAuth();
 
@@ -91,6 +105,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <MagicLinkHandler />
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
