@@ -66,6 +66,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 <head><meta charset="utf-8"></head>
 <body style="font-family: Georgia, serif; background: #FAF7F2; padding: 40px; color: #1a2744;">
   <div style="max-width: 600px; margin: 0 auto; background: white; border: 1px solid #e8e4db; padding: 40px;">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <img src="https://gsxd43np3iiszkai.public.blob.vercel-storage.com/file_final_2.svg" alt="Trust the Locals" style="height: 48px; width: auto;" />
+    </div>
     <h1 style="font-size: 24px; margin-bottom: 8px;">Nuova candidatura — ${formLabel}</h1>
     <hr style="border: none; border-top: 1px solid #e8e4db; margin: 24px 0;">
 
