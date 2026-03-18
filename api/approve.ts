@@ -61,7 +61,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Generate magic link
-  const baseUrl = process.env.VITE_BASE_URL || 'https://trusthelocals.com'
+  const baseUrl = process.env.BASE_URL || process.env.VITE_BASE_URL || 'https://trusthelocals.com'
   const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
     type: 'magiclink',
     email: application.email,

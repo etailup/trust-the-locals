@@ -61,13 +61,15 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Catches magic link redirects that land on any page (e.g. root) and sends them to set-password
+// Catches magic link redirects that land on any page (e.g. root) and sends them to set-password.
+// Uses initialHash captured before Supabase clears window.location.hash.
+import { initialHash } from '@/lib/supabase';
+
 const MagicLinkHandler = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.includes('type=magiclink')) {
+    if (initialHash.includes('type=magiclink')) {
       navigate('/portal/set-password', { replace: true });
     }
   }, []);
