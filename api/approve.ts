@@ -85,9 +85,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Email scanners make HTTP GET requests and never see hash fragments — only
   // real browser JS can read window.location.hash. Putting the token here
   // prevents Google/Gmail pre-scanner from consuming the one-time OTP.
-  // hashed_token is in properties; fall back to parsing it from action_link if absent
-  const otpToken = linkData.properties.hashed_token ||
-    new URL(linkData.properties.action_link).searchParams.get('token') || ''
+  // Use email_otp (the raw OTP) — this is what supabase.auth.verifyOtp() expects
+  // on the client. hashed_token is the pre-hashed version used in the action_link
+  // GET URL which goes through a different server-side verification code path.
+  const otpToken = linkData.properties.email_otp
   const setPasswordUrl = `${baseUrl}/portal/set-password#otp=${otpToken}&email=${encodeURIComponent(application.email)}`
   console.log('[approve] setPasswordUrl (hash, not logged):', setPasswordUrl.split('#')[0] + '#[hidden]')
 
