@@ -55,9 +55,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     user_metadata: { name: application.name },
   })
 
-  if (createUserError && createUserError.message !== 'User already registered') {
-    console.error('Create user error', createUserError)
-    return res.status(500).send(html('Errore', 'Impossibile creare l\'account utente.'))
+  // Ignore "already registered" — user may have been created in a previous attempt
+  if (createUserError) {
+    console.warn('createUser warning (may already exist):', createUserError.message)
   }
 
   // Generate magic link

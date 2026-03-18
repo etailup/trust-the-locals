@@ -32,7 +32,7 @@ const formSchema = z.object({
   countryCode: z.string().default("+39"),
   phone: z.string().trim().min(1, "Phone number is required").max(20),
   country: z.string().min(1, "Country is required"),
-  description: z.string().trim().min(20, "Please provide at least 20 characters").max(1000),
+  description: z.string().trim().min(1, "Description is required"),
   consent: z.literal(true, {
     errorMap: () => ({ message: "Consent is required" }),
   }),
