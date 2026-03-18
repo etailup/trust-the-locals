@@ -10,6 +10,7 @@ export interface User {
   phone?: string;
   preferences?: string;
   memberSince?: string;
+  is_admin?: boolean;
 }
 
 interface AuthContextType {
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loadProfile = async (authUser: { id: string; email: string }) => {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('name, company, phone, preferences, created_at')
+      .select('name, company, phone, preferences, created_at, is_admin')
       .eq('id', authUser.id)
       .single();
 
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       phone: profile?.phone ?? undefined,
       preferences: profile?.preferences ?? undefined,
       memberSince: profile?.created_at ?? undefined,
+      is_admin: profile?.is_admin ?? false,
     });
   };
 
