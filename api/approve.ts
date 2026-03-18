@@ -80,7 +80,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   console.log('[approve] magic link generated for user id:', linkData?.user?.id)
-  const magicLink = linkData.properties.action_link
+
+  // Build a custom URL with OTP token in the hash fragment.
+  // Email scanners make HTTP GET requests and never see hash fragments — only
+  // real browser JS can read window.location.hash. Putting the token here
+  // prevents Google/Gmail pre-scanner from consuming the one-time OTP.
+  // hashed_token is in properties; fall back to parsing it from action_link if absent
+  const otpToken = linkData.properties.hashed_token ||
+    new URL(linkData.properties.action_link).searchParams.get('token') || ''
+  const setPasswordUrl = `${baseUrl}/portal/set-password#otp=${otpToken}&email=${encodeURIComponent(application.email)}`
+  console.log('[approve] setPasswordUrl (hash, not logged):', setPasswordUrl.split('#')[0] + '#[hidden]')
 
   const welcomeHtml = `
 <!DOCTYPE html>
@@ -99,7 +108,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       Benvenuto/a nel portale Trust the Locals, ${application.name}.<br>
       Clicca il pulsante qui sotto per accedere al tuo account.
     </p>
-    <a href="${magicLink}" style="display: inline-block; background: #1a2744; color: #FAF7F2; text-decoration: none; padding: 16px 40px; font-family: Georgia, serif; font-size: 16px; letter-spacing: 0.15em;">
+    <a href="${setPasswordUrl}" style="display: inline-block; background: #1a2744; color: #FAF7F2; text-decoration: none; padding: 16px 40px; font-family: Georgia, serif; font-size: 16px; letter-spacing: 0.15em;">
       ACCEDI AL PORTALE
     </a>
     <p style="margin-top: 32px; font-size: 12px; color: #999;">

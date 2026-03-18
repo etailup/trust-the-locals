@@ -31,13 +31,25 @@ const SetPassword = () => {
     const validate = async (session: Session | null, label: string): Promise<boolean> => {
       console.log(`[SetPassword] ${label} — session user:`, session?.user?.id ?? 'none');
       if (!session) { console.log(`[SetPassword] ${label} — no session`); return false; }
-      const { data: { user }, error: err } = await supabase.auth.getUser();
-      console.log(`[SetPassword] ${label} getUser →`, user?.id ?? 'none', err?.message ?? 'ok');
-      return !!user && !err;
+      const { data: { user }, error: getUserError } = await supabase.auth.getUser();
+      console.log(`[SetPassword] ${label} getUser →`, user?.id ?? 'none', getUserError?.message ?? 'ok');
+      return !!user && !getUserError;
     };
 
+    // Check for OTP token in hash (email-scanner-resistant flow).
+    // approve.ts emails a custom URL: /portal/set-password#otp=TOKEN&email=EMAIL
+    // Hash fragments are never sent in HTTP requests, so email scanners can't
+    // consume the one-time token — only real browser JS can read it.
+    const hashParams = new URLSearchParams(initialHash.replace(/^#/, ''));
+    const otpToken = hashParams.get('otp');
+    const otpEmail = hashParams.get('email');
+    const hasPendingOtp = !!(otpToken && otpEmail);
+
+    // Also support old-style Supabase magic link hash (type=magiclink)
     const hasMagicLinkHash = initialHash.includes('type=magiclink');
-    console.log('[SetPassword] hasMagicLinkHash:', hasMagicLinkHash);
+
+    const hasAnyPendingAuth = hasPendingOtp || hasMagicLinkHash;
+    console.log('[SetPassword] hasPendingOtp:', hasPendingOtp, 'hasMagicLinkHash:', hasMagicLinkHash);
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('[SetPassword] event:', event, 'settled:', settled);
@@ -49,13 +61,30 @@ const SetPassword = () => {
       } else if (event === 'INITIAL_SESSION') {
         if (await validate(session, 'INITIAL_SESSION')) {
           succeed();
-        } else if (!hasMagicLinkHash) {
-          // No magic link in flight — nothing is coming, fail now
+        } else if (!hasAnyPendingAuth) {
+          // No auth in flight — nothing is coming, fail now
           fail();
         }
-        // else: INITIAL_SESSION failed but magic link is being processed → wait for SIGNED_IN
+        // else: auth exchange in progress → wait for SIGNED_IN
       }
     });
+
+    // If hash has OTP token, verify it client-side to establish a session.
+    // On success Supabase fires SIGNED_IN → onAuthStateChange handles it.
+    if (hasPendingOtp) {
+      console.log('[SetPassword] verifyOtp — email:', otpEmail);
+      supabase.auth.verifyOtp({
+        email: otpEmail!,
+        token: otpToken!,
+        type: 'magiclink',
+      }).then(({ error: otpError }) => {
+        if (otpError) {
+          console.error('[SetPassword] verifyOtp error:', otpError.message);
+          fail();
+        }
+        // On success: SIGNED_IN fires → onAuthStateChange calls succeed()
+      });
+    }
 
     // Safety timeout: if we're still loading after 12s, show error
     const timeout = setTimeout(() => {

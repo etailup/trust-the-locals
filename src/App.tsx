@@ -64,12 +64,17 @@ const ScrollToTop = () => {
 
 // Catches magic link redirects that land on any page and sends them to set-password.
 // Uses initialHash captured before Supabase clears window.location.hash.
+// Handles both:
+//   - New flow: #otp=TOKEN&email=EMAIL (email-scanner-resistant, from approve.ts)
+//   - Old flow: #type=magiclink (direct Supabase verify URL)
 const MagicLinkHandler = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (initialHash.includes('type=magiclink')) {
-      navigate('/portal/set-password', { replace: true });
+    const hasOtp = initialHash.includes('otp=') && initialHash.includes('email=');
+    const hasMagicLink = initialHash.includes('type=magiclink');
+    if ((hasOtp || hasMagicLink) && !window.location.pathname.endsWith('/set-password')) {
+      navigate(`/portal/set-password${initialHash}`, { replace: true });
     }
   }, []);
 
