@@ -28,3 +28,13 @@ dist-ssr
 public/HEADER_FINALE.mp4
 .vercel
 .env*.local
+.env
+
+# Supabase temp
+supabase/.temp
+
+# Internal docs
+fixes.md
+fixes_client.md
+fixes_client.pdf
+fixes_italian.md

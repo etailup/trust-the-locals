@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '@/lib/supabase';
 
 interface User {
   id: string;
@@ -24,57 +25,51 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored user on mount
-    const storedUser = localStorage.getItem('ttl_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email!,
+          name: session.user.user_metadata?.name || session.user.email!,
+        });
+      }
+      setIsLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser({
+          id: session.user.id,
+          email: session.user.email!,
+          name: session.user.user_metadata?.name || session.user.email!,
+        });
+      } else {
+        setUser(null);
+      }
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string) => {
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Check credentials
-    if (email === 'giuliom2000@gmail.com' && password === 'trust') {
-      const mockUser: User = {
-        id: '1',
-        email,
-        name: 'Giulio',
-      };
-
-      // Clear wishlist for new session
-      localStorage.removeItem('ttl_wishlist');
-      window.dispatchEvent(new StorageEvent('storage', { key: 'ttl_wishlist', newValue: null }));
-
-      setUser(mockUser);
-      localStorage.setItem('ttl_user', JSON.stringify(mockUser));
-    } else {
-      throw new Error('Invalid credentials');
-    }
-  };
-
-  const register = async (email: string, password: string, name: string) => {
-    // Mock registration
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    const mockUser: User = {
-      id: '1',
-      email,
-      name,
-    };
-
     // Clear wishlist for new session
     localStorage.removeItem('ttl_wishlist');
     window.dispatchEvent(new StorageEvent('storage', { key: 'ttl_wishlist', newValue: null }));
 
-    setUser(mockUser);
-    localStorage.setItem('ttl_user', JSON.stringify(mockUser));
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw new Error(error.message);
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('ttl_user');
+  const register = async (_email: string, _password: string, _name: string) => {
+    throw new Error('Per accedere al portale è necessario inviare una candidatura. Visita la pagina Apply per iniziare.');
+  };
+
+  const logout = async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem('ttl_wishlist');
   };
 
   return (

@@ -46,6 +46,18 @@ export default defineConfig(({ mode }) => {
           // Forward to the configured webhook path.
           rewrite: () => applyWebhookProxy.pathname,
         },
+        "/api/submit-application": {
+          target: "http://localhost:3000",
+          changeOrigin: true,
+        },
+        "/api/approve": {
+          target: "http://localhost:3000",
+          changeOrigin: true,
+        },
+        "/api/reject": {
+          target: "http://localhost:3000",
+          changeOrigin: true,
+        },
       },
     },
     plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),

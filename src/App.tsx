@@ -9,7 +9,9 @@ import { WishlistProvider } from "./contexts/WishlistContext";
 import BottomNav from "./components/BottomNav";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Apply from "./pages/Apply";
+import ApplySelect from "./pages/ApplySelect";
+import ApplyAgency from "./pages/ApplyAgency";
+import ApplyPrivate from "./pages/ApplyPrivate";
 import Contact from "./pages/Contact";
 import HowItWorks from "./pages/HowItWorks";
 import NotFound from "./pages/NotFound";
@@ -91,7 +93,9 @@ const App = () => (
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
-            <Route path="/apply" element={<Apply />} />
+            <Route path="/apply" element={<ApplySelect />} />
+            <Route path="/apply/agency" element={<ApplyAgency />} />
+            <Route path="/apply/private" element={<ApplyPrivate />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/portal/login" element={<Login />} />
