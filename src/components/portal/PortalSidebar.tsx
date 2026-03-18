@@ -1,5 +1,5 @@
 import { memo, useCallback, type ElementType } from 'react';
-import { Heart, MessageCircle, User, LogOut, Sparkles, Users, Calendar, Package, Shield } from 'lucide-react';
+import { Heart, MessageCircle, User, LogOut, Sparkles, Users, Calendar, Package, Shield, Settings } from 'lucide-react';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +38,7 @@ const navigationItems = [
 ];
 
 const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = useCallback(() => {
@@ -78,6 +78,16 @@ const PortalSidebar = ({ isOpen = true }: PortalSidebarProps) => {
             </li>
           ))}
         </ul>
+        {user?.is_admin && (
+          <NavLink
+            to="/portal/admin"
+            className="flex items-center gap-3 px-4 py-3 mt-1 text-[#FAF7F2]/80 hover:text-[#FAF7F2] hover:bg-white/10 rounded-md transition-all duration-200"
+            activeClassName="bg-white/10 text-[#FAF7F2] border-l-2 border-white"
+          >
+            <Settings className="w-6 h-6 flex-shrink-0" />
+            <span className="font-body text-lg">Admin</span>
+          </NavLink>
+        )}
       </nav>
 
       {/* Logout */}
