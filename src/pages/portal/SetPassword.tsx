@@ -16,40 +16,58 @@ const SetPassword = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // When a magic link is clicked, Supabase fires INITIAL_SESSION first with the
-    // stale localStorage session, then SIGNED_IN after OTP exchange completes.
-    // If SIGNED_IN fires before we mount (due to MagicLinkHandler re-navigation),
-    // INITIAL_SESSION fires again with the already-established new session.
-    // Strategy: handle both events, but on INITIAL_SESSION failure don't show
-    // the error page if a magic link hash was present — just wait for SIGNED_IN.
-    const hasMagicLinkHash = initialHash.includes('type=magiclink');
+    let settled = false;
 
-    const checkAndSetReadySafe = async (session: Session | null, isFinalEvent: boolean) => {
-      console.log('[SetPassword] checkAndSetReadySafe — event final:', isFinalEvent, 'session user id:', session?.user?.id ?? 'none');
-      if (!session) return;
-      const { data: { user }, error: getUserError } = await supabase.auth.getUser();
-      console.log('[SetPassword] getUser result — id:', user?.id ?? 'none', 'error:', getUserError?.message ?? 'none');
-      if (user && !getUserError) {
-        setReady(true);
-      } else if (isFinalEvent || !hasMagicLinkHash) {
-        // Show error only on SIGNED_IN failure, or when there's no magic link to wait for
-        console.warn('[SetPassword] stale/invalid session, signing out');
+    const succeed = () => { if (!settled) { settled = true; setReady(true); } };
+    const fail = async () => {
+      if (!settled) {
+        settled = true;
         await supabase.auth.signOut();
         setError(true);
       }
-      // Otherwise (INITIAL_SESSION failure + magic link present): stay in loading, wait for SIGNED_IN
     };
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('[SetPassword] onAuthStateChange event:', event, 'session user id:', session?.user?.id ?? 'none');
+    // Validate session server-side. Returns true if valid, false otherwise.
+    const validate = async (session: Session | null, label: string): Promise<boolean> => {
+      console.log(`[SetPassword] ${label} — session user:`, session?.user?.id ?? 'none');
+      if (!session) { console.log(`[SetPassword] ${label} — no session`); return false; }
+      const { data: { user }, error: err } = await supabase.auth.getUser();
+      console.log(`[SetPassword] ${label} getUser →`, user?.id ?? 'none', err?.message ?? 'ok');
+      return !!user && !err;
+    };
+
+    const hasMagicLinkHash = initialHash.includes('type=magiclink');
+    console.log('[SetPassword] hasMagicLinkHash:', hasMagicLinkHash);
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('[SetPassword] event:', event, 'settled:', settled);
+      if (settled) return;
+
       if (event === 'SIGNED_IN') {
-        checkAndSetReadySafe(session, true);
+        // Definitive event — succeed or fail, no more waiting
+        (await validate(session, 'SIGNED_IN')) ? succeed() : fail();
       } else if (event === 'INITIAL_SESSION') {
-        checkAndSetReadySafe(session, false);
+        if (await validate(session, 'INITIAL_SESSION')) {
+          succeed();
+        } else if (!hasMagicLinkHash) {
+          // No magic link in flight — nothing is coming, fail now
+          fail();
+        }
+        // else: INITIAL_SESSION failed but magic link is being processed → wait for SIGNED_IN
       }
     });
 
-    return () => subscription.unsubscribe();
+    // Safety timeout: if we're still loading after 12s, show error
+    const timeout = setTimeout(() => {
+      console.warn('[SetPassword] timeout — no valid session received');
+      fail();
+    }, 12000);
+
+    return () => {
+      settled = true;
+      subscription.unsubscribe();
+      clearTimeout(timeout);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
