@@ -69,7 +69,7 @@ const ApplySelect = () => {
                 </div>
               </div>
               <h2 className="font-luxury text-2xl sm:text-3xl text-portal-navy mb-3">
-                Private Traveller
+                Private Traveller / Hotel
               </h2>
               <div className="w-8 h-px bg-portal-navy/30 mx-auto mb-4 group-hover:w-12 transition-all duration-300"></div>
               <p className="font-body text-portal-navy/60 text-sm sm:text-base leading-relaxed">

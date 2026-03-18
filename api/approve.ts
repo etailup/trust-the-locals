@@ -97,7 +97,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 `
 
   await resend.emails.send({
-    from: 'Trust the Locals <noreply@trusthelocals.com>',
+    from: 'Trust the Locals <onboarding@resend.dev>',
     to: application.email,
     subject: 'La tua candidatura è stata approvata — Trust the Locals',
     html: welcomeHtml,
