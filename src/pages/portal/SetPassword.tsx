@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
+import type { Session } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,19 +12,29 @@ const SetPassword = () => {
   const [confirm, setConfirm] = useState('');
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Wait for Supabase to process the magic link hash and establish a session
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+    const checkAndSetReady = async (session: Session | null) => {
+      console.log('[SetPassword] checkAndSetReady — session user id:', session?.user?.id ?? 'none');
+      if (!session) return;
+      const { data: { user }, error: getUserError } = await supabase.auth.getUser();
+      console.log('[SetPassword] getUser result — id:', user?.id ?? 'none', 'error:', getUserError?.message ?? 'none');
+      if (user && !getUserError) {
         setReady(true);
+      } else {
+        console.warn('[SetPassword] stale/invalid session, signing out');
+        await supabase.auth.signOut();
+        setError(true);
       }
-    });
+    };
 
-    // Also check if there's already a session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) setReady(true);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('[SetPassword] onAuthStateChange event:', event, 'session user id:', session?.user?.id ?? 'none');
+      if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+        checkAndSetReady(session);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -41,9 +52,12 @@ const SetPassword = () => {
     }
 
     setLoading(true);
+    const { data: { session: currentSession } } = await supabase.auth.getSession();
+    console.log('[SetPassword] updateUser — current session user id:', currentSession?.user?.id ?? 'none');
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
+      console.error('[SetPassword] updateUser error:', error.message);
       toast.error(error.message);
       setLoading(false);
       return;
@@ -52,6 +66,26 @@ const SetPassword = () => {
     toast.success('Password set successfully! Welcome.');
     navigate('/portal/experiences');
   };
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-portal-cream px-4">
+        <div className="w-full max-w-md text-center">
+          <h1 className="font-luxury text-2xl text-portal-navy mb-4">Link non valido</h1>
+          <p className="font-body text-portal-navy/60 text-sm mb-6">
+            Il link è scaduto o non valido. Per favore richiedi un nuovo link di accesso.
+          </p>
+          <Button
+            onClick={() => navigate('/')}
+            className="bg-portal-navy hover:bg-portal-navy/90 font-body tracking-[0.15em] uppercase py-5 min-h-[44px]"
+            style={{ color: '#FAF7F2' }}
+          >
+            Torna alla home
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   if (!ready) {
     return (

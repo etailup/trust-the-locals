@@ -49,30 +49,37 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     .eq('id', id)
 
   // Create auth user
-  const { error: createUserError } = await supabaseAdmin.auth.admin.createUser({
+  const { data: createdUserData, error: createUserError } = await supabaseAdmin.auth.admin.createUser({
     email: application.email,
     email_confirm: true,
     user_metadata: { name: application.name },
   })
 
-  // Ignore "already registered" — user may have been created in a previous attempt
   if (createUserError) {
-    console.warn('createUser warning (may already exist):', createUserError.message)
+    // Ignore "already registered" — user may have been created in a previous attempt
+    console.warn('[approve] createUser warning:', createUserError.message)
+  } else {
+    console.log('[approve] user created — id:', createdUserData?.user?.id, 'email:', application.email)
   }
 
   // Generate magic link
-  const baseUrl = process.env.BASE_URL || process.env.VITE_BASE_URL || 'https://trusthelocals.com'
+  const baseUrl = (process.env.BASE_URL || process.env.VITE_BASE_URL || 'https://trusthelocals.com').trim()
+  const redirectTo = `${baseUrl}/portal/set-password`
+  console.log('[approve] BASE_URL raw:', JSON.stringify(process.env.BASE_URL))
+  console.log('[approve] redirectTo:', redirectTo)
+
   const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
     type: 'magiclink',
     email: application.email,
-    options: { redirectTo: `${baseUrl}/portal/set-password` },
+    options: { redirectTo },
   })
 
   if (linkError || !linkData?.properties?.action_link) {
-    console.error('Magic link error', linkError)
+    console.error('[approve] magic link error:', linkError)
     return res.status(500).send(html('Errore', 'Impossibile generare il link di accesso.'))
   }
 
+  console.log('[approve] magic link generated for user id:', linkData?.user?.id)
   const magicLink = linkData.properties.action_link
 
   const welcomeHtml = `
