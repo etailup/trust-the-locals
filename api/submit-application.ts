@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { Resend } from 'resend'
-import { supabaseAdmin } from './_supabaseAdmin'
+import { supabaseAdmin } from './_supabaseAdmin.js'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 

@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { supabaseAdmin } from './_supabaseAdmin'
+import { supabaseAdmin } from './_supabaseAdmin.js'
 
 const html = (title: string, body: string) => `
 <!DOCTYPE html>
