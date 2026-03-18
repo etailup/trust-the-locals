@@ -23,6 +23,7 @@ import ExperienceDetail from "./pages/portal/ExperienceDetail";
 import Booking from "./pages/portal/Booking";
 import Wishlist from "./pages/portal/Wishlist";
 import Profile from "./pages/portal/Profile";
+import Admin from "./pages/portal/Admin";
 import Concierge from "./pages/portal/Concierge";
 // Our Locals
 import Locals from "./pages/portal/Locals";
@@ -211,6 +212,14 @@ const App = () => (
             {/* Events & Groups Routes */}
             <Route path="/portal/events-groups" element={<ProtectedRoute><EventsGroups /></ProtectedRoute>} />
             <Route path="/portal/events-groups/:id" element={<ProtectedRoute><EventGroupDetail /></ProtectedRoute>} />
+            <Route
+              path="/portal/admin"
+              element={
+                <ProtectedRoute>
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
             </Routes>
