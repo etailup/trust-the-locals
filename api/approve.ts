@@ -62,6 +62,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.log('[approve] user created — id:', createdUserData?.user?.id, 'email:', application.email)
   }
 
+  // Upsert profile row — tolerates re-runs if user already existed
+  const userId = createdUserData?.user?.id
+  if (userId) {
+    const { error: profileError } = await supabaseAdmin
+      .from('profiles')
+      .upsert({
+        id: userId,
+        name: application.name,
+        company: application.company_name ?? null,
+        phone: application.phone ?? null,
+        preferences: null,
+      })
+    if (profileError) console.warn('[approve] profile upsert warning:', profileError.message)
+    else console.log('[approve] profile upserted for user:', userId)
+  }
+
   // Generate magic link
   const baseUrl = (process.env.BASE_URL || process.env.VITE_BASE_URL || 'https://trusthelocals.com').trim()
   const redirectTo = `${baseUrl}/portal/set-password`

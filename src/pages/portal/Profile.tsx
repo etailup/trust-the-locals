@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/lib/supabase';
 import PortalSidebar from '@/components/portal/PortalSidebar';
 import ConciergeButton from '@/components/portal/ConciergeButton';
 import { Button } from '@/components/ui/button';
@@ -9,24 +10,49 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const [formData, setFormData] = useState({
     name: user?.name || '',
     company: user?.company || '',
-    email: user?.email || '',
     phone: user?.phone || '',
     preferences: user?.preferences || '',
   });
+  const [saving, setSaving] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
+    setSaving(true);
+
+    const { error } = await supabase
+      .from('profiles')
+      .update({
+        name: formData.name,
+        company: formData.company || null,
+        phone: formData.phone || null,
+        preferences: formData.preferences || null,
+      })
+      .eq('id', user.id);
+
+    setSaving(false);
+
+    if (error) {
+      toast.error('Failed to save changes');
+      return;
+    }
+
+    setUser({ ...user, ...formData });
     toast.success('Profile updated successfully!');
   };
+
+  const memberSince = user?.memberSince
+    ? new Date(user.memberSince).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
+    : '—';
 
   return (
     <div className="flex min-h-screen bg-portal-cream">
       <PortalSidebar />
-      
+
       <main className="md:ml-10 flex-1 p-8">
         <div className="max-w-3xl mx-auto px-3 md:px-0">
           <h1 className="font-luxury text-4xl text-portal-navy mb-2">
@@ -63,9 +89,9 @@ const Profile = () => {
                 <Input
                   id="email"
                   type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="your@email.com"
+                  value={user?.email || ''}
+                  disabled
+                  className="bg-muted/50 cursor-not-allowed"
                 />
               </div>
 
@@ -76,7 +102,7 @@ const Profile = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+39 351 3628747"
+                  placeholder="+39 ..."
                 />
               </div>
 
@@ -94,20 +120,20 @@ const Profile = () => {
               <div className="pt-4">
                 <Button
                   type="submit"
+                  disabled={saving}
                   className="bg-portal-gold text-portal-navy hover:bg-portal-gold/90 font-medium"
                 >
-                  Save Changes
+                  {saving ? 'Saving...' : 'Save Changes'}
                 </Button>
               </div>
             </form>
           </div>
 
-          {/* Additional Info */}
           <div className="mt-8 p-6 bg-white border border-border rounded-lg">
             <h3 className="font-luxury text-lg text-portal-navy mb-3">Account Information</h3>
             <div className="space-y-2 text-sm text-foreground/70">
               <p><strong className="text-portal-navy">Account Type:</strong> Premium Access</p>
-              <p><strong className="text-portal-navy">Member Since:</strong> January 2025</p>
+              <p><strong className="text-portal-navy">Member Since:</strong> {memberSince}</p>
               <p><strong className="text-portal-navy">Status:</strong> Active</p>
             </div>
           </div>

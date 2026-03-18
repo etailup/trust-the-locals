@@ -1,17 +1,20 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React from 'react';
 import { supabase } from '@/lib/supabase';
 
-interface User {
+export interface User {
   id: string;
   email: string;
   name: string;
   company?: string;
   phone?: string;
   preferences?: string;
+  memberSince?: string;
 }
 
 interface AuthContextType {
   user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
@@ -24,31 +27,42 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const loadProfile = async (authUser: { id: string; email: string }) => {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('name, company, phone, preferences, created_at')
+      .eq('id', authUser.id)
+      .single();
+
+    setUser({
+      id: authUser.id,
+      email: authUser.email,
+      name: profile?.name || authUser.email,
+      company: profile?.company ?? undefined,
+      phone: profile?.phone ?? undefined,
+      preferences: profile?.preferences ?? undefined,
+      memberSince: profile?.created_at ?? undefined,
+    });
+  };
+
   useEffect(() => {
-    // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        setUser({
-          id: session.user.id,
-          email: session.user.email!,
-          name: session.user.user_metadata?.name || session.user.email!,
-        });
+        loadProfile({ id: session.user.id, email: session.user.email! })
+          .finally(() => setIsLoading(false));
+      } else {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     });
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
-        setUser({
-          id: session.user.id,
-          email: session.user.email!,
-          name: session.user.user_metadata?.name || session.user.email!,
-        });
+        loadProfile({ id: session.user.id, email: session.user.email! })
+          .finally(() => setIsLoading(false));
       } else {
         setUser(null);
+        setIsLoading(false);
       }
-      setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
@@ -73,7 +87,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, setUser, login, register, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
