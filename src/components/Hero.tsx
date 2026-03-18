@@ -81,7 +81,7 @@ const Hero = () => {
         <div className="w-px h-10 sm:h-16 bg-white/60 mb-6 sm:mb-10" />
 
         {/* CTA Button - Mobile optimized */}
-        <Link to="/apply" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}>
+        <Link to="/portal/login" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}>
           <Button 
             variant="outline" 
             size="lg" 
