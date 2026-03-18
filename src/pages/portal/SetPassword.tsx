@@ -16,32 +16,36 @@ const SetPassword = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkAndSetReady = async (session: Session | null) => {
-      console.log('[SetPassword] checkAndSetReady — session user id:', session?.user?.id ?? 'none');
+    // When a magic link is clicked, Supabase fires INITIAL_SESSION first with the
+    // stale localStorage session, then SIGNED_IN after OTP exchange completes.
+    // If SIGNED_IN fires before we mount (due to MagicLinkHandler re-navigation),
+    // INITIAL_SESSION fires again with the already-established new session.
+    // Strategy: handle both events, but on INITIAL_SESSION failure don't show
+    // the error page if a magic link hash was present — just wait for SIGNED_IN.
+    const hasMagicLinkHash = initialHash.includes('type=magiclink');
+
+    const checkAndSetReadySafe = async (session: Session | null, isFinalEvent: boolean) => {
+      console.log('[SetPassword] checkAndSetReadySafe — event final:', isFinalEvent, 'session user id:', session?.user?.id ?? 'none');
       if (!session) return;
       const { data: { user }, error: getUserError } = await supabase.auth.getUser();
       console.log('[SetPassword] getUser result — id:', user?.id ?? 'none', 'error:', getUserError?.message ?? 'none');
       if (user && !getUserError) {
         setReady(true);
-      } else {
+      } else if (isFinalEvent || !hasMagicLinkHash) {
+        // Show error only on SIGNED_IN failure, or when there's no magic link to wait for
         console.warn('[SetPassword] stale/invalid session, signing out');
         await supabase.auth.signOut();
         setError(true);
       }
+      // Otherwise (INITIAL_SESSION failure + magic link present): stay in loading, wait for SIGNED_IN
     };
-
-    // If the page loaded with a magic link hash, skip INITIAL_SESSION — it fires
-    // with the stale localStorage session BEFORE the hash is processed. Wait for
-    // SIGNED_IN which fires after Supabase exchanges the OTP for a real session.
-    const hasMagicLinkHash = initialHash.includes('type=magiclink');
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('[SetPassword] onAuthStateChange event:', event, 'session user id:', session?.user?.id ?? 'none');
       if (event === 'SIGNED_IN') {
-        checkAndSetReady(session);
-      } else if (event === 'INITIAL_SESSION' && !hasMagicLinkHash) {
-        // Only validate an existing session if we weren't redirected via magic link
-        checkAndSetReady(session);
+        checkAndSetReadySafe(session, true);
+      } else if (event === 'INITIAL_SESSION') {
+        checkAndSetReadySafe(session, false);
       }
     });
 
