@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import HowItWorks from "./pages/HowItWorks";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/portal/Login";
+import SetPassword from "./pages/portal/SetPassword";
 import Experiences from "./pages/portal/Experiences";
 import ExperienceDetail from "./pages/portal/ExperienceDetail";
 import Booking from "./pages/portal/Booking";
@@ -99,6 +100,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/portal/login" element={<Login />} />
+            <Route path="/portal/set-password" element={<SetPassword />} />
             <Route path="/portal" element={<Navigate to="/portal/experiences" replace />} />
             <Route path="/portal/dashboard" element={<Navigate to="/portal/experiences" replace />} />
             <Route
