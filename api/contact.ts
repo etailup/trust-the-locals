@@ -16,7 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { error } = await resend.emails.send({
     from: 'Trust the Locals <noreply@etailup.com>',
-    to: 'reservations@trusthelocals.com',
+    to: 'lapo@etailup.com',
     replyTo: email,
     subject: `[Contatto] ${subject}`,
     html: `
