@@ -72,7 +72,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         name: application.name,
         company: application.company_name ?? null,
         phone: application.phone ?? null,
-        preferences: null,
+        type: application.form_type ?? null,
+        country: application.country ?? null,
+        website: application.website ?? null,
+        linkedin_url: application.linkedin_url ?? null,
+        annual_clients: application.annual_clients ?? null,
       })
     if (profileError) console.warn('[approve] profile upsert warning:', profileError.message)
     else console.log('[approve] profile upserted for user:', userId)
