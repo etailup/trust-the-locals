@@ -423,9 +423,9 @@ function BulkImportTab() {
         <button
           type="button"
           onClick={e => { e.stopPropagation(); downloadTemplate() }}
-          className="text-xs text-portal-muted underline hover:text-portal-dark"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-portal-dark text-portal-dark rounded hover:bg-portal-dark hover:text-white transition-colors"
         >
-          Scarica template CSV
+          ↓ Scarica template CSV
         </button>
       </div>
 
