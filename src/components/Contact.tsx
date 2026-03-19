@@ -36,16 +36,22 @@ const Contact = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Contact form submitted:", values);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error('Failed');
       toast.success("Message sent successfully! We'll be in touch soon.");
       form.reset();
+    } catch {
+      toast.error("Something went wrong. Please email us directly at reservations@trusthelocals.com");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   }
 
   return (
