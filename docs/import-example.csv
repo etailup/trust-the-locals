@@ -1,0 +1,7 @@
+email,nome,azienda,telefono,tipo,paese,website,linkedin_url,clienti_annui
+mario.rossi@agenziaroma.it,Mario Rossi,Agenzia Roma,+39 06 1234567,agency,Italy,agenziaroma.it,linkedin.com/in/mario-rossi,26-50 clients per year
+giulia.bianchi@grandhotel.it,Giulia Bianchi,Grand Hotel Firenze,+39 055 9876543,hotel,Italy,grandhotelfirenze.com,,
+john.smith@luxurytravel.com,John Smith,Luxury Travel Co,+1 212 5550100,agency,United States,luxurytravel.com,linkedin.com/in/john-smith,51-100 clients per year
+anne.muller@reiseburo.de,Anne Müller,Reisebüro Berlin,+49 30 1234567,agency,Germany,reisebuero-berlin.de,,11-25 clients per year
+sophie.martin@voyages.fr,Sophie Martin,,+33 1 23456789,private,France,,,1-10 clients per year
+paolo@example.com,Paolo Verdi,,,private,Italy,,,

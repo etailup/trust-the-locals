@@ -33,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!callerProfile?.is_admin) return res.status(403).json({ error: 'forbidden' })
 
   // --- Input validation ---
-  const { email, name, company, phone } = req.body ?? {}
+  const { email, name, company, phone, type, country, website, linkedin_url, annual_clients } = req.body ?? {}
 
   if (!email || typeof email !== 'string' || !isValidEmail(email.trim())) {
     return res.status(400).json({ status: 'error', message: 'email non valida' })
@@ -43,6 +43,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const cleanName = (name && typeof name === 'string') ? name.trim() : null
   const cleanCompany = (company && typeof company === 'string') ? company.trim() : null
   const cleanPhone = (phone && typeof phone === 'string') ? phone.trim() : null
+  const cleanType = (type && ['agency', 'private', 'hotel'].includes(type)) ? type : null
+  const cleanCountry = (country && typeof country === 'string') ? country.trim() : null
+  const cleanWebsite = (website && typeof website === 'string') ? website.trim() : null
+  const cleanLinkedin = (linkedin_url && typeof linkedin_url === 'string') ? linkedin_url.trim() : null
+  const cleanAnnualClients = (annual_clients && typeof annual_clients === 'string') ? annual_clients.trim() : null
 
   const baseUrl = (process.env.BASE_URL || process.env.VITE_BASE_URL || 'https://trusthelocals.com').trim()
 
@@ -81,6 +86,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       name: cleanName,
       company: cleanCompany,
       phone: cleanPhone,
+      type: cleanType,
+      country: cleanCountry,
+      website: cleanWebsite,
+      linkedin_url: cleanLinkedin,
+      annual_clients: cleanAnnualClients,
     })
 
   if (profileError) console.warn('[import-contact] profile upsert warning:', profileError.message)

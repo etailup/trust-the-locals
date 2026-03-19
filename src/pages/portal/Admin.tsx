@@ -8,49 +8,114 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useToast } from '@/hooks/use-toast'
 import * as XLSX from 'xlsx'
 
+// ────────── Types ──────────
+
+type ContactType = 'agency' | 'private' | 'hotel' | ''
+
+const CONTACT_TYPES: { value: ContactType; label: string }[] = [
+  { value: 'agency', label: 'Agency' },
+  { value: 'private', label: 'Private' },
+  { value: 'hotel', label: 'Hotel' },
+]
+
+const ANNUAL_CLIENTS_OPTIONS = [
+  '1-10 clients per year',
+  '11-25 clients per year',
+  '26-50 clients per year',
+  '51-100 clients per year',
+  '100+ clients per year',
+]
+
 // ────────── Parser ──────────
+// CSV column order: email, name, company, phone, type, country, website, linkedin_url, annual_clients
 
 interface ParsedContact {
   email: string
   name?: string
   company?: string
   phone?: string
+  type?: string
+  country?: string
+  website?: string
+  linkedin_url?: string
+  annual_clients?: string
   valid: boolean
 }
 
+// Header aliases (case-insensitive) → normalized key
+const HEADER_MAP: Record<string, keyof ParsedContact> = {
+  email: 'email', 'e-mail': 'email',
+  name: 'name', nome: 'name', 'contact name': 'name', 'nome contatto': 'name',
+  company: 'company', azienda: 'company', agency: 'company', 'agency name': 'company',
+  phone: 'phone', telefono: 'phone', tel: 'phone',
+  type: 'type', tipo: 'type',
+  country: 'country', paese: 'country',
+  website: 'website', sito: 'website', 'sito web': 'website',
+  linkedin: 'linkedin_url', 'linkedin url': 'linkedin_url', linkedin_url: 'linkedin_url',
+  'annual clients': 'annual_clients', 'clienti annui': 'annual_clients', annual_clients: 'annual_clients',
+}
+
 function parseContacts(raw: string): ParsedContact[] {
-  return raw
-    .split('\n')
-    .map(line => line.trim())
-    .filter(line => line.length > 0)
-    .map(line => {
-      // Format: "First Last <email@domain.com>"
-      const angleMatch = line.match(/^(.+?)\s*<([^>]+)>$/)
-      if (angleMatch) {
-        const name = angleMatch[1].trim()
-        const email = angleMatch[2].trim()
-        return { email, name, valid: isValidEmail(email) }
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0)
+  if (lines.length === 0) return []
+
+  // Detect if first line is a header row (no @ sign in first cell)
+  const firstCell = lines[0].split(',')[0].trim()
+  const hasHeader = !firstCell.includes('@') && !firstCell.includes('<')
+
+  let headerKeys: (keyof ParsedContact | null)[] = []
+  let dataLines = lines
+
+  if (hasHeader) {
+    const headerCells = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g, ''))
+    headerKeys = headerCells.map(h => HEADER_MAP[h] ?? null)
+    dataLines = lines.slice(1)
+  }
+
+  return dataLines.map(line => {
+    // Format: "First Last <email@domain.com>"
+    const angleMatch = line.match(/^(.+?)\s*<([^>]+)>$/)
+    if (angleMatch) {
+      const name = angleMatch[1].trim()
+      const email = angleMatch[2].trim()
+      return { email, name, valid: isValidEmail(email) }
+    }
+
+    // CSV — positional or header-mapped
+    if (line.includes(',')) {
+      const parts = line.split(',').map(p => p.trim().replace(/^["']|["']$/g, ''))
+
+      if (hasHeader && headerKeys.length > 0) {
+        const contact: Partial<ParsedContact> = { valid: false }
+        headerKeys.forEach((key, i) => {
+          if (key && parts[i]) contact[key] = parts[i] as never
+        })
+        contact.valid = isValidEmail(contact.email ?? '')
+        return contact as ParsedContact
       }
 
-      // Format: "email, Name, Company, Phone" (CSV)
-      if (line.includes(',')) {
-        const parts = line.split(',').map(p => p.trim())
-        const email = parts[0]
-        return {
-          email,
-          name: parts[1] || undefined,
-          company: parts[2] || undefined,
-          phone: parts[3] || undefined,
-          valid: isValidEmail(email),
-        }
+      // Positional: email, name, company, phone, type, country, website, linkedin_url, annual_clients
+      return {
+        email: parts[0] ?? '',
+        name: parts[1] || undefined,
+        company: parts[2] || undefined,
+        phone: parts[3] || undefined,
+        type: parts[4] || undefined,
+        country: parts[5] || undefined,
+        website: parts[6] || undefined,
+        linkedin_url: parts[7] || undefined,
+        annual_clients: parts[8] || undefined,
+        valid: isValidEmail(parts[0] ?? ''),
       }
+    }
 
-      // Plain email
-      return { email: line, valid: isValidEmail(line) }
-    })
+    // Plain email
+    return { email: line, valid: isValidEmail(line) }
+  })
 }
 
 function isValidEmail(email: string): boolean {
@@ -240,6 +305,11 @@ function BulkImportTab() {
             name: row.name,
             company: row.company,
             phone: row.phone,
+            type: row.type,
+            country: row.country,
+            website: row.website,
+            linkedin_url: row.linkedin_url,
+            annual_clients: row.annual_clients,
           }),
         })
 
@@ -294,7 +364,11 @@ function BulkImportTab() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session.access_token}`,
       },
-      body: JSON.stringify({ email: row.email, name: row.name, company: row.company, phone: row.phone }),
+      body: JSON.stringify({
+        email: row.email, name: row.name, company: row.company, phone: row.phone,
+        type: row.type, country: row.country, website: row.website,
+        linkedin_url: row.linkedin_url, annual_clients: row.annual_clients,
+      }),
     })
     const json = await res.json()
 
@@ -332,15 +406,13 @@ function BulkImportTab() {
           Oppure incolla la lista di contatti
         </Label>
         <p className="text-sm text-portal-muted mb-2">
-          Formati supportati (uno per riga):<br />
-          <code className="text-xs bg-gray-100 px-1 rounded">email@domain.com</code> ·
-          <code className="text-xs bg-gray-100 px-1 rounded ml-1">Nome Cognome &lt;email@domain.com&gt;</code> ·
-          <code className="text-xs bg-gray-100 px-1 rounded ml-1">email, Nome, Azienda, Telefono</code>
+          Colonne CSV (con o senza header): <code className="text-xs bg-gray-100 px-1 rounded">email, nome, azienda, telefono, tipo, paese, website, linkedin, clienti_annui</code><br />
+          Tipo valori: <code className="text-xs bg-gray-100 px-1 rounded">agency</code> · <code className="text-xs bg-gray-100 px-1 rounded">private</code> · <code className="text-xs bg-gray-100 px-1 rounded">hotel</code>
         </p>
         <Textarea
           id="contacts-raw"
-          rows={10}
-          placeholder={"mario.rossi@example.com\nGiulia Bianchi <giulia@example.com>\npaolo@agency.it, Paolo Verdi, Agenzia Roma, +39 333 1234567"}
+          rows={8}
+          placeholder={"email, nome, azienda, telefono, tipo, paese, website, linkedin, clienti_annui\nmario@example.com, Mario Rossi, Agenzia Roma, +39 333 1234567, agency, Italy, agenziaroma.it, , 11-25 clients per year\ngiulia@hotel.it, Giulia Bianchi, Grand Hotel, +39 055 000000, hotel, Italy"}
           value={raw}
           onChange={e => { setRaw(e.target.value); setParsed(false) }}
           className="font-mono text-sm"
@@ -353,13 +425,15 @@ function BulkImportTab() {
 
       {parsed && rows.length > 0 && (
         <>
-          <div className="border rounded-md overflow-hidden">
-            <table className="w-full text-sm">
+          <div className="border rounded-md overflow-auto">
+            <table className="w-full text-sm whitespace-nowrap">
               <thead className="bg-gray-50 border-b">
                 <tr>
                   <th className="text-left p-3 font-medium">Email</th>
                   <th className="text-left p-3 font-medium">Nome</th>
                   <th className="text-left p-3 font-medium">Azienda</th>
+                  <th className="text-left p-3 font-medium">Tipo</th>
+                  <th className="text-left p-3 font-medium">Paese</th>
                   <th className="text-left p-3 font-medium">Stato</th>
                 </tr>
               </thead>
@@ -369,6 +443,8 @@ function BulkImportTab() {
                     <td className="p-3 font-mono text-xs">{row.email}</td>
                     <td className="p-3 text-xs">{row.name || '—'}</td>
                     <td className="p-3 text-xs">{row.company || '—'}</td>
+                    <td className="p-3 text-xs">{row.type || '—'}</td>
+                    <td className="p-3 text-xs">{row.country || '—'}</td>
                     <td className="p-3">
                       {!row.valid && <span className="text-red-600 text-xs">✗ email non valida</span>}
                       {row.valid && row.status === 'pending' && <span className="text-gray-400 text-xs">in attesa</span>}
@@ -424,6 +500,11 @@ function SingleContactTab() {
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
   const [phone, setPhone] = useState('')
+  const [type, setType] = useState<ContactType>('')
+  const [country, setCountry] = useState('')
+  const [website, setWebsite] = useState('')
+  const [linkedinUrl, setLinkedinUrl] = useState('')
+  const [annualClients, setAnnualClients] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -445,7 +526,17 @@ function SingleContactTab() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session.access_token}`,
       },
-      body: JSON.stringify({ email, name: name || undefined, company: company || undefined, phone: phone || undefined }),
+      body: JSON.stringify({
+        email,
+        name: name || undefined,
+        company: company || undefined,
+        phone: phone || undefined,
+        type: type || undefined,
+        country: country || undefined,
+        website: website || undefined,
+        linkedin_url: linkedinUrl || undefined,
+        annual_clients: annualClients || undefined,
+      }),
     })
 
     const json = await res.json()
@@ -454,6 +545,7 @@ function SingleContactTab() {
       setStatus('ok')
       toast({ title: 'Email inviata!', description: `Accesso inviato a ${email}` })
       setEmail(''); setName(''); setCompany(''); setPhone('')
+      setType(''); setCountry(''); setWebsite(''); setLinkedinUrl(''); setAnnualClients('')
       setTimeout(() => setStatus('idle'), 3000)
     } else {
       setStatus('error')
@@ -475,17 +567,63 @@ function SingleContactTab() {
           className="mt-1"
         />
       </div>
+
       <div>
         <Label htmlFor="single-name">Nome</Label>
         <Input id="single-name" value={name} onChange={e => setName(e.target.value)} placeholder="Mario Rossi" className="mt-1" />
       </div>
+
       <div>
-        <Label htmlFor="single-company">Azienda</Label>
+        <Label htmlFor="single-type">Tipo</Label>
+        <Select value={type} onValueChange={v => setType(v as ContactType)}>
+          <SelectTrigger id="single-type" className="mt-1">
+            <SelectValue placeholder="Seleziona tipo..." />
+          </SelectTrigger>
+          <SelectContent>
+            {CONTACT_TYPES.map(ct => (
+              <SelectItem key={ct.value} value={ct.value}>{ct.label}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <Label htmlFor="single-company">Azienda / Struttura</Label>
         <Input id="single-company" value={company} onChange={e => setCompany(e.target.value)} placeholder="Agenzia Roma" className="mt-1" />
       </div>
+
       <div>
         <Label htmlFor="single-phone">Telefono</Label>
         <Input id="single-phone" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+39 333 1234567" className="mt-1" />
+      </div>
+
+      <div>
+        <Label htmlFor="single-country">Paese</Label>
+        <Input id="single-country" value={country} onChange={e => setCountry(e.target.value)} placeholder="Italy" className="mt-1" />
+      </div>
+
+      <div>
+        <Label htmlFor="single-website">Website</Label>
+        <Input id="single-website" value={website} onChange={e => setWebsite(e.target.value)} placeholder="agenzia.com" className="mt-1" />
+      </div>
+
+      <div>
+        <Label htmlFor="single-linkedin">LinkedIn URL</Label>
+        <Input id="single-linkedin" value={linkedinUrl} onChange={e => setLinkedinUrl(e.target.value)} placeholder="linkedin.com/in/mario" className="mt-1" />
+      </div>
+
+      <div>
+        <Label htmlFor="single-annual">Clienti annui (Toscana)</Label>
+        <Select value={annualClients} onValueChange={setAnnualClients}>
+          <SelectTrigger id="single-annual" className="mt-1">
+            <SelectValue placeholder="Seleziona volume..." />
+          </SelectTrigger>
+          <SelectContent>
+            {ANNUAL_CLIENTS_OPTIONS.map(opt => (
+              <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Button type="submit" disabled={status === 'sending'}>
