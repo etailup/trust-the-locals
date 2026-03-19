@@ -86,7 +86,7 @@ export default function Admin() {
   if (!user?.is_admin) return null
 
   return (
-    <div className="flex min-h-screen bg-portal-cream relative">
+    <div className="flex min-h-screen bg-white relative">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
