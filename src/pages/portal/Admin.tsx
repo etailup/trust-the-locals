@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
+import * as XLSX from 'xlsx'
 
 // ────────── Parser ──────────
 
@@ -140,12 +141,63 @@ function BulkImportTab() {
   const [parsed, setParsed] = useState(false)
   const [sending, setSending] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [dragging, setDragging] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleParse = useCallback(() => {
     const contacts = parseContacts(raw)
     setRows(contacts.map(c => ({ ...c, status: 'pending' })))
     setParsed(true)
   }, [raw])
+
+  const loadFile = useCallback((file: File) => {
+    const ext = file.name.split('.').pop()?.toLowerCase()
+
+    if (ext === 'csv' || ext === 'txt') {
+      const reader = new FileReader()
+      reader.onload = e => {
+        const text = e.target?.result as string
+        setRaw(text)
+        setParsed(false)
+      }
+      reader.readAsText(file)
+      return
+    }
+
+    if (ext === 'xlsx' || ext === 'xls') {
+      const reader = new FileReader()
+      reader.onload = e => {
+        const data = new Uint8Array(e.target?.result as ArrayBuffer)
+        const wb = XLSX.read(data, { type: 'array' })
+        const ws = wb.Sheets[wb.SheetNames[0]]
+        const rows = XLSX.utils.sheet_to_json<string[]>(ws, { header: 1 })
+        // Convert to CSV-like text: each row joined by comma
+        const text = rows
+          .filter((r): r is string[] => Array.isArray(r) && r.length > 0)
+          .map(r => r.join(', '))
+          .join('\n')
+        setRaw(text)
+        setParsed(false)
+      }
+      reader.readAsArrayBuffer(file)
+      return
+    }
+
+    toast({ title: 'Formato non supportato', description: 'Usa file .csv, .xlsx o .xls', variant: 'destructive' })
+  }, [toast])
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) loadFile(file)
+    e.target.value = ''
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setDragging(false)
+    const file = e.dataTransfer.files?.[0]
+    if (file) loadFile(file)
+  }
 
   const validRows = rows.filter(r => r.valid)
 
@@ -255,9 +307,29 @@ function BulkImportTab() {
 
   return (
     <div className="space-y-6">
+      {/* File drop zone */}
+      <div
+        onDragOver={e => { e.preventDefault(); setDragging(true) }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={handleDrop}
+        onClick={() => fileInputRef.current?.click()}
+        className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${dragging ? 'border-portal-dark bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}
+      >
+        <p className="text-sm text-portal-muted">
+          Trascina qui un file <strong>.csv</strong> o <strong>.xlsx</strong>, oppure <span className="underline">clicca per scegliere</span>
+        </p>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".csv,.xlsx,.xls,.txt"
+          className="hidden"
+          onChange={handleFileChange}
+        />
+      </div>
+
       <div>
         <Label htmlFor="contacts-raw" className="text-sm font-medium mb-2 block">
-          Incolla la lista di contatti
+          Oppure incolla la lista di contatti
         </Label>
         <p className="text-sm text-portal-muted mb-2">
           Formati supportati (uno per riga):<br />
