@@ -379,6 +379,24 @@ function BulkImportTab() {
     ))
   }
 
+  const downloadTemplate = () => {
+    const rows = [
+      ['email', 'nome', 'azienda', 'telefono', 'tipo', 'paese', 'website', 'linkedin_url', 'clienti_annui'],
+      ['mario.rossi@agenziaroma.it', 'Mario Rossi', 'Agenzia Roma', '+39 06 1234567', 'agency', 'Italy', 'agenziaroma.it', 'linkedin.com/in/mario-rossi', '26-50 clients per year'],
+      ['giulia.bianchi@grandhotel.it', 'Giulia Bianchi', 'Grand Hotel Firenze', '+39 055 9876543', 'hotel', 'Italy', 'grandhotelfirenze.com', '', ''],
+      ['john.smith@luxurytravel.com', 'John Smith', 'Luxury Travel Co', '+1 212 5550100', 'agency', 'United States', 'luxurytravel.com', 'linkedin.com/in/john-smith', '51-100 clients per year'],
+      ['sophie.martin@voyages.fr', 'Sophie Martin', '', '+33 1 23456789', 'private', 'France', '', '', '1-10 clients per year'],
+    ]
+    const csv = rows.map(r => r.map(cell => `"${cell}"`).join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'trust-the-locals-import-template.csv'
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="space-y-6">
       {/* File drop zone */}
@@ -399,6 +417,16 @@ function BulkImportTab() {
           className="hidden"
           onChange={handleFileChange}
         />
+      </div>
+
+      <div>
+        <button
+          type="button"
+          onClick={e => { e.stopPropagation(); downloadTemplate() }}
+          className="text-xs text-portal-muted underline hover:text-portal-dark"
+        >
+          Scarica template CSV
+        </button>
       </div>
 
       <div>
