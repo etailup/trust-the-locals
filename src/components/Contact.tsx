@@ -20,7 +20,7 @@ const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
   subject: z.string().trim().min(1, "Subject is required").max(200),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(1000),
+  message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
 const Contact = () => {

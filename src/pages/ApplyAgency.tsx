@@ -36,7 +36,7 @@ const formSchema = z.object({
   country: z.string().min(1, "Country is required"),
   linkedinUrl: z.string().trim().max(255).optional(),
   annualClients: z.string().min(1, "Please select client volume"),
-  description: z.string().trim().min(1, "Description is required"),
+  description: z.string().trim().min(1, "Description is required").max(1000),
   consent: z.literal(true, {
     errorMap: () => ({ message: "Consent is required" }),
   }),
