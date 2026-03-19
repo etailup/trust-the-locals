@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
+        setIsLoading(true);
         loadProfile({ id: session.user.id, email: session.user.email! })
           .finally(() => setIsLoading(false));
       } else {
