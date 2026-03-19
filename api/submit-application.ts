@@ -10,6 +10,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const {
+    _hp,
+    _t,
     form_type,
     name,
     contactName,
@@ -23,6 +25,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     linkedinUrl,
     annualClients,
   } = req.body
+
+  if (_hp) return res.status(200).json({ success: true })
+  if (!_t || Date.now() - Number(_t) < 3000) return res.status(200).json({ success: true })
 
   // Normalise name: agency form uses contactName, private uses name
   const applicantName = name || contactName || ''

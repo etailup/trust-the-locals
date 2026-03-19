@@ -8,7 +8,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, subject, message } = req.body ?? {}
+  const { name, email, subject, message, _hp, _t } = req.body ?? {}
+
+  if (_hp) return res.status(200).json({ success: true })
+  if (!_t || Date.now() - Number(_t) < 3000) return res.status(200).json({ success: true })
 
   if (!name || !email || !subject || !message) {
     return res.status(400).json({ error: 'Missing required fields' })
